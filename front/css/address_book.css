@@ -1,0 +1,372 @@
+body{
+	background:url(../../image/web_image/%E6%B4%BB%E5%8A%A8%E6%8E%A8%E8%8D%90%E8%83%8C%E6%99%AF.png) center repeat;}
+
+
+.top_back{
+	z-index:3;
+	position:fixed;
+	height:40px;
+	width:100%;
+	background:#00ACFF;
+	overflow:hidden;}
+.transparency{
+	filter:alpha(opacity=50); /*支持 IE 浏览器*/
+	-moz-opacity:0.50; /*支持 FireFox 浏览器*/
+	opacity:0.50; /*支持 Chrome, Opera, Safari 等浏览器*/}
+
+.top{
+	z-index:4;
+	position:fixed;
+	top:0;
+	left:50%;
+	margin-left:-550px;
+	width:1100px;
+	height:40px;} 
+.a{
+	float:left;
+	font-size:26px;
+	height:40px;
+	color:#fff;
+	width:120px;
+	background:#999;}
+.b{
+	float:left;
+	margin:0 50px;
+	line-height:40px;
+	color:#FFF;}
+.c{
+	float:right;
+	margin:0 50px;
+	line-height:40px;
+	color:#FFF;}
+	.c a{
+		color:#fff;}
+	.c a:hover{
+		color:#333;}
+
+/*社团封面部分样式*/
+.head{
+	z-index:1;
+	background:#f2f2f2;
+	box-shadow:0 1px 4px #ccc;}
+.head_in{
+	position:relative;
+	background:url(../../image/web_image/%E7%A9%BA%E9%97%B4%E8%83%8C%E6%99%AF.jpg) center no-repeat;
+	height:300px;
+	width:1100px;
+	margin:0 auto;}
+.cover_pic{
+	position:absolute;
+	top:120px;
+	left:90px;
+	background:#fff;
+	border:1px solid #ccc;
+	border-radius:5px;
+	height:130px;
+	width:130px;
+	padding:5px;}
+	.cover_pic img{
+		height:130px;
+		width:130px;
+		background:#ccc;}
+	.name{
+		position:absolute;
+		top:120px;
+		left:250px;}
+		.name strong{
+			color:#00496C;
+			font-size:24px;
+			line-height:50px;}
+	.description{
+		position:absolute;
+		top:200px;
+		left:250px;
+		width:500px;
+		color:#fff;}
+	.identity{
+		position:absolute;
+		bottom:20px;
+		right:30px;
+		color:#fff;}
+		.identity a{
+			font-size:18px;}
+.body{
+	width:1100px;
+	background:#39F;
+	margin:10px auto;}
+	
+/*左侧部分样式*/
+.left{
+	float:left;
+	width:240px;}
+.fresh_button{
+	width:240px;
+	height:40px;
+	background:#97ddff;
+	border-radius:5px;
+	margin-bottom:10px;
+	color:#fff;
+	text-align:center;
+	line-height:40px;}	
+	.fresh_button:hover{
+		transition:background 0.3s;
+        -moz-transition:background 0.3s; /* Firefox 4 */
+        -webkit-transition:background 0.3s; /* Safari and Chrome */
+        -o-transition:background 0.3s; /* Opera */	
+		background:#00ACFF;}	
+.buttons{
+	width:238px;
+	background:#fff;
+	border:1px solid #eee;
+	box-shadow:0 0 3px #ccc;}
+	/*鼠标轮滚动后的样式*/
+	.scroll{
+		position:fixed;
+		top:50px;}
+	.buttons div{
+		width:238px;
+		margin:auto;
+		cursor:pointer;}
+    .buttons li{
+		margin:auto;
+		width:200px;
+		height:60px;
+		line-height:60px;
+		border-bottom:1px solid #f2f2f2;}
+   .buttons div:hover{
+	color:#00acff;
+	box-shadow:1px 1px 3px #ccc;}
+	.buttons img{
+		float:left;
+		margin:15px;
+		height:30px;
+		width:30px;
+		background:#ccc;}
+
+
+/*中间主体部分样式*/
+.main{
+	float:left;
+	margin-left:17px;
+	width:841px;}
+.page{
+	margin-bottom:10px;
+	padding:10px;
+	width:821px;
+	background:#fff;
+	border:1px solid #eee;
+	box-shadow:0 0 3px #ccc;}
+	.title strong{
+		float:left;
+		font-size:16px;
+		line-height:20px;
+		margin-left:20px;}
+	.title a{
+		float:right;
+		color:#ccc;
+		margin-right:20px;}
+		.page a:hover{
+			color:#00acff;}
+	.title a i{
+		display:inline-block;
+		background:#ccc;
+		height:10px;
+		width:20px;
+		margin-left:10px;}
+
+.table{
+	width:820px;
+	margin:10px auto;}
+.table li{
+	height:40px;
+	padding:2px;
+	margin:1px 0;
+	overflow:hidden;}
+.table li:first-child,.table li:last-child{
+	height:25px;
+	padding:2px;
+    background:#97ddff;
+	color:#fff;}
+
+.table li span{
+	overflow:hidden;
+	float:left;
+	display:block;
+    height:40px;
+	line-height:40px;
+	text-align:center;
+	border-right:1px solid #fff;}
+	.table li:first-child span,.table li:last-child span{
+		text-align:center;
+		height:25px;
+		line-height:25px;}
+	.table span:nth-child(1){
+		width:50px;}
+	.table span:nth-child(2){
+		text-align:left;
+		width:140px;}
+		.table span:nth-child(2) a{}
+	.table span:nth-child(3){
+		width:130px;}
+	.table span:nth-child(4){
+		width:130px;}
+	.table span:nth-child(5){
+		width:70px;}
+	.table span:nth-child(6){
+		width:70px;}
+	.table span:nth-child(7){
+		width:220px;
+		border-right:0;}
+	.table span:nth-child(7) a,.handle a{
+		color:#999;}
+	.table span:nth-child(7) a:hover,.handle a:hover{
+		color:#00acff;}
+	.table span img{
+		float:left;
+		margin:2px 5px;
+		height:36px;
+		width:36px;
+		background:#ccc;}
+.table span a,.handle li a{
+	margin:0 10px;}
+.handle{
+	margin:15px 0 5px 0;}
+	.handle a{
+		display:inline-block;
+		height:25px;
+		line-height:25px;
+		width:70px;
+		text-align:center;
+		border-radius:5px;
+		margin:0 20px;}
+	.handle p{
+		display:inline-block;
+		margin-right:198px;}
+	#h1{border:1px solid #999;color:#999;}
+	#h1:hover{border:1px solid #f00;color:#f00;}
+	#h2{border:1px solid #999;color:#999;}
+	#h2:hover{border:1px solid #00acff;color:#00acff;}
+	#h3{border:1px solid #999;color:#999;}
+	#h3:hover{border:1px solid #3C0;color:#3c0;}
+.table input[type=checkbox]{
+	height:40px;
+	vertical-align: middle;
+	cursor:pointer;}
+	.table li:last-child input[type=checkbox]{
+		height:25px;}
+		
+#load_more{
+	display:inline-block;
+	height:25px;
+	line-height:25px;
+	width:400px;
+	text-align:center;
+	margin-left:15px;
+	color:#fff;}
+	#load_more:hover{
+		color:#000;}
+		
+/*报名表样式*/
+.app_form{
+	z-index:11;
+	position:fixed;
+	top:50%;
+	margin-top:-350px;
+	left:50%;
+	margin-left:-290px;
+	padding:10px;
+	border:1px solid #f2f2f2;
+	box-shadow:0 0 3px #ccc;
+	width:560px;
+	height:680px;
+	background:#fff;}
+	.app_form strong{
+		display:block;
+		width:500px;
+		margin:10px auto;
+		line-height:26px;
+		font-size:18px;
+		text-align:center;}
+	.app_form strong a{
+		float:right;
+		font-size:24px;}
+
+.app_form table{
+	border:1px solid #ccc;
+	margin:10px auto;}
+.app_form table tr td{
+	font-size:14px;
+	text-align:center;
+	height:33px;
+	border:1px solid #ccc;}
+	.app_form input[type=text]{
+		text-align:center;
+		width:110px;
+		height:100%;
+		border:0;}
+    .app_form .photo{
+		position:relative;
+
+		background:#f2f2f2;
+		border:1px solid #ccc;}
+	.app_form .photo input[type=button]{
+		border:0;
+		display:block;
+		border-radius:25px;
+		margin:10px auto;
+		height:50px;
+		width:50px;
+		background:url(icon/上传图片图标1.png) center;}
+	.app_form .file{
+		display:block;
+		position:absolute;
+		height:70px;
+		width:50px;
+		cursor:pointer;
+		top:20px;
+		left:50%;
+		margin-left:-25px;
+		filter:alpha(opacity:0);
+		opacity: 0;}
+.app_form p{
+	margin-left:10px;
+	line-height:29px;
+	text-align:left;
+	width:300px;}
+.app_form textarea{
+	border:0;
+	width:480px;
+	line-height:29px;
+	height:67px;}
+	.app_form label{
+		margin-left:20px;}
+	.app_form label span{
+		color:#F00;}
+
+/*调换部门*/
+.change_dep{
+	position:absolute;
+	width:auto;
+	background:#fff;
+	padding:15px;
+	box-shadow:0 0 3px #ccc;
+	margin-top:35px;
+	margin-left:660px;}
+	.change_dep p{
+		margin-bottom:10px;}
+	.change_dep select{
+		height:33px;
+		border:1px solid #ccc}
+	.change_submit{
+		height:33px;
+		border:1px solid #00acff;
+		background:#fff;
+		width:60px;
+		border-radius:5px;
+		color:#00acff;
+		margin-left:10px;}
+		.change_submit:hover{
+			cursor:pointer;
+			background:#00acff;
+			color:#fff;}
+

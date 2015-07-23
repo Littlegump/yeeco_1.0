@@ -1,0 +1,310 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,initial-scale=1.0,user-scalable=no"/>
+<meta name="apple-touch-fullscreen" content="NO"/>
+<title>test</title>
+<link rel="stylesheet" type="text/css" href="M_css/jquery.mobile-1.4.5.css"/>
+<link href="M_css/M_applyForm.css" type="text/css" rel="stylesheet">
+<style>
+.mutPicker{
+	height:216px;
+	background:#f0f0f0;
+	position:fixed;
+	bottom:0;
+	left:0;
+	right:0;}
+.choose{
+	height:40px;
+	width:100%;
+	background:#f0f0f0;
+	border-bottom:1px solid #ddd;
+	border-top:1px solid #ddd;}
+	.choose a{
+		float:right;
+		margin:0 25px;
+		color:#000;
+		line-height:40px;}
+	.option_1,.option_2,.option_3{
+		width:33.3%;
+		float:left;
+		overflow:hidden;
+		position:relative;
+		height:178px;}
+	.options ul{
+		width:100%;
+		position:absolute;
+		top:-8px;
+		-webkit-transition:top 0.2;}
+	.options li{
+		width:100%;
+		font-size:15px;
+		height:26px;
+		line-height:26px;
+		text-align:center;
+		color:#999;
+		-webkit-transition: font-size 0.2s ease;}
+	.options .target{
+		color:#000;
+		line-height:34px;
+		font-size:18px;
+		height:34px;
+		-webkit-transition: font-size 0.2s ease;}
+	.choosen{
+		width:100%;
+		height:33px;
+		top:112px;
+		position:absolute;
+		border-bottom:1px solid #ddd;
+		border-top:1px solid #ddd;}
+</style>
+</head>
+
+<body>
+<div data-role="page" id="index">
+	<div data-role="header" data-position="fixed">
+    	<h1>我是标题</h1>
+    </div>
+
+
+
+	<div data="main" class="ui-content">
+    	<!--<p>我是内容</p>
+        <a href="#" class="ui-btn ui-btn-a ui-corner-all">按钮1</a>
+        <a href="#" class="ui-btn ui-btn-b ui-corner-all">按钮2</a>        
+        <input type="submit" value="我也是按钮" />
+        <input type="submit" value="我也是按钮" />
+
+        	<ul data-role="listview">
+            	<li><a href="#">项目1</a></li>
+                <li><a href="#">项目2</a></li>
+                <li><a href="#">项目3</a></li>
+            </ul>
+            
+            <ul data-role="listview" data-inset="true">
+            	<li>项目1</li>
+                <li>项目2</li>
+                <li>项目3</li>
+            </ul>
+            
+            <form>
+              <div class="ui-field-contain">
+            	<label>发车站</label>
+            	<input type="text"/>
+              </div>
+              <div class="ui-field-contain">
+            	<label>到达站</label>
+            	<input type="text"/>
+              </div>
+              <div class="ui-field-contain">
+            	<label>车次</label>
+            	<input type="text"/>
+              </div>
+            </form>
+            <form method="post" action="demoform.asp">
+      <div data-role="fieldcontain">
+        <fieldset data-role="controlgroup" data-type="horizontal">
+          <legend>安排会议：</legend>
+            <label for="day">选择日期：</label>
+            <select name="day" id="day">
+              <option value="mon">Monday</option>
+              <option value="tue">Tuesday</option>
+              <option value="wed">Wednesday</option>
+              <option value="thu">Thursday</option>
+              <option value="fri">Friday</option>
+              <option value="sat">Saturday</option>
+              <option value="sun">Sunday</option>
+            </select>
+
+            <label for="time">选择时间：</label>
+            <select name="time" id="time">
+              <option value="08">08:00</option>
+              <option value="09">09:00</option>
+              <option value="10">10:00</option>
+              <option value="11">11:00</option>
+              <option value="12">12:00</option>
+              <option value="13">13:00</option>
+              <option value="14">14:00</option>
+              <option value="15">15:00</option>
+              <option value="16">16:00</option>
+            </select>
+        </fieldset>
+      </div>
+      <input type="submit" data-inline="true" value="提交">
+    </form>-->
+    	<span>籍贯</span>
+        <input  placeholder="选择省份-城市" id="testfield"/>
+       	<!--组合选择控件-->
+        
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+        
+        
+        <div class="mutPicker">
+        	<div class="choose"><a href="#">完成</a></div>
+            <div style="clear:both;"></div>
+            <div class="options">
+              <div class="option_1">
+                  
+                  <ul>
+                    <li>福建1</li>
+                    <li>福建2</li>
+                    <li>福建3</li>
+                    <li class="target">福建4</li>
+                    <li>福建5</li>
+                    <li>福6</li>
+                    <li>福建7</li>
+                    <li>福建8</li>
+                    <li>福建9</li>
+                    <li>福建10</li>
+                    <li>福建11</li>
+                    <li>福建12</li>
+                    <li>福建13</li>
+                  </ul>
+              
+              </div>
+              <div class="option_2">
+              	  <ul>
+                    <li>福州</li>
+                    <li>福州</li>
+                    <li>福州1</li>
+                    <li class="target">福?州</li>
+                    <li>福州3</li>
+                    <li>福建</li>
+                    <li>福建</li>
+                    <li>福建</li>
+                    <li>福州</li>
+                    <li>福州</li>
+                  </ul>
+                  
+              </div>
+              <div class="option_3">
+                  <ul>
+                    <li>福清</li>
+                    <li>福清</li>
+                    <li>福清1</li>
+                    <li class="target">福?清</li>
+                    <li>福清3</li>
+                    <li>福清</li>
+                    <li>福建</li>
+                    <li>福建</li>
+                    <li>福建</li>
+                    <li>福清</li>
+                  
+              	  </ul>
+              </div>
+              <div style="clear:both;"></div>
+              <div class="choosen"></div>
+            </div>
+        </div>
+        
+
+	<!--<div data-role="footer" data-position="fixed">
+    	<div data-role="navbar">
+        	<ul>
+            	<li><a href="#" data-icon="carat-l">导航1</a></li>
+                <li><a href="#" data-icon="carat-d">导航2</a></li>
+                <li><a href="#" data-icon="carat-r">导航3</a></li>
+            </ul>
+        </div>
+    </div>-->
+	</div>
+
+</div>
+
+
+
+<div data-role="page" id="page_2">
+	<div data-role="header">
+    	<h1>我是标1题2</h1>
+    </div>
+	<div data="main" class="ui-content">
+    	<p>我是内容2</p>
+        <a href="#index">index</a>
+    </div>
+	<div data-role="footer">
+    	<h1>我是页2脚</h1>
+    </div>
+</div>
+<script src="../js/jquery-1.11.1.js"></script>
+<script type="text/javascript" src="M_js/jquery.mobile-1.4.5.js"></script>
+<script>
+
+$(document).on("pageinit","#index",function(){
+	 //重写鼠标滑动事件	
+	$(".option_1,.option_2,.option_3").on("touchstart",function(e){
+  		e.preventDefault();
+    	startY = e.originalEvent.changedTouches[0].pageY;
+		offsetY = 0;
+		bb=startY;
+		mark = parseInt($(this).children('ul').css("top"));
+		kk=0;
+	});
+	$(".option_1,.option_2,.option_3").on("touchmove",function(e){
+  		//alert("手指触控到了！");
+		moveY = e.originalEvent.changedTouches[0].pageY;
+		offsetY = moveY - startY;	
+		$(this).children('ul').css("top",offsetY+mark);
+		
+		//标记当前高亮的元素
+		t = offsetY%26;
+		$("#testfield").val(t);
+		if(t>0){//向下滑动事件
+			if(t<16){
+				kk=0;
+			}else{
+				if(kk==0){
+					target = $(this).find('.target')
+					target.removeClass("target");
+					target.prev().addClass("target")
+					kk=1;
+					bb=moveY;
+				}
+			}
+			if(moveY<bb){
+				startY = e.originalEvent.changedTouches[0].pageY;
+				offsetY = 18;
+				bb=startY;
+				mark = parseInt($(this).children('ul').css("top"));
+				kk=0;
+			}
+		}else if(t<0){//向上滑动事件
+			if(t>-16){
+				kk=0;
+			}else{
+				if(kk==0){
+					target = $(this).find('.target')
+					target.removeClass("target");
+					target.next().addClass("target")
+					kk=1;
+					bb=moveY;
+				}
+			}
+			if(moveY>bb){
+				startY = e.originalEvent.changedTouches[0].pageY;
+				offsetY = 3;
+				bb=startY;
+				mark = parseInt($(this).children('ul').css("top"));
+				kk=0;
+			}
+		}	
+		$("#testfield").val(onNowTop);
+		
+	});
+	$(".option_2").on("touchend",function(onNowTop){
+  		
+	});
+	
+})
+</script>
+</body>
+</html>
