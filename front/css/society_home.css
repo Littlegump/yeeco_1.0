@@ -31,18 +31,35 @@ body{
 	background:#999;}
 .b{
 	float:left;
-	margin:0 50px;
+	margin-left:50px;
 	line-height:40px;
 	color:#FFF;}
 .c{
-	float:right;
-	margin:0 50px;
+	float:left;
+	margin-left:20px;
 	line-height:40px;
 	color:#FFF;}
 	.c a{
 		color:#fff;}
-	.c a:hover{
+.d{
+	float:right;
+	margin:0 50px;
+	line-height:40px;
+	color:#FFF;}
+	.d a{
+		color:#fff;}
+	.d a:hover{
 		color:#333;}
+.change_society{
+	position:absolute;
+	top:45px;
+	left:160px;
+	background:#fff;
+	border:1px solid #ccc;
+	padding:10px;}
+	.change_society a{
+		margin:0 10px;}
+
 
 /*社团封面部分样式*/
 .head{
@@ -169,7 +186,8 @@ body{
 		margin:5px auto;
 		display:block;
 		border:1px solid #fff;
-		line-height:20px;}
+		line-height:20px;
+		resize: none;}
 
 /*中间主体部分样式*/
 .main{
@@ -179,10 +197,33 @@ body{
 	background:#fff;}
 
     .send_msg{
-		height:80px;
+		height:60px;
 		width:546;
-		margin-bottom:10px;
-		background:#6CF;}
+		margin-bottom:10px;}
+	.send_msg textarea{
+		padding:4px 10px;
+		line-height:23px;
+		resize: none;
+		float:left;
+		width:450px;
+		height:50px;
+		margin-right:10px;
+		border-color:#97ddff;
+		border-radius:5px;}
+	.send_msg input[type=submit]{
+		float:left;
+		width:64px;
+		height:60px;
+		background:#97ddff;
+		color:#fff;
+		font-size:16px;
+		border:0;
+		border-radius:5px;}
+		.send_msg input[type=submit]:hover{
+			background:#00acff;
+			cursor:pointer;}
+		
+		
         .clearfix:after { content:"."; display:block; height:0; clear:both; visibility:hidden}
         .clearfix { *height:1%;}
         #list { margin: 0 auto; text-align: left; width: 546px;}

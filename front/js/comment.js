@@ -6,6 +6,9 @@ window.onload = function () {
     var list = document.getElementById('list');
     var boxs = list.children;
     var timer;
+	flag=null;
+	ccName=null;
+	ccId=null;
 
     //格式化日期
     function formateDate(date) {
@@ -54,19 +57,20 @@ window.onload = function () {
      * @param el 点击的元素
      */
     function reply(box, el) {
+		var userFace=$("[name='userFace']").val();
         var commentList = box.getElementsByClassName('comment-list')[0];
         var textarea = box.getElementsByClassName('comment')[0];
         var commentBox = document.createElement('div');
         commentBox.className = 'comment-box clearfix';
         commentBox.setAttribute('user', 'self');
         commentBox.innerHTML =
-            '<img class="myhead" src="images/my.jpg" alt=""/>' +
+            '<img class="myhead" src="'+userFace+'" alt=""/>' +
                 '<div class="comment-content">' +
                 '<p class="comment-text"><span class="user">我：</span>' + textarea.value + '</p>' +
                 '<p class="comment-time">' +
                 formateDate(new Date()) +
                 '<a href="javascript:;" class="comment-praise" total="0" my="0" style="">赞</a>' +
-                '<a href="javascript:;" class="comment-operate">删除</a>' +
+                '<a href="javascript:;" class="comment-operate" onclick="del_comment(this);">删除</a>' +
                 '</p>' +
                 '</div>'
         commentList.appendChild(commentBox);
@@ -106,10 +110,14 @@ window.onload = function () {
         var box = commentBox.parentNode.parentNode.parentNode;
         var txt = el.innerHTML;
         var user = commentBox.getElementsByClassName('user')[0].innerHTML;
+		
         var textarea = box.getElementsByClassName('comment')[0];
         if (txt == '回复') {
+			ccId = $(el).parent().parent().parent().find("[name='cId']").val();
             textarea.focus();
             textarea.value = '回复' + user;
+			ccName=user;
+			flag='回复';
             textarea.onkeyup();
         }
         else {
@@ -197,5 +205,173 @@ window.onload = function () {
         }
 
     }
+	//评论异步提交
+	$(".btn").click(function(){
+		var nId=$(this).parent().parent().parent().find("[name='nId']").val();
+		var userName=$("[name='userName']").val();
+		var userId=$("[name='userId']").val();
+		var userFace=$("[name='userFace']").val();
+		var date = formateDate(new Date());
+		var comment=$(this).parent().find(".comment").val();
+		if(flag=='回复'){
+			  var comment=comment.substring(comment.indexOf('：')+1);
+			  $.ajax({
+				type:"POST",
+				url:"../background/background_comment/comment_reply.php?action=insert",
+				data:{
+					nId:nId,
+					userName:userName,
+					userId:userId,
+					userFace:userFace,
+					date:date,
+					comment:comment,
+					ccId:ccId,
+					ccName:ccName
+				},
+				success:function(data){
+					ccId=null;
+					ccName=null;
+				},
+				error:function(jqXHR){alert("操作失败"+jqXHR.status);}
+			})		
+		}else{
+			$.ajax({
+				type:"POST",
+				url:"../background/background_comment/comment_reply.php?action=insert",
+				data:{
+					nId:nId,
+					userName:userName,
+					userId:userId,
+					userFace:userFace,
+					date:date,
+					comment:comment
+				},
+				success:function(data){
+				},
+				error:function(jqXHR){alert("操作失败"+jqXHR.status);}
+			})		
+		}	
+	})
 }
+//赞的异步提交
+function praise(x){
+	var c=$(x).parent().attr("class");
+	var userId=$("[name='userId']").val();
+	if(c=='info clearfix'){
+		var p=$(x).parent().find(".praise").text();
+		var nId=$(x).parent().parent().parent().find("[name='nId']").val();	
+		if(p=='赞'){
+			$.ajax({
+					type:"POST",
+					url:"../background/background_comment/comment_praise.php?action=n",
+					data:{
+						nId:nId,
+						uId:userId
+					},
+					success:function(data){
+						if(data=='已赞过'){
+						}else{
+							$(x).parent().parent().find(".praises-total").attr("total",data);
+						}
+					},
+					error:function(jqXHR){alert("操作失败"+jqXHR.status);}
+			})
+		}else{
+			$.ajax({
+					type:"POST",
+					url:"../background/background_comment/comment_praise.php?action=cancel_n",
+					data:{
+						nId:nId,
+						uId:userId
+					},
+					success:function(data){
+						$(x).parent().parent().find(".praises-total").attr("total",data);
+						
+					},
+					error:function(jqXHR){alert("操作失败"+jqXHR.status);}
+			})	
+		}
+	}
+	if(c=='comment-time'){
+		var p=$(x).parent().find(".comment-praise").text();
+		var cId=$(x).parent().parent().parent().find("[name='cId']").val();	
+		if(p=='赞'){
+			$.ajax({
+					type:"POST",
+					url:"../background/background_comment/comment_praise.php?action=c",
+					data:{
+						cId:cId,
+						uId:userId
+					},
+					success:function(data){			
+						$(x).parent().parent().find(".comment-praise").attr("total",data);
+					},
+					error:function(jqXHR){alert("操作失败"+jqXHR.status);}
+			})
+		}else{
+			$.ajax({
+					type:"POST",
+					url:"../background/background_comment/comment_praise.php?action=cancel_c",
+					data:{
+						cId:cId,
+						uId:userId
+					},
+					success:function(data){
+						$(x).parent().parent().find(".comment-praise").attr("total",data);	
+					},
+					error:function(jqXHR){alert("操作失败"+jqXHR.status);}
+			})	
+		}
+	}
+}
+//删除评论
+function del_comment(x){
+	var cId=$(x).parent().parent().parent().find("[name='cId']").val();
+	$.ajax({
+		type:"POST",
+		url:"../background/background_comment/comment_reply.php?action=delete",
+		data:{
+			cId:cId		
+		},
+		success:function(data){	
+		},
+		error:function(jqXHR){alert("操作失败"+jqXHR.status);}
+	})	
+}
+//删除动态
+function del_news(x){
+	var nId=$(x).parent().find("[name='nId']").val();
+	$.ajax({
+		type:"POST",
+		url:"../background/background_comment/comment_reply.php?action=del_news",
+		data:{
+			nId:nId		
+		},
+		success:function(data){	
+			$(x).parent().remove();
+		},
+		error:function(jqXHR){alert("操作失败"+jqXHR.status);}
+	})	
+	
+}
+//异步提交表单功能
+$(document).ready(function () {
+    // 提交表单
+    $(".news").ajaxForm(function(){  
+    	location.reload();
+    });
+});
 
+
+
+//切换社团
+function change_society(){
+	$(".change_society").fadeIn("fast");
+	$(document).one("click", function (){//对document绑定一个影藏Div方法
+		$(".change_society").hide();
+	});
+	event.stopPropagation();
+}
+$(".change_society").click(function (event){
+	event.stopPropagation();//阻止事件向上冒泡
+});

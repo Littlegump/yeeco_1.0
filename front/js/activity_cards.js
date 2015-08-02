@@ -41,8 +41,9 @@ function precise_search(){
 				"school":$("#school").val(),
 			},
 			success:function(data){
-				var data1=data.substr(0,data.length-1);
-				var data2=data.substr(data.length-1,1);
+				var index=data.indexOf('@');
+				var data1=data.substr(0,index-1);
+				var data2=data.substr(index+1);
 				$('#body').html(data1);
 				$('#anum').text(data2);
 			},

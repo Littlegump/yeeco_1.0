@@ -3,7 +3,7 @@ session_start();
 error_reporting(E_ALL & ~E_NOTICE);
 require_once('../background/conf/connect.php');
 $sId=$_GET['sId'];
-$uId=$_SESSION['userId'];
+require_once('../background/conf/session.php');
 //获取用户身份
 $isManage=mysql_fetch_assoc(mysql_query("select isManage from user_society_relation where societyId='$sId' and userId='$uId'"));
 if($isManage['isManage']==0){
@@ -15,11 +15,28 @@ if($isManage['isManage']==0){
 }
 $societyRes=mysql_fetch_array(mysql_query("select *  from society where sId='$sId'"));
 //获取动态
-$res=mysql_query("select * from dynamic_state where sId='$sId'");
+$res=mysql_query("select * from dynamic_state where sId='$sId' order by nTime desc");
 if($res && mysql_num_rows($res)){	
 	while($row = mysql_fetch_assoc($res)){
 			$news[] = $row;	
 	}			
+}
+//查找用户相关社团ID
+$user_society_Id=mysql_query("SELECT societyId FROM user_society_relation WHERE userId='$uId' and isManage<>4");
+if($user_society_Id && mysql_num_rows($user_society_Id)){
+	    while($row = mysql_fetch_assoc($user_society_Id)){
+			if($row['societyId']!=$sId){
+				$societyId[]=$row['societyId'];
+			}
+		}			
+}
+
+//获取社团名称
+if($societyId){
+	foreach($societyId as $value){
+		$res=mysql_fetch_array(mysql_query("select sName from society where sId='$value' "));
+		$sName[]=$res['sName'];
+	}
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -36,11 +53,23 @@ if($res && mysql_num_rows($res)){
       <ul>
         <li class="a">logo</li>
         <li class="b"><?php echo $societyRes['sName']?></li>
-        <li class="c">返回&nbsp&nbsp;<a href="square.php">易可广场>></a></li>
+        <li class="c"><a href="javascript:change_society()">[切换]</a></li>
+        <li class="d">返回&nbsp&nbsp;<a href="square.php">易可广场>></a></li>
       </ul>
       <div style="clear:both;"></div>
+      <div class="change_society" style="display:none;">
+<?php 
+if($sName){
+	for($i=0;$i<=sizeof($sName)-1;$i++){
+?>
+          <a href="society_home.php?sId=<?php echo  $societyId[$i]?>"><?php echo $sName[$i]?></a>
+<?php
+	}
+}
+?>
+      </div>
   </div>
-  
+
 <!--社团封面部分-->
 <div class="head">
     <div class="head_in">
@@ -72,6 +101,10 @@ if($user_limit!='成员'){
 <?php
 }
 ?>
+ <!--个人信息-->
+<input type="hidden" name="userName" value="<?php echo $userName?>"/>
+<input type="hidden" name="userId" value="<?php echo $uId?>"/>
+<input type="hidden" name="userFace" value="../<?php echo $userFace?>"/>
         <div class="buttons" id="fixedSide">
         <a href="society_home.php?sId=<?php echo $sId?>"><div class="nav_on"><li><img src=""/>社团动态</li></div></a>
         <a href="address_book.php?sId=<?php echo $sId?>"><div><li><img src=""/>通讯录</li></div></a>
@@ -83,86 +116,27 @@ if($user_limit!='成员'){
     </div>
     <!--中间主体内容-->
     <div class="main">
-        <div class="send_ms">
+        <div class="send_msg">
+       		<form action="../background/background_comment/send_msg.php" method="post" name="news" class="news">
+                <input type="hidden" name="userName" value="<?php echo $userName?>"/>
+                <input type="hidden" name="userId" value="<?php echo $uId?>"/>
+                <input type="hidden" name="uFace" value="../../<?php echo $userFace?>"/>
+            	<input type="hidden" name="sId" value="<?php echo $sId?>"/>
+                <textarea name="news_content" placeholder="在这里发布一则新的动态吧！"></textarea>
+                <input type="submit" class="submit_btn" value="发表" onclick="submit_btn(this)"/>
+            </form>
+            <div style="clear:both;"></div> 
         </div>
-        <div id="list">
-           <!-- <div class="box clearfix">
-                <a class="close" href="javascript:;">×</a>
-                <img class="user_face" src="../image/user_image/test/1.jpg" alt=""/>
-                <div class="content">
-                    <div class="host">
-                        <p class="txt">
-                            <span class="user">Andy：</span>轻轻的我走了，正如我轻轻的来；我轻轻的招手，作别西天的云彩。
-                        </p>
-                        <img class="pic" src="../image/user_image/test/img1.jpg" alt=""/>
-                    </div>
-                    <div class="info clearfix">
-                        <span class="time">02-14 23:01</span>
-                        <a class="praise" href="javascript:;">赞</a>
-                    </div>
-                    <div class="praises-total" total="4" style="display: block;">4个人觉得很赞</div>
-                    <div class="comment-list">
-                        <div class="comment-box clearfix" user="self">
-                            <img class="myhead" src="../image/user_image/test/my.jpg" alt=""/>
-                            <div class="comment-content">
-                                <p class="comment-text"><span class="user">我：</span>写的太好了。</p>
-                                <p class="comment-time">
-                                    2014-02-19 14:36
-                                    <a href="javascript:;" class="comment-praise" total="1" my="0" style="display: inline-block">1 赞</a>
-                                    <a href="javascript:;" class="comment-operate">删除</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-box">
-                        <textarea class="comment" autocomplete="off">评论…</textarea>
-                        <button class="btn ">回 复</button>
-                        <span class="word"><span class="length">0</span>/140</span>
-                    </div>
-                </div>
-            </div>
-    
-            <div class="box clearfix">
-                <a class="close" href="javascript:;">×</a>
-                <img class="user_face" src="../image/user_image/test/2.jpg" alt=""/>
-                <div class="content">
-                    <div class="host">
-                        <p class="txt">
-                            <span class="user">人在旅途：</span>三亚的海滩很漂亮。
-                        </p>
-                        <img class="pic" src="../image/user_image/test/img5.jpg" alt=""/>
-                    </div>
-                    <div class="info clearfix">
-                        <span class="time">02-14 23:01</span>
-                        <a class="praise" href="javascript:;">赞</a>
-                    </div>
-                    <div class="praises-total" total="0" style="display: none;"></div>
-                    <div class="comment-list">
-                        <div class="comment-box clearfix" user="other">
-                            <img class="myhead" src="../image/user_image/test/4.jpg" alt=""/>
-                            <div class="comment-content">
-                                <p class="comment-text"><span class="user">老鹰：</span>我也想去三亚。</p>
-                                <p class="comment-time">
-                                    2014-02-19 14:36
-                                    <a href="javascript:;" class="comment-praise" total="0" my="0">赞</a>
-                                    <a href="javascript:;" class="comment-operate">回复</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-box">
-                        <textarea class="comment" autocomplete="off">评论…</textarea>
-                        <button class="btn ">回 复</button>
-                        <span class="word"><span class="length">0</span>/140</span>
-                    </div>
-                </div>
-            </div>-->
+        <div id="list">        
 <?php
 if($news){
 	foreach($news as $value){
 ?>
             <div class="box clearfix">
-                <a class="close" href="javascript:;">×</a>
+            	<input type="hidden" name="nId" value="<?php echo $value['nId']?>"/>
+<?php if($user_limit=='创建人' || ($uId==$value['oId'] && $value['nWho']=='person')){?>                
+                <a class="close" href="javascript:void();" onclick="del_news(this);">×</a>
+<?php }?>   
                 <img class="user_face" src="<?php echo substr($value['nImg'],3)?>" alt=""/>
                 <div class="content">
                     <div class="host">
@@ -172,15 +146,95 @@ if($news){
                     </div>
                     <div class="info clearfix">
                         <span class="time"><?php echo $value['nTime']?></span>
-                        <a class="praise" href="javascript:;">赞</a>
+                        <a class="praise" href="javascript:void();" onclick="praise(this);">赞</a>
                     </div>
-                    <div class="praises-total" total="0" style="display: none;"></div>
+                    <div class="praises-total" total="<?php echo $value['pNum']?>" style="display: none;"></div>
                     <div class="comment-list">
-    
-                    </div>
+<?php
+$comment_1=NULL;
+$comment_2=NULL;
+$query=mysql_query("select *  from comment_form where nId='$value[nId]'");
+if($query && mysql_num_rows($query)){	
+	while($row = mysql_fetch_assoc($query)){
+		if($row['ccId'] == 0){
+			$comment_1[] = $row;//对于事件的直接评论
+		}else{
+			$comment_2[] = $row;//对于事件的评论进行的回复
+		}
+	}			
+}
+if($comment_1){
+	foreach($comment_1 as $c1){
+?>					
+    					<div class="comment-box clearfix" user="other">
+                          <input type="hidden"  name="cId" value="<?php echo $c1['cId']?>"/>
+                          <img class="myhead" src="<?php echo $c1['uFace']?>" alt=""/>
+                          <div class="comment-content">
+                          <p class="comment-text">
+                             <span class="user"><?php echo $c1['uName']?>：</span><?php echo $c1['cBody']?>
+                          </p>
+                           <p class="comment-time">
+                                    <?php echo $c1['cTime']?>
+                              	<a class="comment-praise" href="javascript:void();"  total="<?php echo $c1['pNum']?>" my="0" onclick="praise(this);">赞</a>
+<?php
+	if($uId!=$c1['uId']){
+?>
+                              	<a href="javascript:;" class="comment-operate">回复</a>
+<?php
+	}else{
+?>
+								<a href="javascript:void();" class="comment-operate" onclick="del_comment(this);">删除</a>	
+<?php
+	}
+?>
+                              </p>
+                            </div>
+                        </div>
+
+
+<?php
+if($comment_2){
+	foreach($comment_2 as $c2){
+		if($c2['ccId']==$c1['cId']){
+?>
+						<div class="comment-box clearfix" user="other">
+                          <input type="hidden"  name="cId" value="<?php echo $c2['cId']?>"/>
+                          <img class="myhead" src="<?php echo $c2['uFace']?>" alt=""/>
+                          <div class="comment-content">
+                             <p class="comment-text">
+                             <span class="user"><?php echo $c2['uName']?>：</span>回复<?php echo $c2['ccName']?>：<?php echo $c2['cBody']?>
+                             </p>
+                              <p class="comment-time">
+                                    <?php echo $c2['cTime']?>
+                              	<a class="comment-praise" href="javascript:void();"  total="<?php echo $c2['pNum']?>" my="0" onclick="praise(this);">赞</a>
+<?php
+	if($uId!=$c2['uId']){
+?>
+                              	<a href="javascript:;" class="comment-operate">回复</a>
+<?php
+	}else{
+?>
+								<a href="javascript:void();" class="comment-operate" onclick="del_comment(this);">删除</a>	
+<?php
+	}
+?>
+                              </p>
+                            </div>
+                        </div>                         
+<?php
+		}
+	}
+	
+}
+?>                
+<?php
+	}
+}
+?>
+					</div>
                     <div class="text-box">
                         <textarea class="comment" autocomplete="off">评论…</textarea>
-                        <button class="btn ">回 复</button>
+                        <button class="btn">回 复</button>
                         <span class="word"><span class="length">0</span>/140</span>
                     </div>
                 </div>
@@ -226,6 +280,7 @@ if($user_limit!='成员'){
      <a href="../background/background_person/login.php?action=logout"><div id="icon_3"></div></a>
 </div>
 <script src="js/jquery-1.11.1.js"></script>
+<script src="js/jquery.form.js" type="text/javascript"></script>
 <script src="js/main.js"></script>
 <script src="js/society_home.js" type="text/javascript"></script>
 <script src="js/comment.js"></script>

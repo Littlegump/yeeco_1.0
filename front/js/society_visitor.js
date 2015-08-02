@@ -162,7 +162,7 @@ function reply(x){
 
 //对于回复的回复
 function reply2(x){
-	$(x).parent().parent().parent().find(".replayBox").show();
+	$(x).parent().parent().parent().find(".replayBox").show().find("[name='comment']").focus();
 	$(x).parent().parent().parent().find(".say_too").hide();
 	current_host = $(x).parent().find(".host").text();
 }
@@ -192,8 +192,8 @@ function submit_btn_2(x){
 			ccId:ccId,
 			ccName:current_host,
 		},
-		success:function(data){
-			var new_html = "<li class='content'><div class='user_face2'><img src='"+userFace+"'/></div><div class='right_body'><span class='reply_content'><strong class='host'>"+userName+"</strong>回复<strong>"+current_host+"</strong>:&nbsp;"+comment+"</span><a class='delete2' href='javascript:void(0)' onclick='delete2(this)'>删除</a><span class='send_time2'>"+date+"</span></div><div style='clear:both;'></div></li>"
+		success:function(cId){
+			var new_html = "<li class='content'><div class='user_face2'><img src='"+userFace+"'/></div><div class='right_body'><input type='hidden' name='cId' value='"+cId+"'><span class='reply_content'><strong class='host'>"+userName+"</strong>回复<strong>"+current_host+"</strong>:&nbsp;"+comment+"</span><a class='delete2' href='javascript:void(0)' onclick='delete2(this)'>删除</a><span class='send_time2'>"+date+"</span><a class='praise' href='javascript:void(0)' onclick='praise(this)'>赞</a></div><div style='clear:both;'></div></li>"
 			$(target).before(new_html);
 		},
 		error:function(jqXHR){alert("操作失败"+jqXHR.status);}
@@ -217,8 +217,8 @@ function submit_btn(x){
 	var comment = $(x).parent().find("[name='comment']").val();
 	var date = formateDate(new Date());
 	$("[name='date']").val(date);
-	$(".first_comment").ajaxForm(function(data){
-		var new_html = "<li><div class='user_face'><img src='"+userFace+"'/></div><div class='right_body'><strong class='user_name'>"+userName+"</strong><pre>"+comment+"</pre><a href='javascript:void(0)' class='delete' onclick='delete1(this)'>删除</a><span class='send_time'>"+date+"</span></div><div style='clear:both;'></div></li>"
+	$(".first_comment").ajaxForm(function(cId){
+		var new_html = "<li><div class='user_face'><img src='"+userFace+"'/></div><div class='right_body'><input type='hidden' name='cId' value='"+cId+"'><strong class='user_name'>"+userName+"</strong><pre>"+comment+"</pre><a href='javascript:void(0)' class='delete' onclick='delete1(this)'>删除</a><span class='send_time'>"+date+"</span><a class='praise' href='javascript:void(0)' onclick='praise(this)'>赞</a></div><div style='clear:both;'></div></li>"
 		$(".big_comment").prepend(new_html);
 		$(x).parent().find("[name='comment']").val("");
 	});
@@ -267,10 +267,46 @@ function formateDate(date) {
     var mi = date.getMinutes();
     m = m > 9 ? m : '0' + m;
     return y + '-' + m + '-' + d + ' ' + h + ':' + mi;
-}	
-	
-	
+}		
 //**************************************************************************************
+//赞
+function praise(x){
+	var cId=$(x).parent().find("[name='cId']").val();
+	var uId=$("[name='userId']").val();
+	$.ajax({
+		type:"POST",
+		url:"../background/background_comment/comment_praise.php?action=c",
+			//dataType:"json",
+		data:{
+			cId:cId,
+			uId:uId
+		},
+		success:function(data){
+			$(x).text("取消赞("+data+")");
+			$(x).attr("onclick","praise_cancel(this)");
+		},
+		error:function(jqXHR){alert("操作失败"+jqXHR.status);}
+	})
+}
+//取消赞
+function praise_cancel(x){
+	var cId=$(x).parent().find("[name='cId']").val();
+	var uId=$("[name='userId']").val();
+	$.ajax({
+		type:"POST",
+		url:"../background/background_comment/comment_praise.php?action=cancel_c",
+			//dataType:"json",
+		data:{
+			cId:cId,
+			uId:uId
+		},
+		success:function(data){
+			$(x).text("赞("+data+")");
+			$(x).attr("onclick","praise(this)");
+		},
+		error:function(jqXHR){alert("操作失败"+jqXHR.status);}
+	})
+}
 
 
 

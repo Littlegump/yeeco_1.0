@@ -1,1 +1,0 @@
-"../../image/user_image/".

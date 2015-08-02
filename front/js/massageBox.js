@@ -15,17 +15,17 @@ window.onload = function (){
 		var k = (msgUl_height-msgList_height)/(msgList_height-66);	
 		
     $(".delete_msg").click(function(){
-		$(this).parent().parent().hide();
+		$(this).parent().parent().remove();
 		//获取当前msg_list的高度
 		msgList_height=parseInt($(".msg_list").height());
 		//计算当前msg_list中li的数目、
 		li_num = $(".msg_list ul li").length;
 		//计算前msg_list ul的总体高度
 		msgUl_height =  71 * li_num;
-		if(msgUl_height>msgList_height){
-			$(".ui-scrollbar-bar").show();	
+		if(msgList_height>msgUl_height){
+			$(".ui-scrollbar-bar").hide();	
 		}
-		var k = (msgUl_height-msgList_height)/(msgList_height-66);	
+		k = (msgUl_height-msgList_height)/(msgList_height-66);	
 	})
 
     //拖拽事件，滚动条滚动
@@ -58,7 +58,7 @@ window.onload = function (){
 		mark_2=parseInt($(".ui-scrollbar-bar_2").css("top"));
     }); 
 	
-	//重写鼠标滑动事件	
+	//重写鼠标轮滚动事件	
 	$(".msg_list").on("mousewheel DOMMouseScroll", MouseWheelHandler);
 	function MouseWheelHandler(e) {	
 	    var scroolly=parseInt($(".ui-scrollbar-bar").css("top"));
@@ -67,13 +67,15 @@ window.onload = function (){
 		var value = e.originalEvent.wheelDelta || -e.originalEvent.detail;
 		var delta = Math.max(-1, Math.min(1, value));
 			if (delta < 0) {
-				scroolly=scroolly+40;
-				if(scroolly<=msgList_height-66 && scroolly>=0){
-					$('.ui-scrollbar-bar').css({'top':scroolly});
-					$('.msg_list ul').css({'top':-k*scroolly});					
-			    }else{
-					$('.ui-scrollbar-bar').css({'top':msgList_height-66});
-					$('.msg_list ul').css({'top':-k*(msgList_height-66)});	
+				if(msgUl_height>msgList_height){
+					scroolly=scroolly+40;
+					if(scroolly<=msgList_height-66 && scroolly>=0){
+						$('.ui-scrollbar-bar').css({'top':scroolly});
+						$('.msg_list ul').css({'top':-k*scroolly});					
+					}else{
+						$('.ui-scrollbar-bar').css({'top':msgList_height-66});
+						$('.msg_list ul').css({'top':-k*(msgList_height-66)});	
+					}
 				}
 			}else {
 				scroolly=scroolly-40;
@@ -91,3 +93,31 @@ window.onload = function (){
 	
 	
 }
+
+//提交表单 发表评论
+function send_massage(){
+	var userName = $("[name='userName']").val();
+	var userFace = $("[name='userFace']").val();
+	var massage = $("[name='massage']").val();
+	var date = formateDate(new Date());
+	$("#massage_form").ajaxForm(function(){
+		var new_html = "<li class='Tx_msg'><div class='msg_face'><img src='"+userFace+"' /></div><div class='conbine'><em>"+userName+"</em><div class='msg_content'><p>"+massage+"</p></div></div><span class='send_time'>"+date+"</span><div style='clear:both;'></div></li>";
+		$(new_html).appendTo(".massages ul");
+	});
+	$("[name='massage']").val("");
+}
+
+
+ //格式化日期
+    function formateDate(date) {
+        var y = date.getFullYear();
+        var m = date.getMonth() + 1;
+        var d = date.getDate();
+        var h = date.getHours();
+        var mi = date.getMinutes();
+        m = m > 9 ? m : '0' + m;
+        return y + '-' + m + '-' + d + ' ' + h + ':' + mi;
+    }
+
+
+

@@ -2,9 +2,9 @@
 	session_start();
 	error_reporting(E_ALL & ~E_NOTICE);
 	require_once('../background/conf/connect.php');
+	require_once('../background/conf/session.php');
 	//获取页面信息，action表示要去往的页面，“”表示去往“我的动态”，“info”表示去往“个人资料”，“account”表示去往“账号信息”；
 	$action = $_GET['action'];
-	$uId=$_SESSION['userId'];
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -33,7 +33,7 @@
   <div class="left">
       <div class="picture"></div>
       <div class="buttons" id="fixedSide">
-      	   <a href="personal_center_myconcern.php"><div><li>我关注的</li></div></a>
+      	   <a href="myconcern.php"><div><li>我关注的</li></div></a>
       	  <a href="personal_center.php?action=info"><div><li>个人资料</li></div></a>
           <a href="personal_center.php?action=account"><div><li>账号信息</li></div></a>
       </div>

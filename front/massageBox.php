@@ -127,21 +127,49 @@
            <ul>
            <li class="Tx_msg">
             	<div class="msg_face"><img src="../image/user_image/user_face/default_face/default_face_8.jpg" /></div>
-                <div class="msg_content"><p>这上来看来面是一旦上面上来看上来看来面是一旦上面上来看上来看来面是一旦上面上来看上来看来面是一旦上面上来看上来看来面是一旦上面上来看上来看来面是一旦上面上来看上来看来面是一旦上面上来看上来看来面是一旦上面上来看上来看来面是一旦上面上来看来</p></div><div style="clear:both;"></div>
-            </li>
-            <li class="Tx_msg">
-            	<div class="msg_face"><img src="../image/user_image/user_face/default_face/default_face_2.jpg" /></div>
-                <div class="msg_content"><p>这里面是一旦上来看附件离开</p></div><div style="clear:both;"></div>
+                <div class="conbine"><em>林圣良</em>
+                <div class="msg_content"><p>1这上来看来面是一旦上面上来看上来看来面是一旦上面上面上来看上来看来面是一旦上面上来看上来看来面是一旦上面上来看来</p></div></div>
+                <span class="send_time">2015-07-17 15:28</span>
+                <div style="clear:both;"></div>
             </li>
             <li class="Rx_msg">
             	<div class="msg_face"><img src="../image/user_image/user_face/default_face/default_face_8.jpg" /></div>
-                <div class="msg_content"><p>这上来看来面是一旦上面上来看上来看来面是一旦上面上来看上来看来面是一旦上面上来看上来看来面是一旦上面上来看上来看来面是一旦上面上来看上来看来面是一旦上面上来看上来看来面是一旦上面上来看上来看来面是一旦上面上来看上来看来面是一旦上面上来看来</p></div><div style="clear:both;"></div>
+                <div class="conbine"><em>刘钰泽</em>
+                <div class="msg_content"><p>2这上来看来面是一来面来看上来看来面是一旦上面上来看上来看来面是一旦上面上来看来</p></div></div>
+                <span class="send_time">2015-07-17 15:28</span>
+                <div style="clear:both;"></div>
+            </li>
+            <li class="Tx_msg">
+            	<div class="msg_face"><img src="../image/user_image/user_face/default_face/default_face_2.jpg" /></div>
+                <div class="conbine"><em>林圣良</em>
+                <div class="msg_content"><p>3这里面是一旦上来看附件离开</p></div></div>
+                <span class="send_time">2015-07-17 15:28</span>
+                <div style="clear:both;"></div>
+            </li>
+            <li class="Rx_msg">
+            	<div class="msg_face"><img src="../image/user_image/user_face/default_face/default_face_8.jpg" /></div>
+                <div class="conbine"><em>刘钰泽</em>
+                <div class="msg_content"><p>4这上来看来面是一旦上面上来看上来看来面是一旦上是一旦上面上来看上来看来面是一旦上面上来看来</p></div></div>
+                <span class="send_time">2015-07-17 15:28</span>
+                <div style="clear:both;"></div>
+            </li>
+            <li class="Tx_msg">
+            	<div class="msg_face"><img src="../image/user_image/user_face/default_face/default_face_2.jpg" /></div>
+                <div class="conbine"><em>林圣良</em>
+                <div class="msg_content"><p>3这里面是一旦上来看附件离开</p></div></div>
+                <span class="send_time">2015-07-17 15:28</span>
+                <div style="clear:both;"></div>
             </li>
           </ul>       
         </div>
         <div class="sendBox">
-        	<textarea></textarea>
-            <input type="button" value="发送"/>
+          <form action="../test/test_3.php" method="post" id="massage_form" name="massage_form">
+            <input type="hidden" name="userName" value="林圣良" />
+            <input type="hidden" name="userFace" value="../image/user_image/user_face/default_face/default_face_2.jpg" />
+            <input type="hidden" name="userId" value="1" />
+        	<textarea name="massage"></textarea>
+            <input type="submit" value="发送" onclick="send_massage()"/>
+          </form>
         </div>
     </div>
     <div style="clear:both;"></div>
@@ -156,6 +184,7 @@
 
 <script src="js/jquery-1.11.1.js"></script>
 <script src="js/main.js"></script>
+<script src="js/jquery.form.js" type="text/javascript"></script>
 <script src="js/massageBox.js" type="text/javascript"></script>
 
 

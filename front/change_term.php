@@ -1,3 +1,10 @@
+<?php 
+session_start();
+error_reporting(E_ALL & ~E_NOTICE);
+require_once('../background/conf/connect.php');
+require_once('../background/conf/session.php');
+$sId=$_GET['sId'];
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -31,17 +38,17 @@
     <div class="left">
     	<a href="fresh_open.php"><div class="fresh_button">开启纳新</div></a>
         <div class="buttons" id="fixedSide">
-        <a href="society_home.php"><div><li><img src=""/>社团动态</li></div></a>
-        <a href="address_book.php"><div><li><img src=""/>通讯录</li></div></a>
-        <a href="activity.php"><div><li><img src=""/>活动</li></div></a>
-        <a href="society_info.php"><div><li><img src=""/>社团资料</li></div></a>
-        <a href="change_term.php"><div class="nav_on"><li><img src=""/>换届</li></div></a>
-        <a href="find_sponsor.php"><div><li><img src=""/>找赞助</li></div></a>
+        <a href="society_home.php?sId=<?php echo $sId?>"><div><li><img src=""/>社团动态</li></div></a>
+        <a href="address_book.php?sId=<?php echo $sId?>"><div><li><img src=""/>通讯录</li></div></a>
+        <a href="activity.php?sId=<?php echo $sId?>"><div><li><img src=""/>活动</li></div></a>
+        <a href="society_info.php?sId=<?php echo $sId?>"><div><li><img src=""/>社团资料</li></div></a>
+        <a href="change_term.php?sId=<?php echo $sId?>"><div class="nav_on"><li><img src=""/>换届</li></div></a>
+        <a href="find_sponsor.php?sId=<?php echo $sId?>"><div><li><img src=""/>找赞助</li></div></a>
       </div>
     </div>
     <!--中间主体内容-->
     <div class="main">
-        
+        <div class="temp">不好意思啊！！这里还在装修，过些时候再来吧!<br/><a href="javascript:history.go(-1);">点此返回</a></div>
     </div>
     
 </div>

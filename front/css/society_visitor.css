@@ -330,11 +330,15 @@ body{
 		white-space: pre-wrap;
 		word-wrap: break-word;}
 	.send_time{
-		float:right;
 		color:#999;}
 	.reply,.delete{
 		margin-left:15px;
 		float:right;}
+	.praise{
+		line-height:17px;
+		float:right;
+		padding-left: 18px; background: url("../../image/user_image/test/bg2.jpg") no-repeat left;}
+	.praise:hover { text-decoration: underline; background: url("../../image/user_image/test/bg3.jpg") no-repeat left top;}
 	.delete_1{
 		margin-left:15px;
 		float:right;}
@@ -363,18 +367,17 @@ body{
 		float:left;
 		width:490px;
 		line-height:20px;
-		display:block;}
+		display:block;
+		overflow:hidden;}
 .sec_replys .right_body{
 	margin-left:10px;
 	padding:0;
 	width:490px;} 
 	.sec_replys .send_time2{
 		font-size:13px;
-		color:#999;
-		float:right;
-		margin-right:10px;}
+		color:#999;}
 	.reply2,.delete2{
-		margin:0 5px;
+		margin-left:10px;
 		font-size:13px;
 		float:right;}
 .sendBox textarea{

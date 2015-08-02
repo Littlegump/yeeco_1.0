@@ -31,19 +31,34 @@ body{
 	background:#999;}
 .b{
 	float:left;
-	margin:0 50px;
+	margin-left:50px;
 	line-height:40px;
 	color:#FFF;}
 .c{
-	float:right;
-	margin:0 50px;
+	float:left;
+	margin-left:20px;
 	line-height:40px;
 	color:#FFF;}
 	.c a{
 		color:#fff;}
-	.c a:hover{
+.d{
+	float:right;
+	margin:0 50px;
+	line-height:40px;
+	color:#FFF;}
+	.d a{
+		color:#fff;}
+	.d a:hover{
 		color:#333;}
-
+.change_society{
+	position:absolute;
+	top:45px;
+	left:160px;
+	background:#fff;
+	border:1px solid #ccc;
+	padding:10px;}
+	.change_society a{
+		margin:0 10px;}
 /*社团封面部分样式*/
 .head{
 	z-index:1;
@@ -266,82 +281,7 @@ body{
 	#load_more:hover{
 		color:#000;}
 		
-/*报名表样式*/
-.app_form{
-	z-index:11;
-	position:fixed;
-	top:50%;
-	margin-top:-350px;
-	left:50%;
-	margin-left:-290px;
-	padding:10px;
-	border:1px solid #f2f2f2;
-	box-shadow:0 0 3px #ccc;
-	width:560px;
-	height:680px;
-	background:#fff;}
-	.app_form strong{
-		display:block;
-		width:500px;
-		margin:10px auto;
-		line-height:26px;
-		font-size:18px;
-		text-align:center;}
-	.app_form strong a{
-		float:right;
-		font-size:24px;}
 
-.app_form table{
-	border:1px solid #ccc;
-	margin:10px auto;}
-.app_form table tr td{
-	font-size:14px;
-	text-align:center;
-	height:33px;
-	border:1px solid #ccc;}
-	.app_form input[type=text]{
-		text-align:center;
-		width:110px;
-		height:100%;
-		border:0;}
-    .app_form .photo{
-		position:relative;
-
-		background:#f2f2f2;
-		border:1px solid #ccc;}
-	.app_form .photo input[type=button]{
-		border:0;
-		display:block;
-		border-radius:25px;
-		margin:10px auto;
-		height:50px;
-		width:50px;
-		background:url(icon/上传图片图标1.png) center;}
-	.app_form .file{
-		display:block;
-		position:absolute;
-		height:70px;
-		width:50px;
-		cursor:pointer;
-		top:20px;
-		left:50%;
-		margin-left:-25px;
-		filter:alpha(opacity:0);
-		opacity: 0;}
-.app_form p{
-	margin-left:10px;
-	line-height:29px;
-	text-align:left;
-	width:300px;}
-.app_form textarea{
-	border:0;
-	width:480px;
-	line-height:29px;
-	height:67px;}
-	.app_form label{
-		margin-left:20px;}
-	.app_form label span{
-		color:#F00;}
 
 /*调换部门*/
 .change_dep{

@@ -8,7 +8,7 @@
 	require_once('../conf/connect.php');
 	require_once('../conf/json_port.php');
 	
-	$sSchool= "西安邮电大学";//$_POST['sSchool'];
+	$sSchool = $_POST['sSchool'];
 
 	$query=mysql_query("select sId,sName,sCate,sDesc,sNum,sImg from society where sSchool='$sSchool'");
 	if($query && mysql_num_rows($query)){
@@ -16,14 +16,7 @@
 			$allSociety[]=$row;
 		}			
 	}else{
-		$allSociety[0] =  array(
-			'sId' => '',
-			'sName' => '',
-			'sCate' => '',
-			'sDesc' => '',
-			'sNum' => '',
-			'sImg' => ''
-		);
+		$allSociety =  array();
 	}
 	
 	Response::json(200,'该学校的所有社团列表如下',$allSociety);	

@@ -26,7 +26,7 @@ echo "<script>var depName='$depName';</script>";
 				}
 ?>				
                 <li>
-                <span><input type="checkbox" id="<?php echo $value_2['userId']?>" value="<?php echo $value_2['userId']?>" name="member_<?php echo $depName?>[]"/></span><span><a href="javascript:void(0)" class="table_a"><img src="../<?php echo $uInfo[$i]['userFace']?>"/><?php echo $ueInfo[$i]['userName']?></a><?php echo $ueInfo[$i]['userSex']?></span><span><?php echo $ueInfo[$i]['userClass']?></span><span><?php echo $ueInfo[$i]['userTel']?></span><span><?php echo $depName?></span><span class="limit"><?php echo $value_2['position']?></span><span class="cap"><a href="javascript:void(0)" class="table_b">删除</a><a href="javascript:void(0)" class="table_c">调换部门</a><a href="javascript:void(0)" class="table_d">发送通知</a></span>
+                <span><input type="checkbox" id="<?php echo $value_2['userId']?>" value="<?php echo $value_2['userId']?>" name="member_<?php echo $depName?>[]"/></span><span><img src="../<?php echo $uInfo[$i]['userFace']?>"/><?php echo $ueInfo[$i]['userName']?><?php echo $ueInfo[$i]['userSex']?></span><span><?php echo $ueInfo[$i]['userClass']?></span><span><?php echo $ueInfo[$i]['userTel']?></span><span><?php echo $depName?></span><span class="limit"><?php echo $value_2['position']?></span><span class="cap"><a href="javascript:void(0)" class="table_b">删除</a><a href="javascript:void(0)" class="table_c">调换部门</a><a href="javascript:void(0)" class="table_d">发送通知</a></span>
                              
                 </li>
 <?php 
@@ -37,19 +37,23 @@ echo "<script>var depName='$depName';</script>";
                 <li><span><input type="checkbox" class="check_all" id="all_<?php echo $depName?>" value="<?php echo $depName?>" onchange="select_all()"/></span><span style="border-right:0;"><label for="all_<?php echo $depName?>">全选</label></span><a href="" id="load_more">加载更多<i></i></a></li>
               </ul>
         	  <div class="handle">
-                <p>操作：</p><a href="javascript:void(0)" id="h1" class="h1">删除</a><a href="javascript:void(0)" id="h2" class="h2">调换部门</a><a href="javascript:void(0)" id="h3">发送通知</a>
+                <p>操作：</p><a href="javascript:void(0)" id="h1" class="h1">删除</a><a href="javascript:void(0)" id="h2" class="h2">调换部门</a><a href="javascript:void(0)" id="h3" class="h3">发送通知</a>
               </div>
             <div style="clear:both;"></div>
 <script>
  	var jsTarget='#content_'+depName;
 
 	//权限管理
-	if($(jsTarget+' #authority').val()=='成员'){
+	if($('#authority').val()=='成员'){
+		
 		$(".table_b").remove();
 		$(".table_c").remove();
 		$(".h1").remove();
 		$(".h2").remove();
-		$(".cap").css({align:"middle"});
+		$(".h3").css({
+			"margin":"0 65px",
+			"width":"200px"
+		});
 	}
 	//单选与全选
 	$(jsTarget+" :checkbox").click(function(){
@@ -72,14 +76,6 @@ echo "<script>var depName='$depName';</script>";
 		}	
 	})
 	
-	//查看报名表 table_a
-	$(jsTarget+" .table_a").click(function(){
-		var x = $(this).parent().parent().find(":checkbox").attr("value");
-		$("#form_box").load("res_package/member_appForm.php",{"userId":x},function(){
-			coverall();
-			$("#form_box").show();
-		});
-	})
 	//删除单一成员 table_b
 	$(jsTarget+" .table_b").click(function(){
 		var uId=new Array();

@@ -1,9 +1,9 @@
 <?php
 session_start();
 error_reporting(E_ALL & ~E_NOTICE);
-$uId=$_SESSION['userId'];
-$sSchool=$_SESSION['sSchool'];
 require_once('../background/conf/connect.php');
+require_once('../background/conf/session.php');
+
 //查找用户
 $find_user = mysql_query("select * from user where uId='$uId' limit 1");
 $result_user = mysql_fetch_array($find_user);
@@ -14,6 +14,7 @@ if($user_society_Id && mysql_num_rows($user_society_Id)){
 			$societyId[]=$row['societyId'];
 		}			
 }
+
 //获取社团名称
 if($societyId){
 	foreach($societyId as $value){

@@ -64,3 +64,14 @@ function return_main(){
 	movebox('form_box');
 	nocover();
 }
+//切换社团
+function change_society(){
+	$(".change_society").fadeIn("fast");
+	$(document).one("click", function (){//对document绑定一个影藏Div方法
+		$(".change_society").hide();
+	});
+	event.stopPropagation();
+}
+$(".change_society").click(function (event){
+	event.stopPropagation();//阻止事件向上冒泡
+});

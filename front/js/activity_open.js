@@ -17,8 +17,9 @@ $(document).ready(function () {
 		data=data.split('&');
 		data1=data[0].substr(3);
 		data2=data[1];
+		var sId = $('[name="sId"]').val();
 		$("#qrcode").attr("src",data1);
-		$("#activity_detail").attr("href","activity_detail.php?actId="+data2);
+		$("#activity_detail").attr("href","activity_detail.php?actId="+data2+"&sId="+sId);
     })
 })
 

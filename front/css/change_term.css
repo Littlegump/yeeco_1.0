@@ -141,7 +141,13 @@ body{
 .main{
 	float:left;
 	margin:0 17px;
-	width:546px;
-	background:#fff;}
+	width:816px;}
 
 
+.temp{
+	height:200px;
+	text-align:center;
+	line-height:100px;
+	margin:100px auto;
+	color:#000;
+	font-size:30px;}

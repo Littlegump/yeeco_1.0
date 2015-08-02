@@ -2,7 +2,7 @@
 session_start();
 error_reporting(E_ALL & ~E_NOTICE);
 require_once('../background/conf/connect.php');
-$school=$_SESSION['sSchool'];
+require_once('../background/conf/session.php');
 $sId=$_GET['sId'];
 $sinfo=mysql_fetch_assoc(mysql_query("select sName,sImg from society where sId='$sId'"));
 ?>
@@ -38,7 +38,7 @@ $sinfo=mysql_fetch_assoc(mysql_query("select sName,sImg from society where sId='
     <form action="../background/background_society/activity/activity_open_form.php" method="post" id="activity_form" enctype="multipart/form-data">
     <input type="hidden" name="sId" value="<?php echo $sId?>">
     <input type="hidden" name="sName" value="<?php echo $sinfo['sName']?>">
-    <input type="hidden" name="sSchool" value="<?php echo $school?>">
+    <input type="hidden" name="sSchool" value="<?php echo $sSchool?>">
     <input type="hidden" name="actImg" value="<?php echo $sinfo['sImg']?>">
       <div class="page_1" id="0">
           <ul>

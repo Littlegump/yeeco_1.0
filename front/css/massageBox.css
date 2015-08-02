@@ -79,7 +79,7 @@ body{
 		background:#f0f0f0;
 		border-radius:5px;
 		text-align:center;
-		vertical-align:middle;s}
+		vertical-align:middle;}
 	.userFace img{
 		margin:3%;
 		width:94%;
@@ -148,6 +148,9 @@ body{
 	width:680px;
 	border-radius:8px;
 	overflow:hidden;}
+.massages ul{
+	position:absolute;
+	bottom:0;}
 .massages li{
 	width:680px;
 	margin:15px 0;}
@@ -166,22 +169,44 @@ body{
 		float:left;}
 	.Tx_msg .msg_face{
 		float:right;}
-	.Rx_msg .msg_content{
-		margin:0 10px;
+.Rx_msg .conbine{
+	margin:0 10px;
+	float:left;}
+.Tx_msg .conbine{
+	margin:0 10px;
+	float:right;}
+	.Tx_msg .conbine em{
+		float:right;
+		color:#999;}
+	.Rx_msg .conbine em{
 		float:left;
+		color:#999;}
+	.Rx_msg .msg_content{
+		margin-top:20px;
 		background:#fff;
 		border:1px solid #ccc;
 		padding:10px;
 		max-width:300px;
 		border-radius:5px;}
 	.Tx_msg .msg_content{
-		margin:0 10px;
-		float:right;
+		margin-top:20px;
 		background:#97ddff;
 		border:1px solid #00acff;
 		padding:10px;
 		max-width:300px;
 		border-radius:5px;}
+	.Tx_msg .send_time{
+		margin-top:20px;
+		color:#ccc;
+		display:block;
+		vertical-align:top;
+		float:right;}
+	.Rx_msg .send_time{
+		margin-top:20px;
+		color:#ccc;
+		display:block;
+		vertical-align:top;
+		float:left;}
 		
 .sendBox{
 	position:relative;
@@ -192,14 +217,14 @@ body{
 		position:absolute;
 		top:0;
 		left:0;
-		height:53%;
+		height:51%;
 		width:678px;
 		border:1px solid #ccc;
 		border-radius:8px;
 		resize: none;
 		line-height:26px;
 		padding:10px;}
-	.sendBox input[type=button]{
+	.sendBox input[type=submit]{
 		position:absolute;
 		height:38px;
 		width:100px;
@@ -210,6 +235,6 @@ body{
 		font-size:16px;
 		right:0;
 		border-radius:5px;}
-		.sendBox input[type=button]:hover{
+		.sendBox input[type=submit]:hover{
 			background:#00acff;
 			cursor:pointer;}

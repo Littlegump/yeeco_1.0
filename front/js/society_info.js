@@ -1,7 +1,7 @@
 // JavaScript Document
 $(document).ready(function(e) {
     //权限管理
-	if($('#authority').val()=='成员'){
+	if($('#authority').val()!='创建人'){
 		$(".mod").remove();	
 	}
 })
@@ -87,3 +87,14 @@ function deleteDep(id){
 	 var childnode = document.getElementById(id);
 	 parentnode.removeChild(childnode);
 }
+//切换社团
+function change_society(){
+	$(".change_society").fadeIn("fast");
+	$(document).one("click", function (){//对document绑定一个影藏Div方法
+		$(".change_society").hide();
+	});
+	event.stopPropagation();
+}
+$(".change_society").click(function (event){
+	event.stopPropagation();//阻止事件向上冒泡
+});

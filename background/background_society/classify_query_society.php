@@ -34,7 +34,7 @@ if($action=='search'){
                           </li>";	
 		}	
 	}
-	echo count($sInfo);
+	echo '@'.count($sInfo);
 	exit;
 }
 //分类查找
@@ -98,7 +98,7 @@ if($action=='precise_search'){
                           </li>";	
 		}	
 	}
-	echo count($sInfo);
+	echo '@'.count($sInfo);
 	exit;
 }
 ?>

@@ -3,4 +3,5 @@
 	define('HOST', '127.0.0.1');
 	define('USERNAME', 'root');
 	define('PASSWORD', 'redhat');
+	error_reporting(E_ALL & ~E_NOTICE & ~E_WARNING);
 ?>

@@ -11,7 +11,6 @@
 	require_once('../conf/json_port.php');
 	
 	$uId = $_POST['userId'];
-	
 	//根据uId查找用户的个人资料
 	$infoResult=mysql_fetch_array(mysql_query("select u.userName,u.userSchool,u.userTel,u.userFace,e.userEmail,e.userSex,e.userBirth,e.userPlace,e.userClass,e.userQQ FROM user as u inner join userextrainfo as e
 on u.uId=e.uId  where e.uId='$uId' limit 1"));
@@ -23,7 +22,7 @@ on u.uId=e.uId  where e.uId='$uId' limit 1"));
 		'userBirth' => $infoResult['userBirth'],
 		'userPlace' => $infoResult['userPlace'],
 		'userSchool' => $infoResult['userSchool'],
-		'userClass' => $infoRessult['userClass'],
+		'userClass' => $infoResult['userClass'],
 		'userTel' => $infoResult['userTel'],
 		'userEmail' => $infoResult['userEmail'],
 		'userQQ' => $infoResult['userQQ'],

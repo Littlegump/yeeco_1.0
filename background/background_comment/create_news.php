@@ -11,7 +11,7 @@ function create_news($type,$data){
 	if($type=='开启纳新'){
 		$nWho = 'society';
 		$fAnn = $data['fAnn'];
-		$fUrl = "http://localhost/yeeco_1.0/front/society_visitor.php?sId=".$oId;
+		$fUrl = "http://localhost/yeeco_1.0/front/society_visitor.php?sId=".$sId;
 		//查询图片
 		$img=mysql_fetch_assoc(mysql_query("select sImg from society where sId='$oId'"));
 		$nImg = $img['sImg'];
@@ -34,7 +34,7 @@ function create_news($type,$data){
 	if($type=='创建活动'){
 		$nWho = 'activity';
 		$describe=$data['describe'];
-		$aUrl="http://localhost/yeeco_1.0/front/activity_detail?actId=".$oId;
+		$aUrl="activity_visitor.php?actId=".$oId;
 		//查询图片
 		$img=mysql_fetch_assoc(mysql_query("select sImg from society where sId='$sId'"));
 		$nImg = $img['sImg'];
@@ -54,6 +54,9 @@ function create_news($type,$data){
 		$nBody=$oName.$content.'<br/>修改详情请点击<a href='.$mUrl.' style="color:#97ddff">这里!!</a>';	
 	}
 	if($type=='自定义动态'){
+		$nWho='person';
+		$nImg =$data['nImg'];
+		$nBody=$data['nBody'];		
 	}
 	if($type=='换届'){
 	}

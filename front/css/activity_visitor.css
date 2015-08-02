@@ -205,3 +205,222 @@ body{
 		width:150px;
 		background:#CCC;}
 
+/*********************************************************************************评论部分样式*/
+.comment li{
+	margin:10px auto;
+	padding:10px 0;
+	width:740px;
+	border-bottom:1px solid #f0f0f0;}
+.user_face{
+	float:left;
+	width:80px;
+	height:80px;
+	border-radius:10px;
+	overflow:hidden;}
+	.user_face img{
+		height:100%;
+		width:100%;}
+.right_body{
+	float:left;
+	padding:0 30px;
+	width:600px;}
+	.right_body strong{
+		font-size:16px;
+		line-height:23px;
+		color:#333;}
+	.right_body pre{
+		min-height:27px;
+		width:600px;
+		margin:10px 0;
+		white-space: pre-wrap;
+		word-wrap: break-word;}
+	.send_time{
+		color:#999;}
+	.reply,.delete{
+		margin-left:15px;
+		float:right;}
+	.praise{
+		line-height:17px;
+		float:right;
+		padding-left: 18px; background: url("../../image/user_image/test/bg2.jpg") no-repeat left;}
+	.praise:hover { text-decoration: underline; background: url("../../image/user_image/test/bg3.jpg") no-repeat left top;}
+	.delete_1{
+		margin-left:15px;
+		float:right;}
+.sec_replys{
+	width:550px;
+	margin-top:5px;
+	padding:10px 15px;
+	background:#f2f2f2;
+	float:right;}
+
+.sec_replys li{
+	border-bottom:1px dashed #fff;
+	width:550px;
+	margin-bottom:0;}
+	.user_face2{
+		float:left;
+		width:50px;
+		height:50px;}
+		.user_face2 img{
+			height:100%;
+			width:100%;}
+	.reply_content{
+		min-height:28px;
+		margin:0;
+		margin-bottom:5px;
+		float:left;
+		width:490px;
+		line-height:20px;
+		display:block;
+		overflow:hidden;}
+.sec_replys .right_body{
+	margin-left:10px;
+	padding:0;
+	width:490px;} 
+	.sec_replys .send_time2{
+		font-size:13px;
+		color:#999;}
+	.reply2,.delete2{
+		margin-left:10px;
+		font-size:13px;
+		float:right;}
+.sendBox textarea{
+	display:block;
+	margin:0 auto;
+	width:678px;
+	border:1px solid #ccc;
+	border-radius:8px;
+	resize: none;
+	line-height:26px;
+	padding:10px;}
+	.sendBox input[type=submit]{
+		margin:5px 20px;
+		float:right;
+		height:33px;
+		width:100px;
+		border:0;
+		background:#97ddff;
+		bottom:0;
+		color:#fff;
+		font-size:16px;
+		border-radius:5px;}
+		.sendBox input[type=submit]:hover{
+			background:#00acff;
+			cursor:pointer;}
+.sec_replys li{
+	padding-top:0;}
+.replayBox textarea{
+	height:46px;
+	display:block;
+	margin:0 auto;
+	width:500px;
+	border:1px solid #ccc;
+	resize: none;
+	line-height:23px;
+	padding:0 10px;}
+	.replayBox input[type=button]{
+		margin:0 14px;
+		float:right;
+		height:24px;
+		width:60px;
+		border:0;
+		background:#97ddff;
+		bottom:0;
+		color:#fff;
+		font-size:14px;}
+		.replayBox input[type=button]:hover{
+			background:#00acff;
+			cursor:pointer;}
+.I_say{
+	display:block;
+	height:26px;
+	width:80px;
+	border:1px solid #97ddff;
+	text-align:center;
+	line-height:26px;
+	float:right;
+	color:#97ddff;}
+	.I_say:hover{
+		color:#fff;
+		background:#00acff;
+		border:1px solid #00acff;}
+.content strong{
+	font-size:15px;
+	color:#000;
+	margin:0 5px;}
+		
+
+/*table纳新结果样式*/
+.table{
+	margin:10px 0;
+	width:800px;}	
+
+.table li{
+	float:left;
+	position:relative;
+	height:40px;
+	padding:2px;
+	margin:1px 0;
+	margin-right:50px;}
+.table li:first-child,.table li:last-child{
+	width:740px;
+	margin:1px 0;
+	height:25px;
+	padding:2px;
+    background:#97ddff;
+	color:#fff;}
+
+.table li span{
+	overflow:hidden;
+	float:left;
+	display:block;
+    height:40px;
+	line-height:40px;
+	text-align:center;
+	border-right:1px solid #fff;}
+	.table li:first-child span,.table li:last-child span{
+		text-align:center;
+		height:25px;
+		line-height:25px;}
+	.table span:nth-child(1){
+		width:140px;}
+	.table span:nth-child(2){
+		width:130px;}
+	.table span:nth-child(3){
+		width:70px;}
+	.table span:nth-child(4){
+		width:53px;}
+	.table span:nth-child(5){
+		width:140px;}
+	.table span:nth-child(6){
+		width:130px;}
+	.table span:nth-child(7){
+		width:70px;
+		border-right:0;}
+	.table span:nth-child(6) a,.handle a{
+		color:#999;}
+	.table span:nth-child(6) a:hover,.handle a:hover{
+		color:#00acff;}
+	.table span img{
+		float:left;
+		margin:2px 5px;
+		height:36px;
+		width:36px;
+		background:#ccc;}
+.table span a,.handle li a{
+	margin:0 10px;}
+
+		
+#load_more{
+	display:block;
+	height:25px;
+	line-height:25px;
+	width:400px;
+	text-align:center;
+	margin:0 auto;
+	color:#fff;}
+	#load_more:hover{
+		color:#000;}
+
+

@@ -2,8 +2,8 @@
 error_reporting(E_ALL & ~E_NOTICE);
 session_start();
 require_once('../background/conf/connect.php');
+require_once('../background/conf/session.php');
 $sId=$_GET['sId'];
-$uId=$_SESSION['userId'];
 //获取用户身份
 $isManage=mysql_fetch_assoc(mysql_query("select isManage from user_society_relation where societyId='$sId' and userId='$uId'"));
 if($isManage['isManage']==0){
@@ -29,7 +29,30 @@ if($members && mysql_num_rows($members)){
 			$member_info[]=$row;
 		}			
 }
-
+//查询评论信息
+$nId = mysql_fetch_assoc(mysql_query("select nId from dynamic_state where nImg='$sId'"));
+if($nId['nId']!==NULL){
+ $query=mysql_query("select *  from comment_form where nId='$nId[nId]' order by cId desc");
+}
+if($query && mysql_num_rows($query)){	
+	while($row = mysql_fetch_assoc($query)){
+		if($row['ccId'] == 0){
+			$comment_1[] = $row;//对于事件的直接评论
+		}else{
+			$comment_2[] = $row;//对于事件的评论进行的回复
+		}
+	}			
+}
+if($comment_2){
+	sort($comment_2);
+}
+//获取赞的相关信息
+$query=mysql_query("select cId from praise where uId='$uId'");
+if($query && mysql_num_rows($query)){	
+	while($row = mysql_fetch_assoc($query)){
+		$pcId[]=$row;
+	}			
+}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -38,6 +61,8 @@ if($members && mysql_num_rows($members)){
 <title>纳新详情</title>
 <link href="css/main.css" type="text/css" rel="stylesheet">
 <link href="css/fresh_detail.css" type="text/css" rel="stylesheet">
+<script src="js/jquery-1.11.1.js"></script>
+<script>aIds = new Array();i=0;</script>
 </head>
 
 <body>
@@ -122,10 +147,14 @@ if($members && mysql_num_rows($members)){
 		$qu=mysql_fetch_assoc(mysql_query("select userFace from user where uId='$value[uId]'"));
 		$uImg=$qu['userFace'];
 		if(empty($value['aRemark'])){
-			$value['aRemark'] = '添加备注';}
+			$value['aRemark'] = '添加备注';
+		}
 ?>                
-                <li id="<?php echo $value['aId']?>"><span><input type="checkbox" value="<?php echo $value['aId']?>" class="key" name='member[]'/></span><span><a href="javascript:void(0)" id="table_a"><img src="../<?php echo $uImg?>"/><?php echo $value['aName']?><i><?php echo $value['aSex']?></i></a></span><span><?php echo $value['aClass']?></span><span><?php echo $value['aTel']?></span><span><?php echo $value['sDep']=='0'?'任意部门': $value['sDep'];?></span><span><a href="javascript:void(0)" class="add_remark"><?php echo $value['aRemark']?></a></span><div class="edit_box" style="display:none"><input type="text" id="remark"/></div></li>
-               
+                <li id="<?php echo $value['aId']?>"><span><input type="checkbox" value="<?php echo $value['aId']?>" class="key" name='member[]'/></span><span><a href="javascript:void(0)"  class="check_form"><img src="../<?php echo $uImg?>"/><?php echo $value['aName']?><i><?php echo $value['aSex']?></i></a></span><span><?php echo $value['aClass']?></span><span><?php echo $value['aTel']?></span><span><?php echo $value['sDep']=='0'?'任意部门': $value['sDep'];?></span><span><a href="javascript:void(0)" class="add_remark"><?php echo $value['aRemark']?></a></span><div class="edit_box" style="display:none"><input type="text" id="remark"/></div></li>
+<script>
+	aIds[i] = parseInt(<?php echo $value['aId']?>);
+	i++;
+</script>               
 <?php
 	}
 ?>                             
@@ -147,6 +176,153 @@ if($members && mysql_num_rows($members)){
         <!--评论-->
     	<div class="page">
         	<strong>评论：</strong>
+            <div class="comment">
+              <ul class="big_comment">
+<?php
+if($comment_1){
+	$i = 0;
+	foreach($comment_1 as $value){
+		$i++;		
+?>
+				<li>
+                	<div class="user_face"><img src="<?php echo $value['uFace']?>"/></div>
+                    <div class="right_body">
+                    	<input type="hidden" name="cId" value="<?php echo $value['cId']?>">
+                        <strong class="user_name"><?php echo $value['uName']?></strong>
+                        <pre><?php echo $value['cBody']?></pre>
+                      
+<?php
+		if($uId != $value['uId']){		
+?>
+                        <a href="javascript:void(0)" onclick="reply(this)" class="reply" id="reply_<?php echo $i?>">回复</a>
+<?php
+		}else{
+?>
+                        <a href="javascript:void(0)" onclick="delete1(this)" class="delete">删除</a>
+<?php
+		}
+?>                        
+						<span class="send_time"><?php echo $value['cTime']?></span>
+<?php
+if($pcId){
+	$flag=false;
+	foreach($pcId as $p){
+		if($p['cId']==$value['cId']){
+			$flag=true;
+?>
+  						<a class="praise" href="javascript:void(0)" onclick="praise_cancel(this)">取消赞(<?php echo $value['pNum']?>)</a>
+<?php
+			break;
+		}					
+	}
+	if(!$flag){
+?>
+						<a class="praise" href="javascript:void(0)" onclick="praise(this)">赞<?php echo $value['pNum']==0?'':"(".$value['pNum'].")"?></a> 
+<?php
+	}
+}else{
+?>
+						<a class="praise" href="javascript:void(0)" onclick="praise(this)">赞<?php echo $value['pNum']==0?'':"(".$value['pNum'].")"?></a> 
+<?php
+}
+?>
+                        <div class="sec_replys" style="display:none" id="<?php echo $i?>">
+                          <ul>
+<?php
+if($comment_2){
+	foreach($comment_2 as $value_2){
+		if($value_2['ccId']==$value['cId']){
+			echo "<script>$('#".$i."').show();$('#reply_".$i."').text('收起回复');</script>";
+?>
+
+                            <li class="content">
+                              <div class="user_face2"><img src="<?php echo $value_2['uFace']?>"/></div>
+                              <div class="right_body">
+                              	  <input type="hidden" name="cId" value="<?php echo $value_2['cId']?>">
+                                  <span class="reply_content"><strong class="host"><?php echo $value_2['uName']?></strong>回复<strong><?php echo $value_2['ccName']?></strong>：<?php echo $value_2['cBody']?></span>
+<?php
+		if($uId != $value_2['uId']){		
+?>
+                                  <a class="reply2" href="javascript:void(0)" onclick="reply2(this)">回复</a>
+<?php
+		}else{
+?>                                   
+                                  <a class="delete2" href="javascript:void(0)" onclick="delete2(this)">删除</a>
+<?php
+		}
+?>
+                                  <span class="send_time2"><?php echo $value_2['cTime']?></span>  
+                                   
+<?php
+if($pcId){
+	$flag=false;
+	foreach($pcId as $p){
+		if($p['cId']==$value_2['cId']){
+			$flag=true;
+?>
+  						<a class="praise" href="javascript:void(0)" onclick="praise_cancel(this)">取消赞(<?php echo $value_2['pNum']?>)</a>
+<?php
+			break;
+		}					
+	}
+	if(!$flag){
+?>
+						<a class="praise" href="javascript:void(0)" onclick="praise(this)">赞<?php echo $value_2['pNum']==0?'':"(".$value['pNum'].")"?></a> 
+<?php
+	}
+}else{
+?>
+						<a class="praise" href="javascript:void(0)" onclick="praise(this)">赞<?php echo $value_2['pNum']==0?'':"(".$value['pNum'].")"?></a> 
+<?php
+}
+?>                                
+                                  
+                              </div>
+                              <div style="clear:both;"></div>
+                            </li>
+<?php
+		}
+	}
+}
+?>
+                            <!--回复评论--> 
+                            <li class="replayBox" style="display:none">
+                                <form action="../background/background_comment/comment_reply.php" method="post" name="commentForm" class="second_comment">
+                                    <textarea name="comment"></textarea>
+                                    <input type="hidden" name="ccId" value="<?php echo $value['cId']?>">
+                                    <input type="button" class="submit_btn_2" value="回复" onclick="submit_btn_2(this)"/>
+                                </form>
+                                <div style="clear:both;"></div>
+                            </li>
+                            <li class="say_too">
+                            	<a href="javascript:void(0)" class="I_say" onclick="I_say(this)">我也说一句</a>
+                            	<div style="clear:both;"></div>
+                            </li>
+                          </ul>
+                        </div>
+                    </div>
+                    <div style="clear:both;"></div>
+                </li>
+<?php
+	}
+}
+?>              
+                <li class="sendBox">
+                    <form action="../background/background_comment/comment_reply.php?action=insert" method="post" name="commentForm" class="first_comment" class="first_comment">
+                    	<input type="hidden" name="date" value="">
+                        <input type="hidden" name="userName" value="<?php echo $userName?>"/>
+                        <input type="hidden" name="userId" value="<?php echo $uId?>"/>
+                        <input type="hidden" name="userFace" value="../<?php echo $userFace?>"/>
+                        <input type="hidden" name="nId" value="<?php echo $nId['nId']?>"/>
+                        <textarea name="comment"></textarea>
+                        <input type="submit" class="submit_btn" value="评论" onclick="submit_btn(this)"/>
+                    </form>
+                    <div style="clear:both;"></div>
+                </li>
+
+                
+              </ul>
+            </div>
         </div>
     </div>
     
@@ -174,15 +350,19 @@ if($members && mysql_num_rows($members)){
 	<strong><?php  echo $freshResult['sName']?>报名表<a href="javascript:return_main()">&times;</a></strong>
 	      <label><span>*</span>填写报名表：</label>
 <form action="background/society-apply-form.php" method="post" name="apply_table">
-       <input type="hidden" name="sId" value="">
-       <input type="hidden" name="userId" value="">
+       <input type="hidden" name="sId" value=""/>
+       <input type="hidden" name="userId" value=""/>
+       <input type="hidden" name="sName" value="<?php  echo $freshResult['sName']?>"/>
+       <input type="hidden" name="fQue_1" value="<?php echo $freshResult['fQue_1']?>"/>
+       <input type="hidden" name="fQue_2" value="<?php echo $freshResult['fQue_2']?>"/>
+       <input type="hidden" name="fQue_3" value="<?php echo $freshResult['fQue_3']?>"/> 
 <table cellspacing="0">
   <tr>
     <td width=80>姓名</td>
     <td width=120><input type="text" name="aName" required="required"/></td>
     <td width=80>性别</td>
     <td width=120><input type="text" name="aSex" required="required"/></td>
-    <td width=100 rowspan="4" class="photo">
+    <td width=100 rowspan="4" class="photo"></td>
   </tr>
   <tr>
     <td>出生年月</td>
@@ -261,6 +441,10 @@ if($members && mysql_num_rows($members)){
     <div class="choose"><a href="javascript:cancel_employ()" class="button">取消</a><a class="button" href="javascript:employ_act()">录用</a></div>
 </div>
 
+<!--查看成员报名表-->
+<div class="app_form" id="member_appForm" style="display:none">
+  
+</div>
 
 
 <!--侧边快捷操作面板--> 
@@ -270,8 +454,8 @@ if($members && mysql_num_rows($members)){
     <a href="../background/background_person/login.php?action=logout"><div id="icon_3"></div></a>
 </div>
 
-<script src="js/jquery-1.11.1.js"></script>
 <script src="js/main.js"></script>
+<script src="js/jquery.form.js" type="text/javascript"></script>
 <script src="js/fresh_detail.js" type="text/javascript"></script>
 
 </body>

@@ -75,7 +75,7 @@ if($_GET['action'] == 'isright'){
 	$result=mysql_fetch_array(mysql_query("select password from user where uId='$uId' limit 1"));
 	if($password_old == $result['password']){
 		if($clientSign){
-			Response::json(200,'密码正确',NULL);
+			Response::json(208,'密码正确',NULL);
 		}else{
 			exit;
 		}
@@ -97,7 +97,7 @@ if($op == 'tel'){
 			$f=mysql_query("update user set userTel='$userTel' where uId='$uId'");
 			if($f){
 				if($clientSign){
-					Response::json(200,'修改成功，需要用户重新登录',NULL);
+					Response::json(207,'修改成功，需要用户重新登录',NULL);
 				}else{
 					logout();
 					echo "<script>alert('修改成功，请重新登陆！');window.location.href='../../index.php';</script>";

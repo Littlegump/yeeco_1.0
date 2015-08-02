@@ -3,7 +3,7 @@ session_start();
 error_reporting(E_ALL & ~E_NOTICE);
 require_once('../background/conf/connect.php');
 $sId=$_GET['sId'];
-$uId=$_SESSION['userId'];
+require_once('../background/conf/session.php');
 //获取用户身份
 $isManage=mysql_fetch_assoc(mysql_query("select isManage from user_society_relation where societyId='$sId' and userId='$uId'"));
 if($isManage['isManage']==0){
@@ -28,6 +28,23 @@ if($dep && mysql_num_rows($dep)){
 			$dep_info[]=$row;
 		}			
 }
+//查找用户相关社团ID
+$user_society_Id=mysql_query("SELECT societyId FROM user_society_relation WHERE userId='$uId' and isManage<>4");
+if($user_society_Id && mysql_num_rows($user_society_Id)){
+	    while($row = mysql_fetch_assoc($user_society_Id)){
+			if($row['societyId']!=$sId){
+				$societyId[]=$row['societyId'];
+			}
+		}			
+}
+
+//获取社团名称
+if($societyId){
+	foreach($societyId as $value){
+		$res=mysql_fetch_array(mysql_query("select sName from society where sId='$value' "));
+		$sName[]=$res['sName'];
+	}
+}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -44,9 +61,21 @@ if($dep && mysql_num_rows($dep)){
       <ul>
         <li class="a">logo</li>
         <li class="b"><?php echo $sInfo['sName']?></li>
-        <li class="c">返回&nbsp&nbsp;<a href="square.php">易可广场>></a></li>
+        <li class="c"><a href="javascript:change_society()">[切换]</a></li>
+        <li class="d">返回&nbsp&nbsp;<a href="square.php">易可广场>></a></li>
       </ul>
       <div style="clear:both;"></div>
+      <div class="change_society" style="display:none;">
+<?php 
+if($sName){
+	for($i=0;$i<=sizeof($sName)-1;$i++){
+?>
+          <a href="society_info.php?sId=<?php echo  $societyId[$i]?>"><?php echo $sName[$i]?></a>
+<?php
+	}
+}
+?>
+      </div>
   </div>
   
 <!--社团封面部分-->

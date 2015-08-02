@@ -2,7 +2,7 @@
 session_start();
 error_reporting(E_ALL & ~E_NOTICE);
 require_once('../background/conf/connect.php');
-$school=$_SESSION['sSchool'];
+require_once('../background/conf/session.php');
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -22,7 +22,7 @@ $school=$_SESSION['sSchool'];
   </div>
 </div>
 <div style="clear:both;"></div>
-<input type="hidden" id="school" value="<?php echo $school?>"/>
+<input type="hidden" id="school" value="<?php echo $sSchool?>"/>
 <div id="main">
 		<div class="course-content">
             <!--分类：导航-->
@@ -31,7 +31,7 @@ $school=$_SESSION['sSchool'];
                         <span class="l">所有活动</span>
                         <span class="r">
                         <div class="search-area">
-            				<form id="search_form" action="../background/background_society/activity/classify_query_activity.php?action=search&school=<?php echo $school?>" name="search_form"  method="post">
+            				<form id="search_form" action="../background/background_society/activity/classify_query_activity.php?action=search&school=<?php echo $sSchool?>" name="search_form"  method="post">
                 				<input class="search-input" placeholder="搜索活动、关键词" type="text" autocomplete="off" name="words" value=""/>
                 				<input type="submit" class="btn_search button" value="搜索"/>
            					</form>

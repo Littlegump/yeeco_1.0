@@ -3,9 +3,7 @@ session_start();
 error_reporting(E_ALL & ~E_NOTICE);
 require_once('../background/conf/connect.php');
 $sId=$_GET['sId'];
-$uId=$_SESSION['userId'];
-$userName=$_SESSION['userName'];
-$userFace=$_SESSION['userFace'];
+require_once('../background/conf/session.php');
 //查找社团信息
 $sInfo=mysql_fetch_assoc(mysql_query("select * from society where sId='$sId'"));
 //查找纳新信息
@@ -13,7 +11,10 @@ $fInfo=mysql_fetch_assoc(mysql_query("select * from society_fresh where sId='$sI
 //查看是否关注此社团
 $concern=mysql_fetch_assoc(mysql_query("select isManage from user_society_relation where societyId='$sId' and userId='$uId'"));
 //查询评论信息
-$query=mysql_query("select *  from comment_form where nId='$sId' order by cId desc");
+$nId = mysql_fetch_assoc(mysql_query("select nId from dynamic_state where nImg='$sId'"));
+if($nId['nId']!==NULL){
+ $query=mysql_query("select *  from comment_form where nId='$nId[nId]' order by cId desc");
+}
 if($query && mysql_num_rows($query)){	
 	while($row = mysql_fetch_assoc($query)){
 		if($row['ccId'] == 0){
@@ -26,7 +27,13 @@ if($query && mysql_num_rows($query)){
 if($comment_2){
 	sort($comment_2);
 }
-
+//获取赞的相关信息
+$query=mysql_query("select cId from praise where uId='$uId'");
+if($query && mysql_num_rows($query)){	
+	while($row = mysql_fetch_assoc($query)){
+		$pcId[]=$row;
+	}			
+}//print_r($pcId);exit;
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -179,6 +186,7 @@ if($comment_1){
                     	<input type="hidden" name="cId" value="<?php echo $value['cId']?>">
                         <strong class="user_name"><?php echo $value['uName']?></strong>
                         <pre><?php echo $value['cBody']?></pre>
+                      
 <?php
 		if($uId != $value['uId']){		
 ?>
@@ -189,7 +197,31 @@ if($comment_1){
                         <a href="javascript:void(0)" onclick="delete1(this)" class="delete">删除</a>
 <?php
 		}
-?>                        <span class="send_time"><?php echo $value['cTime']?></span>
+?>                        
+						<span class="send_time"><?php echo $value['cTime']?></span>
+<?php
+if($pcId){
+	$flag=false;
+	foreach($pcId as $p){
+		if($p['cId']==$value['cId']){
+			$flag=true;
+?>
+  						<a class="praise" href="javascript:void(0)" onclick="praise_cancel(this)">取消赞(<?php echo $value['pNum']?>)</a>
+<?php
+			break;
+		}					
+	}
+	if(!$flag){
+?>
+						<a class="praise" href="javascript:void(0)" onclick="praise(this)">赞<?php echo $value['pNum']==0?'':"(".$value['pNum'].")"?></a> 
+<?php
+	}
+}else{
+?>
+						<a class="praise" href="javascript:void(0)" onclick="praise(this)">赞<?php echo $value['pNum']==0?'':"(".$value['pNum'].")"?></a> 
+<?php
+}
+?>
                         <div class="sec_replys" style="display:none" id="<?php echo $i?>">
                           <ul>
 <?php
@@ -215,7 +247,32 @@ if($comment_2){
 <?php
 		}
 ?>
-                                  <span class="send_time2"><?php echo $value_2['cTime']?></span>    
+                                  <span class="send_time2"><?php echo $value_2['cTime']?></span>  
+                                   
+<?php
+if($pcId){
+	$flag=false;
+	foreach($pcId as $p){
+		if($p['cId']==$value_2['cId']){
+			$flag=true;
+?>
+  						<a class="praise" href="javascript:void(0)" onclick="praise_cancel(this)">取消赞(<?php echo $value_2['pNum']?>)</a>
+<?php
+			break;
+		}					
+	}
+	if(!$flag){
+?>
+						<a class="praise" href="javascript:void(0)" onclick="praise(this)">赞<?php echo $value_2['pNum']==0?'':"(".$value['pNum'].")"?></a> 
+<?php
+	}
+}else{
+?>
+						<a class="praise" href="javascript:void(0)" onclick="praise(this)">赞<?php echo $value_2['pNum']==0?'':"(".$value['pNum'].")"?></a> 
+<?php
+}
+?>                                
+                                  
                               </div>
                               <div style="clear:both;"></div>
                             </li>
@@ -252,7 +309,7 @@ if($comment_2){
                         <input type="hidden" name="userName" value="<?php echo $userName?>"/>
                         <input type="hidden" name="userId" value="<?php echo $uId?>"/>
                         <input type="hidden" name="userFace" value="../<?php echo $userFace?>"/>
-                        <input type="hidden" name="nId" value="<?php echo $sId?>"/>
+                        <input type="hidden" name="nId" value="<?php echo $nId['nId']?>"/>
                         <textarea name="comment"></textarea>
                         <input type="submit" class="submit_btn" value="评论" onclick="submit_btn(this)"/>
                     </form>

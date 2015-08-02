@@ -41,7 +41,7 @@ if($action=='search'){
 				  </ul>";
 		}
 	}
-	echo count($actInfo);
+	echo '@'.count($actInfo);
 	exit;
 }
 //分类查找
@@ -132,7 +132,7 @@ select * from society_act_open where actSchool='$school' and actType like '%$typ
 				  </ul>";	
 		}	
 	}
-	echo count($actInfo);
+	echo '@'.count($actInfo);
 	exit;
 }
 ?>

@@ -4,8 +4,6 @@
 *1.所需要的参数：
 *2.返回值：
 */
-
-
 	error_reporting(E_ALL & ~E_NOTICE);
 	require_once('../conf/connect.php');
 	require_once('get_picture.php');
@@ -86,6 +84,8 @@
 	$aPhoto=getImg($folder);
 	//插入数据到数据库
 	$insertSql=mysql_query("insert into apply_information_unselected(uId,aName,aSex,aBirthday,aNative,aClass,aTel,aEmail,aQQ,aFavor,aStrong,aPhoto,aAnser_1,aAnser_2,aAnser_3,sId,fId,sDep,aSendTime) values('$uId','$aName','$aSex','$aBirthday','$aNative','$aClass','$aTel','$aEmail','$aQQ','$aFavor','$aStrong','$aPhoto','$aAnser_1','$aAnser_2','$aAnser_3','$sId','$fId','$depName','$aSendTime')");
+	//同步个人信息
+	mysql_query("update userextrainfo set userName='$aName',userTel='$aTel',userSex='$aSex',userBirth='$aBirthday',userPlace='$aNative',userClass='$aClass',userEmail='$aEmail',userQQ='$aQQ' where uId='$uId'");
 	if($insertSql){
 		if($clientSign){
 			Response::json(200,'数据提交成功！',NULL);

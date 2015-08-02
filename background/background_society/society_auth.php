@@ -20,6 +20,8 @@ if(!$result){
 			$check_query = mysql_fetch_assoc(mysql_query("select * from pre_society where sId='$sid' && flag='$flag' limit 1"));
 			if($check_query){
 				$insertsql = mysql_query("insert into society(sId,sName,sSchool,sPrincipal,uId,sCate,sDesc,sImg) select 					     				sId,sName,sSchool,sPrincipal,uId,sCate,sDesc,sImg from pre_society where sId='$sid'");
+				$newId = $check_query['sId'];
+				$createNews = mysql_query("insert into dynamic_state(nImg) values('$newId')");
 				$regTime=time();
 				$updatesql=mysql_query("update society set regTime='$regTime',sQRCode='$QRCode' where sId='$sid'");
 				$delete_old = mysql_query("delete from pre_society where sId='$sid'");	
