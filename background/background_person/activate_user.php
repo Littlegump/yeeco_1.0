@@ -74,7 +74,7 @@
 					'sSchool' => $userSchool,
 					'userFace' => $userFace
 				);
-				Response::json(200,'用户已成功激活，并自动为其登录',$data);
+				Response::json(207,'用户已成功激活，并自动为其登录',$data);
 			}else{
 				if($_POST['flag'] == 'M_request'){
 					echo $newId;
@@ -95,7 +95,7 @@
 		$f=mysql_query("update user set password='$password' where userTel='$userTel'");
 		if($f){
 			if($clientSign){
-				Response::json(200,'修改成功，请重新登录',NULL);
+				Response::json(206,'修改成功，请重新登录',NULL);
 			}else{
 				echo "<script>alert('修改成功，请重新登陆！');window.location.href='../../index.php';</script>";
 			}

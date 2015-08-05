@@ -36,7 +36,7 @@
 			'nonactivated' => $data_2,
 		);
 
-		Response::json(200,'该用户参加了以下社团(activated为已激活社团，nonactivated为未激活社团)',$data);		
+		Response::json(213,'该用户参加了以下社团(activated为已激活社团，nonactivated为未激活社团)',$data);		
 	
 	}else{
 		

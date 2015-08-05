@@ -77,7 +77,7 @@ if($query && mysql_num_rows($query)){
 <div style="clear:both;"></div>
 
 <!--封面--> 
-<div class="head">
+<!--<div class="head">
 	<div class="cover">
     	<img src="<?php echo substr($aInfo['actImg'],3)?>"/>    
     </div>
@@ -114,16 +114,59 @@ if($flag==false){
         </div>
     </div>
    
+</div>-->
+<div class="head">
+	<div class="cover"><img src=""/></div>
+    <div class="summary">
+    	<ul>
+          <li>
+            <span>当前状态</span>
+        		<em>正在进行</em>
+          </li>
+          <li>
+            <span>关注人数</span>
+            <em>23</em>
+          </li>
+          <li class="course_hour">
+            <span>报名人数</span>
+            <em>34</em>
+          </li>
+        </ul>
+    </div>
+    <div class="head_handle">
+
+        <div class="concern" id="concern">
+        	<a href="javascript:concern();" class="handle_1">
+            	<i></i>
+            	<em class="concerned-icon">活动互动室</em>
+            </a>
+        </div>
+        <div class="join">
+            <a href="javascript:" class="handle_2">关闭活动</a>                      
+        </div>
+        
+    </div>
 </div>
 <div style="clear:both;"></div>
 
 <!--主体-->
 <div class="body">
     <div class="main">
-    	<!--纳新公告--纳新详情-->
+    
+    	<div class="page">
+        	<div class="cover_pic"><img src=""/></div>
+        	<div class="base_info">
+              <ul>
+                <li><label style="margin-top:7px;">主办社团：</label><strong>MT音乐俱乐部</strong></li>
+                <li><label>活动类型：</label><p>比赛/需要报名/面向全校</p></li>
+                <li><label>活动时间：</label><p>2015-06-23&nbsp;12:03~2015-06-23&nbsp;12:03</p></li>
+                <li><label>活动地点：</label><p>西安邮电大学长安校区体育馆南侧大广场上</p></li>
+                <li><label>报名时间：</label><p>2015-06-23&nbsp;12:03~2015-06-23&nbsp;12:03</p></li>
+              </ul>
+            </div>
+           	<div style="clear:both;"></div>
+        </div>
     	<div class="page page_1">
-        	<strong>活动类型：</strong>
-                <p><?php echo $aInfo['actType']?></p>
         	<strong>活动简介：</strong>
                 <p><?php echo $aInfo['actDesc']?></p>
         	<strong>活动详情：</strong><a class="more" href="javascript:detail()"></a>

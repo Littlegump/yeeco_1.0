@@ -111,7 +111,7 @@ if($user_limit!='成员'){
         <a href="activity.php?sId=<?php echo $sId?>"><div><li><img src=""/>活动</li></div></a>
         <a href="society_info.php?sId=<?php echo $sId?>"><div><li><img src=""/>社团资料</li></div></a>
         <a href="change_term.php?sId=<?php echo $sId?>"><div><li><img src=""/>换届</li></div></a>
-        <a href="find_sponsor.php?sId=<?php echo $sId?>"><div><li><img src=""/>找赞助</li></div></a>
+        <a href="temp_page.html"><div><li><img src=""/>找赞助</li></div></a>
       </div>
     </div>
     <!--中间主体内容-->

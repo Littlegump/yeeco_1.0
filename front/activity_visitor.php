@@ -9,8 +9,10 @@ $aInfo=mysql_fetch_assoc(mysql_query("select * from society_act_open where actId
 if(!$aInfo){
 	$aInfo=mysql_fetch_assoc(mysql_query("select * from society_act_closed where actId='$actId'"));
 }
+//查询活动主办社团
+$society=mysql_fetch_assoc(mysql_query("select sName,sImg from society where sId='$aInfo[sId]'"));
 //查询是否已经参加活动
-$isJoin=mysql_num_rows(mysql_query("select id from act_user_relation where uId='$uId' and actId='$actId'"));
+$isJoin=mysql_fetch_assoc(mysql_query("select id,isConcern from act_user_relation where uId='$uId' and actId='$actId'"));
 //查询用户是否是活动所属社团的人
 $isSociety=mysql_num_rows(mysql_query("select id from user_society_relation where userId='$uId' and societyId='$aInfo[sId]'"));
 //查询评论信息
@@ -64,54 +66,71 @@ if($query && mysql_num_rows($query)){
 <input type="hidden" id="uId" value="<?php echo $uId?>"/>
 <input type="hidden" id="actRange" value="<?php echo $aInfo['actRange']?>"/>
 <input type="hidden" id="isSociety" value="<?php echo $isSociety?>"/>
+<input type="hidden" id="isJoin" value="<?php echo $isJoin['isConcern']?>"/>
 <!--封面--> 
 <div class="head">
-	<div class="cover">
-    	<img src="<?php echo substr($aInfo['actImg'],3)?>"/>    
-    </div>
+	<div class="cover"><img src="<?php echo substr($aInfo['actImg'],3)?>"/></div>
     <div class="summary">
     	<ul>
           <li>
-          <span>活动时间</span>
-           <em><?php echo $aInfo['actBeginDate']?>&nbsp;<?php echo $aInfo['actBeginTime']?>&nbsp;~&nbsp;<?php echo $aInfo['actEndDate']?>&nbsp;<?php echo $aInfo['actEndTime']?></em>       
+            <span>当前状态</span>
+        		<em>正在进行</em>
           </li>
           <li>
-            <span>活动地点</span>
-            <em><?php echo $aInfo['actPlace']?></em>
-          </li>     
+            <span>关注人数</span>
+            <em><?php echo $aInfo['actFocusNum']?></em>
+          </li>
+          <li class="course_hour">
+            <span>报名人数</span>
+            <em><?php echo $aInfo['actNum']?></em>
+          </li>
         </ul>
-        <div class="head_handle">
-        	<div class="number">
-              <ul>
-              	<li><span>报名人数</span><em><?php echo $aInfo['actNum']?></em></li>
-                <li><span style="margin-right:70px;"></span><span>关注人数</span><em><?php echo $aInfo['actFocusNum']?></em></li>
-              </ul>         
-            </div>
+    </div>
+    <div class="head_handle">
+        <div class="concern" id="concern">
+        	<a href="javascript:concern();" class="handle_1">
+            	<i></i>
+            	<em class="concerned-icon">关注此社团</em>
+            </a>
+        </div>
+        
+        <div class="join">
 <?php
-if($isJoin){
+if($isJoin['isConcern']==='0'){
 ?>
-        <a><div class="close_act">已经报名</div></a>
+        <a class="handle_2">报名成功</a>
 <?php
 }else{
 ?> 
-		<a href="javascript:apply_activity();" id="apply_act"><div class="close_act">报名参加</div></a>  
+		<a href="javascript:apply_activity();" id="apply_act" class="handle_2">报名参加</a>  
 <?php 
 }
-?>   
-            <div style="clear:both;"></div>
-        </div>
+?>                      
+        </div>      
     </div>
-   
 </div>
+
 <div style="clear:both;"></div>
 
 <!--主体-->
 <div class="body">
     <div class="main">
-    	<!--纳新公告--纳新详情-->
+    	
+        <div class="page">
+        	<div class="cover_pic"><img src="<?php echo substr($society['sImg'],3)?>"/></div>
+        	<div class="base_info">
+              <ul>
+                <li><label style="margin-top:7px;">主办社团：</label><strong><?php echo $society['sName']?></strong></li>
+                <li><label>活动类型：</label><p><?php echo $aInfo['actType']?>/<?php echo $aInfo['isApply']?>/<?php echo $aInfo['actRange']?></p></li>
+                <li><label>活动时间：</label><p><?php echo $aInfo['actBeginDate']?>&nbsp;<?php echo $aInfo['actBeginTime']?>&nbsp;~&nbsp;<?php echo $aInfo['actEndDate']?>&nbsp;<?php echo $aInfo['actEndTime']?></p></li>
+                <li><label>活动地点：</label><p><?php echo $aInfo['actPlace']?></p></li>
+                <li><label>报名时间：</label><p><?php echo $aInfo['applyBeginDate']?>&nbsp;<?php echo $aInfo['applyBeginTime']?>&nbsp;~&nbsp;<?php echo $aInfo['applyEndDate']?>&nbsp;<?php echo $aInfo['applyEndTime']?></p></li>
+              </ul>
+            </div>
+           	<div style="clear:both;"></div>
+        </div>
+   
     	<div class="page page_1">
-        	<strong>活动类型：</strong>
-                <p><?php echo $aInfo['actType']?>/<?php echo $aInfo['isApply']?>/<?php echo $aInfo['actRange']?></p>
         	<strong>活动简介：</strong>
                 <p><?php echo $aInfo['actDesc']?></p>
         	<strong>活动详情：</strong><a class="more" href="javascript:detail()"></a>
@@ -310,6 +329,12 @@ if($pcId){
 <script src="js/jquery.form.js" type="text/javascript"></script>
 <script src="js/main.js"></script>
 <script src="js/activity_visitor.js" type="text/javascript"></script>
+<?php
+	if($isJoin['isConcern']==='0' || $isJoin['isConcern']==='1'){	
+		//已关注
+		echo "<script>change_concern(1);</script>";
+	}
+?>
 
 </body>
 </html>

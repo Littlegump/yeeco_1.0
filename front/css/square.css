@@ -146,33 +146,94 @@
 	.selected{
 		background:#72C4D8;
 		color:#fff;}
-#mysociety{
-	background:#00ACFF;
-	margin:20px auto;
-	box-shadow:inset 0px 0px 5px #00ACFF;
-	overflow:hidden;}
-#mysociety ul{
-	display:block;
-	margin:10px auto;}
-	#mysociety ul a{
-		color:#fff;
-		font-size:16px;
-		margin:7px 30px;
-		float:left;}
-
-#all_cover{
+.mysociety{
+	padding:10px;
 	position:absolute;
-	top:-100px;
-	bottom:0;
-	left:0;
-	right:0;
-	z-index:4;
-	background:#000;
-	filter:alpha(opacity=30);  
-    -moz-opacity:0.3;  
-    -khtml-opacity: 0.3;  
-    opacity: 0.3;}
-				
+	top:50%;
+	margin-top:10px;
+	left:50%;
+	margin-left:160px;
+	background:#fff;
+	overflow:hidden;
+	width:360px}
+.mysociety ul li{
+	overflow:hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+	line-height:30px;
+	height:30px;
+	float:left;
+	width:160px;
+	margin:0 10px;}
+	
+
+/*活动版块***************************************************************************/
+.title{
+	font-size:28px;
+	color:#00acff;
+	text-align:center;
+	margin:30px;}
+.act_body{
+	margin:20px auto;
+	width:1200px;}
+.act_body li {
+  position: relative;
+  float: left;
+  width: 280px;
+  margin: 10px;
+  height: 240px;
+  background: #f7faf9;
+  border-radius: 0 0 1px 1px;
+  box-shadow: 0 1px 2px #c5c5c5;
+}
+.act_img{
+	height:160px;
+	width:280px;
+	overflow:hidden;}
+	.act_img img{
+		height:100%;
+		width:100%;}
+.act_tips,.decs{
+	position:absolute;
+	height:80px;
+	width:280px;
+	top:160px;}
+.act_tips h2{
+	width:250px;
+  	font-size:16px;
+	color:#333;
+	text-align:center;
+	margin:15px auto;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+	overflow:hidden;}
+.decs p{
+	margin:7px auto;
+	font-size:12px;
+	line-height:21px;
+	height:63px;
+	width:250px;
+	display:block;
+	text-overflow:ellipsis;
+	overflow:hidden;
+	color:#333;}
+.act_l{
+	position:absolute;
+	bottom:5px;
+	left:10px;
+	font-size:13px;
+	color:#b4bbbf;}
+.act_r{
+	position:absolute;
+	bottom:5px;
+	right:10px;
+	font-size:13px;
+	color:#b4bbbf;}
+
+
+
+/*活动版块***************************************************************************/
+/*				
 .activity{
 	background:url(../../image/web_image/活动推荐背景.png) center repeat;
 	margin:0 auto;}
@@ -189,13 +250,29 @@
 .activity strong{
 	font-size:24px;
 	color:#00ACFF;}
-
+*/
+/*活动版块***************************************************************************/
 
 .society_card{
 	position:relative;
 	width:100%;
 	height:400px;
-	background:url(../../image/web_image/社团名录背景.png) center}
+	background:url(../../image/web_image/社团名录背景.png) center;
+	margin-top:40px;}
+	
+#all_cover{
+	position:absolute;
+	top:-100px;
+	bottom:0;
+	left:0;
+	right:0;
+	z-index:4;
+	background:#000;
+	filter:alpha(opacity=30);  
+    -moz-opacity:0.3;  
+    -khtml-opacity: 0.3;  
+    opacity: 0.3;}
+
 .card_in{
 	position:relative;
 	height:400px;
@@ -291,3 +368,12 @@
 	width:300px;
 	height:200px;}
 	
+.mobile_client{
+	background:url(../../image/web_image/活动推荐背景.png) center repeat;
+	margin-top:40px;
+	height:500px;
+	box-shadow:0 -3px 5px #ccc;}
+	
+.about_us{
+	height:200px;
+	background:#f2f2f2;}

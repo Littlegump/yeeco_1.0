@@ -40,6 +40,6 @@
 		'relation' => $relation
 	);
 	
-	Response::json(200,'该社团信息、纳新信息如下',$data);	
+	Response::json(215,'该社团信息、纳新信息如下',$data);	
 
 ?>

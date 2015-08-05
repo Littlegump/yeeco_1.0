@@ -69,26 +69,13 @@
 
     
 </div>
-<div style="height:1000px;"></div>
+
 <div style="clear:both;"></div>
-<div class="foot_back">
-  <div class="foot">
-      <div class="foot_logo"><img src="image_main/logo.png" width=100% height=100% /></div>
-      <div class="foot_middle">
-        <p>好点子，心生活！&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;易可传技，传递价值！<br/>
-	    地址：西安邮电大学东区大学生创新创业孵化基地B3       |京ICP备 13046642号-2  </p>
-      </div>
-      <div class="foot_right">
-	    <ul>
-		  <li><a href="">网站主页</a></li>
-		  <li><a href="">新手上路</a></li>
-		  <li><a href="">网站地图</a></li><br>
-	      <li><a href="">诚聘英才</a></li>
-		  <li><a href="">关于我们</a></li>
-		  <li><a href="">联系方式</a></li>
-	    </ul>
-	  </div>
-  </div>
+<div class="footer">
+	<p><a href="temp_page.html">招才纳士</a><a href="temp_page.html">联系我们</a><a href="temp_page.html">意见反馈</a><a href="temp_page.html">网站地图</a><a href="temp_page.html">新手学堂</a></p>
+    <hr color="#ccc" size="1"/>
+    <p>中国·陕西·西安市·长安区·西安邮电大学 710100 | *</p>
+    <p>好点子，新生活</p>
 </div>
 <script src="front/js/jquery-1.11.1.js"></script>
 <script src="front/js/index.js"></script>

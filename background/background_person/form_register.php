@@ -19,8 +19,18 @@ $clientSign = isMobile();
 //}else{
 //	print_r("你是用电脑登陆的！");
 //}exit;
-
-
+$action=$_GET['action'];
+if($action=='testcode'){
+	$tel=$_POST['usertel'];
+	if($clientSign){
+		$code = creatTestCode($tel);
+		Response::json(221,'该账号可以注册！',$code);
+	}else{
+		$code = creatTestCode($tel);
+		echo $code;
+	}
+	exit;	
+}
 //获取表单数据
 $userTel = $_POST['usertel'];
 $password = $_POST['password1'];
@@ -51,13 +61,14 @@ if($_POST['ousertel']){
 		}else{
 			//允许注册提示成功，返回200
 			if($clientSign){
-				$code = creatTestCode($ousertel);
-				Response::json(200,'该账号可以注册！',$code);
+				//$code = creatTestCode($ousertel);
+				Response::json(203,'该账号可以注册！',NULL);
 			}
 		}
 	}
 	exit;
 }
+
 
 //向数据库中插入新注册用户数据；
 $insertsql=mysql_query("insert into user(userTel,password,userSchool,userName,regTime,userFace) values('$userTel','$password','$userSchool','$userName',$regTime,'$userFace')");
@@ -75,7 +86,7 @@ $uid = mysql_insert_id();
 				'sSchool' => $userSchool,
 				'userFace' => $userFace
 			);
-			Response::json(200,'注册成功，自动执行登录操作！',$data);
+			Response::json(204,'注册成功，自动执行登录操作！',$data);
 		}else{
 			echo "<script>window.location.href='../../front/square.php'</script>";
 		}

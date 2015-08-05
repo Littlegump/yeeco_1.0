@@ -82,7 +82,7 @@ error_reporting(E_ALL & ~E_NOTICE);
         <ul> 
           <li>
               <p>欢迎您加入易可社团的大家庭！！！</p>
-              <p>验证码已发送至手机&nbsp;88888888888，</p>
+              <p>验证码已发送至手机&nbsp;：<span id="target_number"></span></p>
           </li>
           <li>
               <p>若<strong class="time">60</strong>秒后您还未收到，请点击<a id="resend" class="gray">重新发送</a></p>
@@ -92,7 +92,7 @@ error_reporting(E_ALL & ~E_NOTICE);
           </li>
           <li>
             <input type="button" onclick="toRegister()" class="register" value="返回" onclick=""/>
-            <input type="submit" class="register" value="提交" />
+            <input type="button" class="register" onclick="verify_Code()" value="提交" />
           </li>
         </ul>    
     </div>

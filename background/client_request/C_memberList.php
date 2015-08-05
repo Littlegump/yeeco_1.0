@@ -47,5 +47,5 @@
 		$members = array();
 	}
 	
-	Response::json(200,'部门信息及各部门成员信息如下：',$dep_members);
+	Response::json(218,'部门信息及各部门成员信息如下：',$dep_members);
 ?>

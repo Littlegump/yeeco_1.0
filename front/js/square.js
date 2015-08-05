@@ -27,14 +27,6 @@ function getEvent(e){
 //******************************************************************
 //页面加载时产生的事件响应
 window.onload = function () {
-	
-	//获取原来的“我的社团”的高度；
-	oheight = $("#mysociety").height();
-	$("#mysociety").css({'height':0});
-	
-	//计算并设置主页面的高度
-    $("#page_main").height($(window).height()-100); 
-   
     
 	//焦点轮播图效果
             var container = document.getElementById('container');
@@ -149,6 +141,9 @@ window.onload = function () {
         }
     }
 
+
+
+
 }
 var timer = null;
 //出现相应card名片详情
@@ -196,17 +191,27 @@ function recover(x){
 }
 //打开或关闭我的社团
 function mysociety(){
-	var height = $("#mysociety").height();
-	if(height == 0){	
-	    $("#all_cover").fadeIn("fast");
-    	$("#mysociety").animate({height:oheight});
-		$(".buttons ul a li:last").addClass("selected");
-		$(".buttons ul a li:last").removeClass("unselected");	
-	}else{
-		$("#all_cover").fadeOut("fast");
-		$(".buttons ul a li:last").addClass("unselected");
-		$(".buttons ul a li:last").removeClass("selected");
-		$("#mysociety").animate({height:0});
-	}
+	$(".mysociety").fadeIn("fast");
+	$(document).one("click", function (){//对document绑定一个影藏Div方法
+		$(".mysociety").fadeOut("fast");
+	});
+	event.stopPropagation();
+}
+$(".mysociety").click(function (event){
+	event.stopPropagation();//阻止事件向上冒泡
+});
+//寻找社团
+function find_society(){
+	scrollTo(0,1300);
 }
 
+//**活动推荐部分动画效果****************************************************************
+	$(".act_body li").hover(function(){
+		$(this).find(".act_img img").animate({height:"110%",width:"110%",margin:"-9px -14px"},300);
+		$(this).find(".decs").fadeIn("fast");
+		$(this).find(".act_tips").fadeOut("fast");
+	},function(){
+		$(this).find(".act_img img").animate({height:"100%",width:"100%",margin:"0"},300);
+		$(this).find(".decs").fadeOut("fast");
+		$(this).find(".act_tips").fadeIn("fast");
+	});

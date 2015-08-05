@@ -58,6 +58,6 @@
 			'relation' => ''
 		);
 	}
-	Response::json(200,'该社团活动信息如下',$data);	
+	Response::json(220,'该社团活动信息如下',$data);	
 
 ?>

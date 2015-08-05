@@ -293,20 +293,20 @@ on u.uId=e.uId  where e.uId='$uId' limit 1"));
         <li class="title_left">账号信息</li>
     </div>
     <div class="contact">
-    	<form class="tel_form" action="../background/background_person/modify_userinfo.php?op=tel" method="post">
+    	<form class="tel_form" id="tel_form" action="../background/background_person/modify_userinfo.php?op=tel" method="post">
           <li>
             <label>当前账号：</label>
             <input name="userTel" type="text" value="<?php echo $accountResult['userTel']?>" readonly="readonly" onkeydown="disappear('otel');" />
           </li>
-          <li><span id="otel" style="display:none"></span></li>
+          <li><span id="otel" style="display:none"></span><span id="span_4" style="display:none">手机号码格式不正确</span></li>
           <li><a class="gray" href="javascript:change_tel()">绑定其他手机号</a></li>
-          <input type="button" class="button" value="发送验证码" style="display:none;" onclick="sendcode()"/>
+          <input type="button" class="button" id="sendcode" value="发送验证码" style="display:none;" onclick="sendCode();"/>
           <li class="ver_code" style="display:none;">
             <p>我们给该号码发送了一条短信验证码</p>
             <p>若<strong class="time">60</strong>秒后您还未收到，请点击<a id="resend" class="gray">重新发送</a></p>
             <p><input type="text" id="test" placeholder="在这里输入验证码"/></p>
           </li>
-          <input type="submit" class="button" value="确认修改" style="display:none;"/>
+          <input type="button" class="button" id="onsubmit" value="确认修改" onclick="verify_Code()" style="display:none;"/>
         </form>
         <div style="width:750px;border-bottom:1px solid #f2f2f2;margin:35px auto;"></div>
         <form class="password_form" action="../background/background_person/modify_userinfo.php?op=pwd" method="post">

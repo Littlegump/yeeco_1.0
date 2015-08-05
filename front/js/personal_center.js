@@ -1,43 +1,58 @@
 // JavaScript Document
 //更改绑定的手机号码
 function change_tel(){
-	$(".tel_form :button").css("display","block");
+	$("#sendcode").css("display","block");
 	$("[name='userTel']").removeAttr("readonly"); 
 	$("[name='userTel']").val("");
 	$("[name='userTel']").focus();
 }
+function sendCode(){	
 
-//发送验证码
-function sendcode(){	
 	//检查手机号码格式以及是否被注册了
 	var usertel=$("[name='userTel']").val();
 	var x=$("[name='userTel']");
 	var temp=usertel.substring(0,2);
 	if(usertel != ""){
-	if(usertel.length != 11){
-		error(x);
-	}else if(temp!="14" && temp!="13" && temp!="15" && temp!="18"){
-	    error(x);
+		if(usertel.length != 11){
+			error(x);
+		}else if(temp!="14" && temp!="13" && temp!="15" && temp!="18"){
+			error(x);
+		}else{
+			//用户名格式正确，判断该用户是否已经被注册
+			$("#otel").load("../background/background_person/form_register.php",{"ousertel":usertel},function(){
+				aaa = $("#otel").html();
+					if(aaa){
+						$("#otel").css("display","block");
+					}else{
+						//发送验证码*****************************************************
+						$.ajax({
+							type:"POST",
+							url:"../background/background_person/form_register.php?action=testcode",
+							//dataType:"json",
+							data:{
+								usertel:usertel,
+							},
+							success:function(data){
+								realCode = data;
+								alert(realCode);
+							},
+							error:function(jqXHR){alert("操作失败"+jqXHR.status);}
+						})
+						
+						$(".ver_code").css("display","block");
+						$("#onsubmit").css("display","block");
+						$("#sendcode").css("display","none");
+						$("[href='javascript:change_tel()']").css("display","none");
+						//重置并开启倒计时
+						$("#resend").addClass("gray");
+						$("#resend").removeAttr("href"); 
+						t=60;
+						countDown();
+					}
+			});
+		}		
 	}else{
-	    //用户名格式正确，判断该用户是否已经被注册
-		$("#otel").load("../background/background_person/form_register.php",{"ousertel":usertel},function(){
-		    aaa = $("#otel").html();
-			    if(aaa){
-			        $("#otel").css("display","block");
-				}else{
-	                //发送验证码*****************************************************
-					$(".ver_code").css("display","block");
-					$(".tel_form :submit").css("display","block");
-					$(".tel_form :button").css("display","none");
-					$("[href='javascript:change_tel()']").css("display","none");
-					//重置并开启倒计时
-					$("#resend").addClass("gray");
-					$("#resend").removeAttr("href"); 
-					t=60;
-					countDown();
-				}
-		});
-	}		
+		error(x);
 	}
 }
 
@@ -56,7 +71,7 @@ function countDown(){
 		    countDown();
 		}else{
 			$("#resend").removeClass("gray");
-			$("#resend").attr("href","javascript:sendcode();"); 
+			$("#resend").attr("href","javascript:sendCode();"); 
 			$(".test_code input[type='button']").attr("onclick","checking_find()");
 			$(".test_code input[type='button']").removeClass("disabled");
 			$(".test_code input[type='button']").addClass("button");
@@ -68,13 +83,14 @@ function countDown(){
 //提示框消失
 function disappear(x){
 	document.getElementById(x).style.display="none";
+	$("#span_4").hide();
 }
 
 //错误提示：x表示发生错误的文本框；
 function error(x){
 	var objid = $(x).attr("name");
 	switch(objid){
-	case 'usertel':$("#span_4").css("display","block");break;
+	case 'userTel':$("#span_4").css("display","block");break;
 	case 'password_old':$("#span_1").css("display","block");break;
 	case 'password_1':$("#span_2").css("display","block");break;
 	case 'password_2':$("#span_3").css("display","block");break;
@@ -148,15 +164,35 @@ function checking_find(){
 
 //找回密码，发送验证码
 function send_findcode(){
+	var usertel = $("[name='usertel']").val();
+	$.ajax({
+		type:"POST",
+		url:"../background/background_person/form_register.php?action=testcode",
+		//dataType:"json",
+		data:{
+			usertel:usertel,
+		},
+		success:function(data){
+			realCode = data;
+			alert(realCode);
+		},
+		error:function(jqXHR){alert("操作失败"+jqXHR.status);}
+		})
      //发送验证码
-	alert("yanzhengmayifasong");
-	$(".test_code input[type='button']").val("重发验证码");
-	$(".test_code input[type='button']").removeAttr("onclick");
-	$(".test_code input[type='button']").removeClass("button");
-	$(".test_code input[type='button']").addClass("disabled");
+	$("#onsend").val("重发验证码");
+	$("#onsend").removeAttr("onclick");
+	$("#onsend").removeClass("button");
+	$("#onsend").addClass("disabled");
 	countDown();
 }
 
 
-
+function verify_Code(){
+	var inputCode = $("#test").val();
+	if(inputCode == realCode){
+		document.getElementById('tel_form').submit();
+	}else{
+		alert("验证码输入错误！");
+	}
+}
 

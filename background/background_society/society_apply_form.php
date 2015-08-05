@@ -88,7 +88,7 @@
 	mysql_query("update userextrainfo set userName='$aName',userTel='$aTel',userSex='$aSex',userBirth='$aBirthday',userPlace='$aNative',userClass='$aClass',userEmail='$aEmail',userQQ='$aQQ' where uId='$uId'");
 	if($insertSql){
 		if($clientSign){
-			Response::json(200,'数据提交成功！',NULL);
+			Response::json(217,'数据提交成功！',NULL);
 		}else{
 			echo "success";
 		}		

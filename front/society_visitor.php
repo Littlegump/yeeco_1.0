@@ -95,7 +95,7 @@ if($query && mysql_num_rows($query)){
             </a>
         </div>
         <div class="join">
-            	<a href="javascript:apply_form(<?php echo $sInfo['isFresh']?>);" class="handle_2">申请加入</a>                      
+            	<a href="javascript:apply_form(<?php echo $sInfo['isFresh']?>);" class="handle_2">申请加入</a>
         </div>
         
     </div>

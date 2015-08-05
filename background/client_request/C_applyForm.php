@@ -57,6 +57,6 @@
 		'depInfo' => $depInfo
 	);
 	
-	Response::json(200,'该用户的报名表信息如下',$data);	
+	Response::json(216,'该用户的报名表信息如下',$data);	
 
 ?>

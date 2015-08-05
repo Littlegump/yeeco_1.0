@@ -60,21 +60,21 @@
 ?>
 <!--发送验证码，找回密码页面-->   
 <div class="page">
-        <form class="test_code" action="change_password.php" method="post">
+        <form class="test_code" id="tel_form" action="change_password.php" method="post">
         <ul>
           <li>
             <label>手机号码：</label>
             <input name="usertel" type="text" placeholder="请输入手机号码" required="required" onkeydown="disappear('span_4');disappear('otel')"/>
-            <input type="button" class="button" value="发送验证码" onclick="checking_find()"/>
+            <input type="button" class="button" id="onsend" value="发送验证码" onclick="checking_find()"/>
           </li>
           <li><span id="span_4" style="display:none">请输入合法的手机号码！</span></li>
           <li><span id="otel" style="display:none"></span></li>
           <li>
             <label>验证码：</label>
-            <input name="user_tel" type="text" placeholder="请输入验证码" required="required"/>
+            <input name="user_tel" id="test" type="text" placeholder="请输入验证码" required="required"/>
           </li>
           <li><span id="span_5" style="display:none">验证码输入错误！</span></li>
-          <input type="submit" class="button" value="提交" />
+          <input type="button" style="margin:0 170px" class="button" id="onsubmit" onclick="verify_Code()" value="提交" />
         </ul>
         </form>
 </div>

@@ -9,6 +9,7 @@
 	require_once('../conf/connect.php');
 	require_once('../conf/isMobile.php');
 	require_once('../conf/json_port.php');
+	require_once('validate_code.php');
 	
 	$clientSign = isMobile();
 	$ousertel=$_POST['ousertel'];
@@ -24,12 +25,14 @@
 				}
 			}else{
 				if($clientSign){
-					Response::json(200,'该用户存在，允许其修改密码！',NULL);
+					$code = creatTestCode($ousertel);
+					Response::json(205,'该用户存在，允许其修改密码！',$code);
 				}
 			}	
 		}else{
 			if($clientSign){
-				Response::json(200,'该用户存在，允许其修改密码！',NULL);
+				$code = creatTestCode($ousertel);
+				Response::json(205,'该用户存在，允许其修改密码！',$code);
 			}
 		}
 		

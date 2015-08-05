@@ -11,7 +11,7 @@ function create_news($type,$data){
 	if($type=='开启纳新'){
 		$nWho = 'society';
 		$fAnn = $data['fAnn'];
-		$fUrl = "http://localhost/yeeco_1.0/front/society_visitor.php?sId=".$sId;
+		$fUrl = "society_visitor.php?sId=".$sId;
 		//查询图片
 		$img=mysql_fetch_assoc(mysql_query("select sImg from society where sId='$oId'"));
 		$nImg = $img['sImg'];
@@ -21,7 +21,7 @@ function create_news($type,$data){
 	if($type=='纳新关闭'){
 		$nWho = 'society';
 		$action=$data['action'];
-		$fUrl = "http://localhost/yeeco_1.0/front/society_visitor.php?sId=".$oId;
+		$fUrl = "society_visitor.php?sId=".$oId;
 		//查询图片
 		$img=mysql_fetch_assoc(mysql_query("select sImg from society where sId='$oId'"));
 		$nImg = $img['sImg'];
@@ -47,9 +47,9 @@ function create_news($type,$data){
 		$img=mysql_fetch_assoc(mysql_query("select sImg from society where sId='$oId'"));
 		$nImg = $img['sImg'];
 		if($content=='社团通讯录有所更新!'){
-			$mUrl="http://localhost/yeeco_1.0/front/address_book?sId=".$oId;
+			$mUrl="address_book?sId=".$oId;
 		}else{
-			$mUrl="http://localhost/yeeco_1.0/front/society_info.php?sId=".$oId;
+			$mUrl="society_info.php?sId=".$oId;
 		}
 		$nBody=$oName.$content.'<br/>修改详情请点击<a href='.$mUrl.' style="color:#97ddff">这里!!</a>';	
 	}

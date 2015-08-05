@@ -6,10 +6,10 @@ function QRCode($page,$Id,$QRfolder){
 	include $f1.'phpqrcode/qrlib.php';
 	include $f1.'phpqrcode/qrconfig.php';
 	if($page=='mobileFront/M_societyVisitor.php'){
-		$value = 'http://192.168.1.105/yeeco_1.0/front/'.$page.'?sId='.$Id; //二维码内容 
+		$value = 'http://www.yeeco.me/front/'.$page.'?sId='.$Id; //二维码内容 
 	}
 	if($page=='activity_detail.php'){
-		$value = 'http://192.168.1.105/yeeco_1.0/front/'.$page.'?actId='.$Id;
+		$value = 'http://www.yeeco.me/front/'.$page.'?actId='.$Id;
 	}
 	$errorCorrectionLevel = 'L';//容错级别 
 	$matrixPointSize = 6;//生成图片大小 

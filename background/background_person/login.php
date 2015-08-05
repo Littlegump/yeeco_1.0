@@ -137,7 +137,7 @@ function logout(){
     setcookie("passwordno", null, time()-3600*24*365,"/yeeco_1.0/");  
 	}
 	if($clientSign){
-		Response::json(200,'成功退出登录',NULL);
+		Response::json(202,'成功退出登录',NULL);
 	}else{
 		echo "<script>window.location.href='../../index.php';</script>";
 	}

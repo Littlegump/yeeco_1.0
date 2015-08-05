@@ -1,5 +1,5 @@
 body{
-	min-height:1200px;
+	min-height:800px;
 	color:#333;
 	padding:0;	
 	font-family:"微软雅黑";
@@ -120,8 +120,18 @@ em,i{font-style:normal;}
 		cursor:pointer;
 		background:url(../../image/web_image/%E9%80%80%E5%87%BA%E7%99%BB%E5%BD%95.png) no-repeat -4px -50px;}
 
-
-
-
+/*底部*/
+.footer{
+	text-align:center;
+	line-height:30px;
+	margin:20px auto;
+	width:800px;
+	height:150px;}
+	.footer a{
+		color:#999;
+		line-height:40px;
+		margin:0 20px;}
+	.footer a:hover{
+		color:#00acff;}
 
 

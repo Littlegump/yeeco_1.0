@@ -28,6 +28,6 @@ on u.uId=e.uId  where e.uId='$uId' limit 1"));
 		'userQQ' => $infoResult['userQQ'],
 	);
 	
-	Response::json(200,'该用户的个人资料如下',$data);	
+	Response::json(214,'该用户的个人资料如下',$data);	
 
 ?>

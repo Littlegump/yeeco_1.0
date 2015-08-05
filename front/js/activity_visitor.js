@@ -25,15 +25,15 @@ function detail(){
 		t=0;
 	}
 }
-//报名参加活动
+//报名参加活动//**************************************************************************************
 function apply_activity(){
 	var actRange=$("#actRange").val();
 	if(actRange=='面向全校'){
 		$.ajax({
 			type:"GET",
-			url:"../background/background_society/activity/apply_activity.php?actId="+$("#actId").val()+"&uId="+$("#uId").val(),
+			url:"../background/background_society/activity/apply_activity.php?action=join&actId="+$("#actId").val()+"&uId="+$("#uId").val(),
 			success:function(){
-				$(".close_act").html("已经报名");	
+				$(".handle_2").html("报名成功");	
 				$("#apply_act").attr("href","");
 			},
 			error:function(){alert("操作失败");}
@@ -43,9 +43,9 @@ function apply_activity(){
 		if(isSociety){
 			$.ajax({
 				type:"GET",
-				url:"../background/background_society/activity/apply_activity.php?actId="+$("#actId").val()+"&uId="+$("#uId").val(),
+				url:"../background/background_society/activity/apply_activity.php?action=join&actId="+$("#actId").val()+"&uId="+$("#uId").val(),
 				success:function(){
-					$(".close_act").html("已经报名");	
+					$(".handle_2").html("报名成功");	
 					$("#apply_act").attr("href","");
 				},
 				error:function(){alert("操作失败");}
@@ -225,4 +225,53 @@ function praise_cancel(x){
 		},
 		error:function(jqXHR){alert("操作失败"+jqXHR.status);}
 	})
+}
+//**************************************************************************************	//切换 关注1/已经关注2
+var t=1;
+function change_concern(t){	
+	if(t==1){
+		$(".concern").attr('id','concerned');
+		$(".concerned-icon").html("已关注");
+		$("#concerned").hover(function(){
+			$("#concerned i").css("background-position","-76px 0");
+		},function(){
+			$("#concerned i").css("background-position","-76px -74px");
+		});
+	}else if(t==2){
+		$(".concern").attr('id','concern');
+		$(".concerned-icon").html("关注此社团");
+		$("#concern").hover(function(){
+			$("#concern i").css("background-position","0 -74px");
+		},function(){
+			$("#concern i").css("background-position","0 0");
+		});
+	}
+}
+
+//关注或取消关注
+function concern(){	
+	var type=$(".concern").attr('id');
+	if(type == 'concern'){
+		//如果未关注，进行关注
+		$.ajax({
+			type:"GET",
+			url:"../background/background_society/activity/apply_activity.php?action=concern&actId="+$("#actId").val()+"&uId="+$("#uId").val(),
+			success:function(){change_concern(1);},
+			error:function(jqXHR){alert("操作失败"+jqXHR.status);}
+		})
+		
+	}else{
+		//如果已经关注，取消关注
+		//判断是否已参加了该活动
+		if($("#isJoin").val()==1){
+			$.ajax({
+				type:"GET",
+				url:"../background/background_society/activity/apply_activity.php?action=cancel_concern&actId="+$("#actId").val()+"&uId="+$("#uId").val(),
+				success:function(){change_concern(2);},
+				error:function(){alert("操作失败");}
+			})
+		}else{
+			alert("您报名参加了该活动，默认为关注，无法取消关注！");	
+		}
+	}
 }

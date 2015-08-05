@@ -30,5 +30,5 @@
 	}
 	//echo "<pre>";
 	//print_r($allActivity);
-	Response::json(200,'该学校的所有活动列表如下',$allActivity);	
+	Response::json(219,'该学校的所有活动列表如下',$allActivity);	
 ?>

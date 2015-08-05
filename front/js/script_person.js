@@ -56,7 +56,19 @@ function countDown(){
 //发送验证码
 function sendcode(){
 	//发送验证码
-	
+	var usertel=$("#usertel").val();
+	$.ajax({
+			type:"POST",
+			url:"../background/background_person/form_register.php?action=testcode",
+			//dataType:"json",
+			data:{
+				usertel:usertel,
+			},
+			success:function(data){
+				realCode = data;
+			},
+			error:function(jqXHR){alert("操作失败"+jqXHR.status);}
+	})
 	//重置并开启倒计时
     $("#resend").addClass("gray");
 	$("#resend").removeAttr("href"); 
@@ -86,6 +98,7 @@ function toTest(){
 	    error(school);
 	}else{
 		//所有字段都已填写清楚，继续后续操作
+		$("#target_number").text(usertel.val());
 		$(".register_box").css("display","none");
 	    $(".test").css("display","block");
 		countDown();
@@ -181,3 +194,13 @@ $(document).ready(function(){
 		closeChoose();
     });
 });
+
+
+function verify_Code(){
+	var inputCode = $("#test").val();
+	if(inputCode == realCode){
+		document.getElementById("registerForm").submit();	
+	}else{
+		alert("验证码输入错误！");
+	}
+}
