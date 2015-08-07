@@ -54,7 +54,10 @@ function concern(){
 		$.ajax({
 			type:"GET",
 			url:"../background/background_society/isConcern.php?action=concern&sId="+$("#sId").val()+"&uId="+$("#uId").val(),
-			success:function(){change_concern(1);},
+			success:function(){
+				change_concern(1);
+				$("#isManage").val('4');
+			},
 			error:function(jqXHR){alert("操作失败"+jqXHR.status);}
 		})
 		
@@ -65,7 +68,10 @@ function concern(){
 			$.ajax({
 				type:"GET",
 				url:"../background/background_society/isConcern.php?action=cancelConcern&sId="+$("#sId").val()+"&uId="+$("#uId").val(),
-				success:function(){change_concern(2);},
+				success:function(){
+					change_concern(2);
+					$("#isManage").val('');
+				},
 				error:function(){alert("操作失败");}
 			})
 		}else{

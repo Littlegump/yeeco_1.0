@@ -44,6 +44,9 @@ if($op == 'info'){
 	//获取图片
 	$folder = "../../image/user_image/user_face/defined_face";
 	$userFace=substr(getImg($folder),6);
+	//重置SESSION
+	$_SESSION['userName']=$username;
+	$_SESSION['userFace']=$userFace;
 	//更新信息
 	$updatesql1=mysql_query("update userextrainfo set userName='$username',userTel='$tel_number', userSex='$sex',userBirth='$userBirth',userPlace='$userPlace',userClass='$major',userEmail='$email',userQQ='$qq' where uId='$uId'");
 	mysql_query("update user set userName='$username' where uId='$uId'");

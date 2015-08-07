@@ -184,8 +184,12 @@ function save(){
 }
 //关闭活动
 function close_act(){
-	coverall();
-	newbox('notice_box');
+	if($("#user_limit")=='成员'){
+		alert("您是成员，不能关闭或者删除活动");
+	}else{
+		coverall();
+		newbox('notice_box');
+	}
 }
 //取消关闭活动
 function cancel_close(){

@@ -136,9 +136,17 @@ if($user_limit!='成员'){
 <?php 
 if($act_info){
 		foreach($act_info as $value){
+			if($user_limit!='成员'){
 ?>
                <a href="activity_detail.php?actId=<?php echo $value['actId']?>&sId=<?php echo $sId?>" style="color:#333;">
-                <div class="act">
+ <?php
+			}else{
+ ?>   
+ 			 <a href="activity_visitor.php?actId=<?php echo $value['actId']?>&sId=<?php echo $sId?>" style="color:#333;">
+ <?php 
+			}
+ ?>
+               <div class="act">
                     <div class="act_ad">
                         <img src="<?php echo substr($value['actImg'],3)?>"/>
                     </div>

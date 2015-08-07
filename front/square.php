@@ -125,7 +125,6 @@ if($query && mysql_num_rows($query)){
 	<div class="act_body">
       <ul>
 <?php
-if($acts){
 	for($i=0;$i<=7;$i++){
 ?>
  		<li>
@@ -145,7 +144,6 @@ if($acts){
         </li>
 <?php
 	}
-}
 ?>
       </ul>
       <div style="clear:both;"></div>

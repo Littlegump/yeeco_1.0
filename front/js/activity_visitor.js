@@ -239,7 +239,7 @@ function change_concern(t){
 		});
 	}else if(t==2){
 		$(".concern").attr('id','concern');
-		$(".concerned-icon").html("关注此社团");
+		$(".concerned-icon").html("关注此活动");
 		$("#concern").hover(function(){
 			$("#concern i").css("background-position","0 -74px");
 		},function(){
@@ -256,7 +256,10 @@ function concern(){
 		$.ajax({
 			type:"GET",
 			url:"../background/background_society/activity/apply_activity.php?action=concern&actId="+$("#actId").val()+"&uId="+$("#uId").val(),
-			success:function(){change_concern(1);},
+			success:function(){
+				change_concern(1);
+				$("#isJoin").val('1');
+			},
 			error:function(jqXHR){alert("操作失败"+jqXHR.status);}
 		})
 		
@@ -267,7 +270,10 @@ function concern(){
 			$.ajax({
 				type:"GET",
 				url:"../background/background_society/activity/apply_activity.php?action=cancel_concern&actId="+$("#actId").val()+"&uId="+$("#uId").val(),
-				success:function(){change_concern(2);},
+				success:function(){
+					change_concern(2);
+					$("#isJoin").val('');
+				},
 				error:function(){alert("操作失败");}
 			})
 		}else{

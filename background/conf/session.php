@@ -4,6 +4,7 @@ $uId=$_SESSION['userId'];
 $sSchool=$_SESSION['sSchool'];
 $userFace=$_SESSION['userFace'];
 if($userName==NULL || $uId==NULL || $sSchool==NULL || $userFace==NULL){
+		#:print_r("ss");exit;
 	 unset($_SESSION['userName']); 
 	 unset($_SESSION['userId']);
 	 unset($_SESSION['sSchool']); 

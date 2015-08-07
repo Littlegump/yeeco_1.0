@@ -53,6 +53,8 @@ if($query && mysql_num_rows($query)){
 		$pcId[]=$row;
 	}			
 }	
+//查询活动主办社团
+$society=mysql_fetch_assoc(mysql_query("select sName,sImg from society where sId='$aInfo[sId]'"));
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -75,74 +77,58 @@ if($query && mysql_num_rows($query)){
   </div>
 </div>
 <div style="clear:both;"></div>
-
-<!--封面--> 
-<!--<div class="head">
-	<div class="cover">
-    	<img src="<?php echo substr($aInfo['actImg'],3)?>"/>    
-    </div>
-    <div class="summary">
-    	<ul>
-          <li>
-          <span>活动时间</span>
-            <em><?php echo $aInfo['actBeginDate']?>&nbsp;<?php echo $aInfo['actBeginTime']?>&nbsp;~&nbsp;<?php echo $aInfo['actEndDate']?>&nbsp;<?php echo $aInfo['actEndTime']?></em>           
-          </li>
-          <li>
-            <span>活动地点</span>
-            <em><?php echo $aInfo['actPlace']?></em>
-          </li>     
-        </ul>
-        <div class="head_handle">
-        	<div class="number">
-              <ul>
-              	<li><span>报名人数</span><em><?php echo $aInfo['actNum']?></em></li>
-                <li><span style="margin-right:70px;"></span><span>关注人数</span><em><?php echo $aInfo['actFocusNum']?></em></li>
-              </ul>         
-            </div>
-<?php
-if($flag==false){
-?>
-            <a href="javascript:close_act()"><div class="close_act">关闭活动</div></a>
-<?php 
-}else{
-?>
-			<a href="javascript:close_act()"><div class="close_act">删除活动</div></a>	
-<?php
-}
-?>
-            <div style="clear:both;"></div>
-        </div>
-    </div>
-   
-</div>-->
+<!--个人信息-->
+<input type="hidden" id="user_limit" value="<?php echo $user_limit?>"/>
+<!--社团封面-->
 <div class="head">
-	<div class="cover"><img src=""/></div>
+	<div class="cover"><img src="<?php echo substr($aInfo['actImg'],3)?>"/></div>
     <div class="summary">
     	<ul>
           <li>
             <span>当前状态</span>
-        		<em>正在进行</em>
-          </li>
+ <?php
+if($flag==false){
+?>
+            <em>正在进行</em>
+<?php 
+}else{
+?>
+			<em>活动关闭</em>	
+<?php
+}
+?>        </li>
           <li>
             <span>关注人数</span>
-            <em>23</em>
+            <em><?php echo $aInfo['actFocusNum']?></em>
           </li>
           <li class="course_hour">
             <span>报名人数</span>
-            <em>34</em>
+            <em><?php echo $aInfo['actNum']?></em>
           </li>
         </ul>
     </div>
     <div class="head_handle">
 
         <div class="concern" id="concern">
-        	<a href="javascript:concern();" class="handle_1">
+        	<a href="javascript:alert('此功能尚未开放！');" class="handle_1">
             	<i></i>
             	<em class="concerned-icon">活动互动室</em>
             </a>
         </div>
         <div class="join">
-            <a href="javascript:" class="handle_2">关闭活动</a>                      
+<?php
+if($flag==false){
+?>
+            <a href="javascript:close_act();" class="handle_2">关闭活动</a>                      
+<?php 
+}else{
+?>	
+			<a href="javascript:close_act();" class="handle_2">删除活动</a>
+            
+<?php
+}
+?>
+     
         </div>
         
     </div>
@@ -157,11 +143,11 @@ if($flag==false){
         	<div class="cover_pic"><img src=""/></div>
         	<div class="base_info">
               <ul>
-                <li><label style="margin-top:7px;">主办社团：</label><strong>MT音乐俱乐部</strong></li>
-                <li><label>活动类型：</label><p>比赛/需要报名/面向全校</p></li>
-                <li><label>活动时间：</label><p>2015-06-23&nbsp;12:03~2015-06-23&nbsp;12:03</p></li>
-                <li><label>活动地点：</label><p>西安邮电大学长安校区体育馆南侧大广场上</p></li>
-                <li><label>报名时间：</label><p>2015-06-23&nbsp;12:03~2015-06-23&nbsp;12:03</p></li>
+                <li><label style="margin-top:7px;">主办社团：</label><strong><?php echo $society['sName']?></strong></li>
+               <li><label>活动类型：</label><p><?php echo $aInfo['actType']?>/<?php echo $aInfo['isApply']?>/<?php echo $aInfo['actRange']?></p></li>
+                <li><label>活动时间：</label><p><?php echo $aInfo['actBeginDate']?>&nbsp;<?php echo $aInfo['actBeginTime']?>&nbsp;~&nbsp;<?php echo $aInfo['actEndDate']?>&nbsp;<?php echo $aInfo['actEndTime']?></p></li>
+                <li><label>活动地点：</label><p><?php echo $aInfo['actPlace']?></p></li>
+                <li><label>报名时间：</label><p><?php echo $aInfo['applyBeginDate']?>&nbsp;<?php echo $aInfo['applyBeginTime']?>&nbsp;~&nbsp;<?php echo $aInfo['applyEndDate']?>&nbsp;<?php echo $aInfo['applyEndTime']?></p></li>
               </ul>
             </div>
            	<div style="clear:both;"></div>

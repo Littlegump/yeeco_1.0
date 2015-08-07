@@ -29,7 +29,7 @@ $sId=$_GET['sId'];
     <div class="welcome">
        <p>激活邮件已发送至您的邮箱！</p>
        <p>请注意查收并及时激活您的社团！</p>
-       <p>如果长时间未收到，点此<a href="../background/background_society/email_resend.php?sId=$sId" class="gray">重新发送</a></p>
+       <p>如果长时间未收到，点此<a href="../background/background_society/email_resend.php?sId=<?php echo $sId?>" class="gray">重新发送</a></p>
     </div>
 </div>
 

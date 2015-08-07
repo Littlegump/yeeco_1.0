@@ -139,8 +139,6 @@ function checking_1(x){
 	if(usertel != ""){
 	if(usertel.length != 11){
 		error(x);
-	}else if(temp!="14" && temp!="13" && temp!="15" && temp!="18"){
-	    error(x);
 	}else{
 	    //用户名格式正确，判断该用户是否已经被注册
 		$("#otel").load("../background/background_person/form_register.php",{"ousertel":usertel},function(){

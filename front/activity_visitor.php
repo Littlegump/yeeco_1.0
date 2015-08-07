@@ -4,7 +4,7 @@ session_start();
 require_once('../background/conf/connect.php');
 require_once('../background/conf/session.php');
 $actId=$_GET['actId'];
-//查询活动内容
+//查询活动用户关系
 $aInfo=mysql_fetch_assoc(mysql_query("select * from society_act_open where actId='$actId'"));
 if(!$aInfo){
 	$aInfo=mysql_fetch_assoc(mysql_query("select * from society_act_closed where actId='$actId'"));
@@ -90,7 +90,7 @@ if($query && mysql_num_rows($query)){
         <div class="concern" id="concern">
         	<a href="javascript:concern();" class="handle_1">
             	<i></i>
-            	<em class="concerned-icon">关注此社团</em>
+            	<em class="concerned-icon">关注此活动</em>
             </a>
         </div>
         

@@ -1,9 +1,9 @@
 <?php
 error_reporting(E_ALL & ~E_NOTICE);
+session_start();
 require_once('../conf/connect.php');
 require_once('get_picture.php');
 require_once('../conf/code.php');
-session_start();
 //获取参数值
 $sid=$_GET['sid'];
 $uid=$_GET['uid'];

@@ -72,7 +72,7 @@
 
 <div style="clear:both;"></div>
 <div class="footer">
-	<p><a href="temp_page.html">招才纳士</a><a href="temp_page.html">联系我们</a><a href="temp_page.html">意见反馈</a><a href="temp_page.html">网站地图</a><a href="temp_page.html">新手学堂</a></p>
+	<p><a href="front/temp_page.html">招才纳士</a><a href="front/temp_page.html">联系我们</a><a href="front/temp_page.html">意见反馈</a><a href="front/temp_page.html">网站地图</a><a href="front/temp_page.html">新手学堂</a></p>
     <hr color="#ccc" size="1"/>
     <p>中国·陕西·西安市·长安区·西安邮电大学 710100 | *</p>
     <p>好点子，新生活</p>

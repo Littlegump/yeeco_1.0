@@ -340,7 +340,7 @@ if($pcId){
 </div>
 
 
-<!--查看、打印报名表--> 
+<!----> 
     <input type="hidden" id="isManage" value="<?php echo $concern['isManage']?>">
     <input type="hidden" id="sId" value="<?php echo $sId?>">
     <input type="hidden" id="uId" value="<?php echo $uId?>">
