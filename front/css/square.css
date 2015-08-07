@@ -36,7 +36,7 @@
 		display:block;
 		height:40px;
 		width:40px;
-		background:#ccc;}
+		background:#00acff;}
 	.top_right span:last-child{
 		float:left;
 		margin:0 15px;
@@ -328,7 +328,30 @@
 	left:200px;
 	background:#00ACFF;
 	width:300px;
-	height:200px;}
+	height:200px;
+	color:#fff;}
+.card_a_det strong,.card_e_det strong{
+	position:absolute;
+	font-size:20px;
+	line-height:26px;
+	top:10px;
+	left:10px;}	
+.card_a_det .jianjie,.card_e_det .jianjie{
+	position:absolute;
+	top:70px;
+	left:10px;
+	height:80px;
+	width:280px;
+	display:block;
+	overflow:hidden;}
+.card_a_det .leibie,.card_e_det .leibie{
+	position:absolute;
+	top:170px;
+	left:10px;}	
+.card_a_det .renshu,.card_e_det .renshu{
+	position:absolute;
+	top:170px;
+	right:10px;}
 	
 .card_c_cover{
 	z-index:2;
@@ -349,8 +372,26 @@
 	left:100px;
 	background:#00ACFF;
 	width:200px;
-	height:100px;}
-	
+	height:100px;
+	color:#fff;}
+.card_c_det strong,.card_d_det strong{
+	position:absolute;
+	font-size:18px;
+	line-height:18px;
+	top:10px;
+	left:10px;}	
+.card_c_det .jianjie,.card_d_det .jianjie{
+	position:absolute;
+	top:36px;
+	left:10px;
+	height:60px;
+	width:180px;
+	display:block;
+	overflow:hidden;
+	font-size:12px;
+	line-height:20px;}
+
+		
 .card_d_det{
 	z-index:3;
 	position:absolute;
@@ -358,7 +399,8 @@
 	right:100px;
 	background:#00ACFF;
 	width:200px;
-	height:100px;}
+	height:100px;
+	color:#fff;}
 .card_e_det{
 	z-index:3;
 	position:absolute;
@@ -366,7 +408,11 @@
 	right:200px;
 	background:#00ACFF;
 	width:300px;
-	height:200px;}
+	height:200px;
+	color:#fff;}
+
+	
+	
 	
 .mobile_client{
 	background:url(../../image/web_image/活动推荐背景.png) center repeat;
