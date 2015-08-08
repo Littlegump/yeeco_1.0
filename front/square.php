@@ -44,9 +44,11 @@ if($query && mysql_num_rows($query)){
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>易可社团-广场</title>
-<link href="css/main.css" type="text/css" rel="stylesheet">
-<link href="css/square.css" type="text/css" rel="stylesheet">
-<script src="js/jquery-1.11.1.js"></script>
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="renderer" content="webkit">
+<link href="css/main.css" type="text/css" rel="stylesheet"/>
+<link href="css/square.css" type="text/css" rel="stylesheet"/>
+<script src="js/jquery-1.11.1.js" type="text/javascript"></script>
 </head>
 
 
@@ -449,6 +451,6 @@ if($query && mysql_num_rows($query)){
     <p>中国·陕西·西安市·长安区·西安邮电大学 710100 | *</p>
     <p>好点子，新生活</p>
 </div>
-<script src="js/square.js"></script>
+<script src="js/square.js" type="text/javascript"></script>
 </body>
 </html>

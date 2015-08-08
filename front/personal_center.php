@@ -11,6 +11,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>个人中心</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="renderer" content="webkit">
 <link href="css/main.css" type="text/css" rel="stylesheet">
 <link href="css/personal_center.css" type="text/css" rel="stylesheet">
 </head>
@@ -211,7 +213,7 @@ on u.uId=e.uId  where e.uId='$uId' limit 1"));
                 <label for="native_place">籍贯：</label>
                 <span id="native_place">
 					<select class="native_por" id="native_por" name="native_por">
-                        <option selected="selected" value="">省份</option>
+                        <option value="" selected="selected">省份</option>
                         <option value="北京" id="1">北京</option>
                         <option value="上海" id="2">上海</option>
                         <option value="天津" id="3">天津</option>

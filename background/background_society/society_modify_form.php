@@ -20,7 +20,12 @@ if($action=='modify_info'){
 	$sDesc = $_POST['describe'];
 	$folder = "../../image/user_image/society";
 	$sImg = getImg($folder);
-	mysql_query("update society set sName='$sName',sSchool='$sSchool',sImg='$sImg',sDesc='$sDesc',sCate='$sCate' where sId='$sId'");
+	if($sImg){
+		$oldImg=mysql_fetch_assoc(mysql_query("select sImg  from society where sId='$sId'"));
+		unlink($oldImg['sImg']);
+		mysql_query("update society set sImg='$sImg' where sId='$sId'");
+	}
+	mysql_query("update society set sName='$sName',sSchool='$sSchool',sDesc='$sDesc',sCate='$sCate' where sId='$sId'");
 	//设置动态内容
 	$content="社团基本资料有所更新！";
 }

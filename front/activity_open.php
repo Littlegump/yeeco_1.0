@@ -11,6 +11,8 @@ $sinfo=mysql_fetch_assoc(mysql_query("select sName,sImg from society where sId='
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>创建活动</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="renderer" content="webkit">
 <link href="css/main.css" type="text/css" rel="stylesheet">
 <link href="css/activity_open.css" type="text/css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="res_package/jquery.datetimepicker.css"/>
@@ -39,7 +41,6 @@ $sinfo=mysql_fetch_assoc(mysql_query("select sName,sImg from society where sId='
     <input type="hidden" name="sId" value="<?php echo $sId?>">
     <input type="hidden" name="sName" value="<?php echo $sinfo['sName']?>">
     <input type="hidden" name="sSchool" value="<?php echo $sSchool?>">
-    <input type="hidden" name="actImg" value="<?php echo $sinfo['sImg']?>">
       <div class="page_1" id="0">
           <ul>
             <li>
@@ -52,7 +53,7 @@ $sinfo=mysql_fetch_assoc(mysql_query("select sName,sImg from society where sId='
               <input type='text' name='fImg' id='textfield' readonly="readonly"/>
               <div class="photo">
                   <div class="ph">
-                      <img id="pre_img" src="<?php echo substr($sinfo['sImg'],3)?>"/>
+                      <img id="pre_img" src="../image/user_image/defaultImg/activity_ad.png"/>
                       <input type="file" class="file" name="pic" id="pic" onchange="setImagePreviews();document.getElementById('textfield').value=this.value" />
                       <input type='button'/>
                   </div>

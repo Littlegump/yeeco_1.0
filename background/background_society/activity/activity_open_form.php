@@ -15,8 +15,8 @@ $sSchool=$_POST['sSchool'];
 //获取上传图片
 $folder='../../../image/user_image/society/activity';
 $actImg=substr(getImg($folder),3);
-if(!$actImg){
-	$actImg=$_POST['actImg'];
+if($actImg==NULL){
+	$actImg='../../image/user_image/defaultImg/activity_ad.png';	
 }
 //活动名称
 $activity_name=$_POST['activity_name'];
@@ -63,7 +63,7 @@ $data = array(
 		'sId' => $sId,
 		'oId' => $actId,
 		'oName' => $sName,
-		'describe' => $describe,
+		'describe' => $describe
 );
 create_news($type,$data);
 ?>

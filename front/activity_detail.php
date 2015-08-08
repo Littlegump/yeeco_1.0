@@ -61,6 +61,8 @@ $society=mysql_fetch_assoc(mysql_query("select sName,sImg from society where sId
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>活动详情</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="renderer" content="webkit">
 <link href="css/main.css" type="text/css" rel="stylesheet">
 <link href="css/activity_detail.css" type="text/css" rel="stylesheet">
 </head>
@@ -140,7 +142,7 @@ if($flag==false){
     <div class="main">
     
     	<div class="page">
-        	<div class="cover_pic"><img src=""/></div>
+        	<div class="cover_pic"><img src="<?php echo substr($society['sImg'],3)?>"/></div>
         	<div class="base_info">
               <ul>
                 <li><label style="margin-top:7px;">主办社团：</label><strong><?php echo $society['sName']?></strong></li>

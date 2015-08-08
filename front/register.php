@@ -6,6 +6,10 @@ error_reporting(E_ALL & ~E_NOTICE);
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>注册</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="renderer" content="webkit">
+<meta name="Keywords" content="易可社团,易可平台,易可高校社团,中国高校社团,高校社团管理平台,社团管理系统,线上社团,学生社团">
+<meta name="Description" content="易可社团，作为一款适应于中国国内高校社团的线上管理系统，创建线上管理与线下活动相结合的新模式；构建围绕社团活动开展的网络社区，吸引高校生长期活跃的互联网社区。">
 <link href="css/main.css" type="text/css" rel="stylesheet">
 <link href="css/register.css" type="text/css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="res_package/school.css"/>

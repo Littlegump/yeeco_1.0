@@ -52,6 +52,8 @@ if($societyId){
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>我的社团-通讯录</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="renderer" content="webkit">
 <link href="css/main.css" type="text/css" rel="stylesheet">
 <link href="css/address_book.css" type="text/css" rel="stylesheet">
 </head>

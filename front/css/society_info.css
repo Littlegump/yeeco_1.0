@@ -84,13 +84,13 @@ body{
 	.cover_pic img{
 		height:130px;
 		width:130px;
-		background:#ccc;}
+		background:#fff;}
 	.name{
 		position:absolute;
 		top:120px;
 		left:250px;}
 		.name strong{
-			color:#fff;
+			color:#00496C;
 			font-size:24px;
 			line-height:50px;}
 	.description{

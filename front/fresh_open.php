@@ -1,14 +1,19 @@
 <?php
 session_start();
 error_reporting(E_ALL & ~E_NOTICE);
+require_once('../background/conf/connect.php');
 $sId=$_GET['sId'];
 $sName=$_GET['sName'];
+//查询社团二维码
+$qrcode=mysql_fetch_assoc(mysql_query("select sQRCode from society where sId='$sId'"));
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>开启纳新</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="renderer" content="webkit">
 <link href="css/main.css" type="text/css" rel="stylesheet">
 <link href="css/fresh_open.css" type="text/css" rel="stylesheet">
 </head>
@@ -48,7 +53,7 @@ $sName=$_GET['sName'];
               <input type='text' name='fImg' id='textfield' readonly="readonly"/>
               <div class="photo">
                   <div class="ph">
-                      <img id="pre_img" src="../image/web_image/社团封面.png"/>
+                      <img id="pre_img" src="../image/user_image/defaultImg/fresh_ad.png"/>
                       <input type="file" class="file" name="pic" id="pic" onchange="setImagePreviews();document.getElementById('textfield').value=this.value" />
                       <input type='button'/>
                   </div>
@@ -107,8 +112,8 @@ $sName=$_GET['sName'];
           <li>
             <table class="hello">
               <tr>
-                <td><img src="icon/society_logo.png" width=100% height=100% /></td>
-                <td><span>恭喜您，现在已经成功开启纳新！</span></td>
+                <td><img src="<?php echo substr($qrcode['sQRCode'],3)?>" width=100% height=100% /></td>
+                <td><span>恭喜您，现在已经成功开启纳新！</span><span>左边是此社团的专属二维码，快快扫码分享吧！</span></td>
               </tr>
             </table>
           </li>

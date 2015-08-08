@@ -18,7 +18,7 @@
 	$folder = "../../image/user_image/society";
 	$sImg = getImg($folder);//执行图片上传操作，并且返回图片上传后的路径及文件名。
 	if($sImg==='' || $sImg===NULL){
-		$sImg='../../image/web_image/社团封面.png';
+		$sImg='../../image/user_image/defaultImg/society_logo.png';
 	}
 	//生成加密字符，用来验证激活社团
 	$flag=md5(rand());

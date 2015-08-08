@@ -13,7 +13,7 @@ function create_news($type,$data){
 		$fAnn = $data['fAnn'];
 		$fUrl = "society_visitor.php?sId=".$sId;
 		//查询图片
-		$img=mysql_fetch_assoc(mysql_query("select sImg from society where sId='$oId'"));
+		$img=mysql_fetch_assoc(mysql_query("select sImg from society where sId='$sId'"));
 		$nImg = $img['sImg'];
 		$nBody = $oName.'开启纳新啦！<br/>'.$fAnn.'<br/>…小伙伴们快来报名加入吧！……详情<a href='.$fUrl.' style="color:#97ddff">猛戳这里！！！</a>';
 		

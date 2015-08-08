@@ -7,6 +7,8 @@ error_reporting(E_ALL & ~E_NOTICE);
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>创建社团</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="renderer" content="webkit">
 <link href="css/main.css" type="text/css" rel="stylesheet">
 <link href="css/society_establish.css" type="text/css" rel="stylesheet">
 </head>
@@ -66,7 +68,7 @@ error_reporting(E_ALL & ~E_NOTICE);
         </li>
         <li>
             <label for="pic">&nbsp;&nbsp;社团封面：</label>
-            <div class="pic" id="dd"><img id="pre_img" src="../image/web_image/社团封面.png"/></div>
+            <div class="pic" id="dd"><img id="pre_img" src="../image/user_image/defaultImg/society_logo.png"/></div>
             <input id="pic" type="file" name="pic" accept="image/gif/png/jpeg/jpg" onchange="setImagePreviews();"/>
             <p>请选择不超过1M的 .gif, .jpg, .jpeg 或 .png文件</p>
             <a href="javascript:delete_pic()">移除图片</a><span style="color:#999">（如果未上传将使用默认图片）</span>

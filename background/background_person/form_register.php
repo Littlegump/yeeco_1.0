@@ -78,7 +78,8 @@ $uid = mysql_insert_id();
  if($insertsql){ 	
 		$_SESSION['userName'] = $userName;
 		$_SESSION['userId'] = $uid;
-		$_SESSION['sSchool']=$userSchool;
+		$_SESSION['sSchool'] = $userSchool;
+		$_SESSION['userFace'] = $userFace;
 		if($clientSign){
 			$data = array(
 				'userId' => $uid,

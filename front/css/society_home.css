@@ -85,7 +85,7 @@ body{
 	.cover_pic img{
 		height:130px;
 		width:130px;
-		background:#ccc;}
+		background:#fff;}
 	.name{
 		position:absolute;
 		top:120px;
@@ -208,7 +208,7 @@ body{
 		width:450px;
 		height:50px;
 		margin-right:10px;
-		border-color:#97ddff;
+		border:1px solid #97ddff;
 		border-radius:5px;}
 	.send_msg input[type=submit]{
 		float:left;

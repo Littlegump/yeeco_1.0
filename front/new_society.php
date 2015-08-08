@@ -21,6 +21,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>我的社团</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="renderer" content="webkit">
 <link href="css/new_society.css" type="text/css" rel="stylesheet">
 <link href="css/main.css" type="text/css" rel="stylesheet">
 </head>
@@ -168,7 +170,7 @@
       <p>·还在等什么，赶快扫一扫并分享在朋友圈吧，让更多的人知道你的社团！</p>
   </div> 
   <div class="actions">
-      <input type="button" value="继续" class="button"/>
+      <input type="button" value="继续" class="button" onclick="page_to('2','1')"/>
   </div>
 </div>
 <!--第四页--> 

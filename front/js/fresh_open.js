@@ -12,7 +12,11 @@ function page_to(page_a,page_b){
 //异步提交表单功能
 $(document).ready(function () {
     // 提交表单
-    $("#fresh_form").ajaxForm(function(){  
+    $("#fresh_form").ajaxForm(function(data){
+		if(data){
+			alert('该社团已经开启纳新!');
+			window.location.href='society_home.php?sId='+data;
+		}  
     	page_to('3','2');
     });
 });
