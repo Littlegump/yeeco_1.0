@@ -5,7 +5,8 @@
 error_reporting(E_ALL & ~E_NOTICE);
 require_once('../../conf/connect.php');
 $action=$_GET['action'];
-//$action='precise_search';
+//传入页码
+//$page=$_GET['p'];
 if($action=='search'){
 	$school=$_GET['school'];
 	$words=$_POST['words'];
@@ -46,6 +47,7 @@ if($action=='search'){
 }
 //分类查找
 if($action=='precise_search'){
+	//获取属性
 	$going=$_POST['going'];
 	$type=$_POST['type'];
 	$status=$_POST['status'];

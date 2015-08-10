@@ -33,18 +33,18 @@ error_reporting(E_ALL & ~E_NOTICE);
       <div class="page">
         <ul>  
           <li>
-            <div class="icon"></div>
+            <div class="icon icon_1"></div>
             <input type="text" id="usertel" name="usertel" class="text-input" onfocus="register_text_in(this)" onkeydown="disappear('span_1');disappear('otel');" onblur="register_text_out(this);checking_1(this)" placeholder="您的手机号码"/>
           </li>
           <span id="otel" style="display:none"></span>
           <span id="span_1" style="display:none">请输入合法的手机号码!</span>
           <li>
-            <div class="icon"></div>
+            <div class="icon icon_2"></div>
             <input type="password" id="password1" name="password1" class="text-input" onfocus="register_text_in(this)" onkeydown="disappear('span_2');" onblur="register_text_out(this);checking_2(this)" placeholder="设置密码"/>
           </li>
           <span id="span_2" style="display:none">密码长度至少6位！</span>
           <li>
-            <div class="icon"></div>
+            <div class="icon icon_3"></div>
             <input type="password" id="password2" name="password2" class="text-input" onfocus="register_text_in(this)" onkeydown="disappear('span_3');" onblur="register_text_out(this);checking_3(this)" placeholder="确认密码"/>
           </li>
           <span id="span_3" style="display:none">两次密码不一致！</span>
@@ -54,12 +54,12 @@ error_reporting(E_ALL & ~E_NOTICE);
       <div class="page">  
         <ul>  
           <li>
-            <div class="icon"></div>
+            <div class="icon icon_4"></div>
             <input type="text" id="realname" name="realname" class="text-input" onfocus="register_text_in(this)" onblur="register_text_out(this)" onkeydown="disappear('span_4');" placeholder="您的真实姓名"/>
           </li>
           <span id="span_4" style="display:none">请输入您的真实姓名！</span>
           <li>
-            <div class="icon"></div>
+            <div class="icon icon_5"></div>
             <input type="text" id="school" name="school" class="text-input" onclick="chooseSchool();disappear('span_5');" readonly="readonly" placeholder="您所在的学校"/>
 
           </li>

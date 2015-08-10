@@ -1,6 +1,9 @@
 // JavaScript Document
 //页面加载时进行的函数
 window.onload = function (){
+
+	
+
 	
 
 //msg_list事件******************************************
@@ -94,21 +97,63 @@ window.onload = function (){
 	
 }
 
-//提交表单 发表评论
+
+
+//**********************************消息系统*************************************
+
+//打开并接收消息
+
+function openSingleChat(msgToId,x){
+	var msgFromId = $("[name='userId']").val();
+	if(typeof(EventSource)!=="undefined"){
+	//如果浏览器支持此技术， 则执行：
+		$("[name='toId']").val(msgToId);
+		var toUserName =$(x).find("strong").text();
+		var toUserFace = $(x).find(".userFace img").attr("src");
+		$("[name='toUserName']").val(toUserName);
+		$("[name='toUserFace']").val(toUserFace);
+		var source=new EventSource("../background/message/request_msg.php?msgToId="+msgToId+"&msgFromId="+msgFromId);
+  		source.onmessage=function(event){
+    		document.getElementById("result").innerHTML+=event.data + "<br />";
+			//判断返回值不是 json 格式
+			if (!event.data.match("^\{(.+:.+,*){1,}\}$")){
+				 alert("请求重传")
+			}else{
+				 //通过这种方法可将字符串转换为对象
+				var obj = jQuery.parseJSON(event.data);
+				var state = obj.state;
+				if(state == "501"){
+					RxmsgBody = obj.message.msgBody;
+					RxmsgTime = formateDate(new Date(obj.message.msgTime *1000));
+					var new_html = "<li class='Rx_msg'><div class='msg_face'><img src='"+toUserFace+"' /></div><div class='conbine'><em>"+toUserName+"</em><div class='msg_content'><p>"+RxmsgBody+"</p></div></div><span class='send_time'>"+RxmsgTime+"</span><div style='clear:both;'></div></li>";
+					$(new_html).appendTo(".massages ul");
+				}
+			}
+			
+		};
+	}else{//如果浏览器不支持此技术， 则执行
+ 		alert("对不起，您的浏览器暂不支持即时消息推送~");
+	}
+}
+
+	
+
+
+
+//发送消息
 function send_massage(){
 	var userName = $("[name='userName']").val();
 	var userFace = $("[name='userFace']").val();
-	var massage = $("[name='massage']").val();
+	var massage = $("[name='message']").val();
 	var date = formateDate(new Date());
-	$("#massage_form").ajaxForm(function(){
+	$("#massage_form").ajaxForm(function(data){
 		var new_html = "<li class='Tx_msg'><div class='msg_face'><img src='"+userFace+"' /></div><div class='conbine'><em>"+userName+"</em><div class='msg_content'><p>"+massage+"</p></div></div><span class='send_time'>"+date+"</span><div style='clear:both;'></div></li>";
 		$(new_html).appendTo(".massages ul");
+		$("[name='message']").val("");
 	});
-	$("[name='massage']").val("");
 }
 
-
- //格式化日期
+//格式化日期
     function formateDate(date) {
         var y = date.getFullYear();
         var m = date.getMonth() + 1;
@@ -118,6 +163,3 @@ function send_massage(){
         m = m > 9 ? m : '0' + m;
         return y + '-' + m + '-' + d + ' ' + h + ':' + mi;
     }
-
-
-

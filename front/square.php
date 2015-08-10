@@ -441,7 +441,7 @@ if($query && mysql_num_rows($query)){
 
 
 <div class="mobile_client">
-</div>
+<img src="../image/web_image/下载APP.png" width="677" height="431" /> </div>
 
 <div class="about_us">
 </div>

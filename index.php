@@ -47,7 +47,7 @@
 <div class="first_page">
       
     <div class="b"><img src="image/web_image/主题图片.png"></div>
-    <div class="a"><img src="image/web_image/背景图片1.png"></div>  
+    <!--<div class="a"><img src="image/web_image/背景图片1.png"></div>  -->
     <div class="c"><img src="image/web_image/气泡1.png"></div>
     <div class="d"><img src="image/web_image/气泡2.png"></div>
     <div class="e"><img src="image/web_image/气泡3.png"></div>
@@ -58,11 +58,11 @@
         </div>
     <form name="LoginForm" action="background/background_person/login.php" method="post"><!--指向后台的登录模块.php-->
         <div class="lnusername">
-            <div class="icon"></div>
+            <div class="icon icon_1"></div>
             <input type="text" id="username" name="usertel" class="text-input" onFocus="register_text_in(this)" onBlur="register_text_out(this)" placeholder="请输入手机号码" required/>
         </div>
         <div class="lnpassword">
-            <div class="icon"></div>
+            <div class="icon icon_2"></div>
             <input type="password" id="password" name="password" class="text-input" onFocus="register_text_in(this)" onBlur="register_text_out(this)" placeholder="请输人密码" required oncopy="return false" onpaste="return false"/>
         </div>
         <label class="checkbox"><input type="checkbox" name="remember" checked="checked">自动登录</label>

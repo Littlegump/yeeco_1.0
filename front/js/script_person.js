@@ -2,11 +2,25 @@
 //获取焦点改变文本框（当前对象的父标签）边框颜色：操作的文本框
 function register_text_in(x){
     x.parentNode.style.border="1px solid #00ACFF";
+	switch(x.id){
+		case "usertel" :$(".icon_1").css("background-position","-102px 4px");break;
+		case "password1" :$(".icon_2").css("background-position","-156px 4px");break;
+		case "password2" :$(".icon_3").css("background-position","-210px 4px");break;
+		case "realname" :$(".icon_4").css("background-position","-264px 4px");break;
+		case "school" :$(".icon_5").css("background-position","-318px 4px");break;
+	}
 }
 
 //失去焦点改变文本框（当前对象的父标签）边框颜色：操作的文本框
 function register_text_out(x){
      x.parentNode.style.border="1px solid #ccc";
+	 switch(x.id){
+		case "usertel" :$(".icon_1").css("background-position","-102px -43px");break;
+		case "password1" :$(".icon_2").css("background-position","-156px -43px");break;
+		case "password2" :$(".icon_3").css("background-position","-210px -43px");break;
+		case "realname" :$(".icon_4").css("background-position","-264px -43px");break;
+		case "school" :$(".icon_5").css("background-position","-318px -43px");break;
+	}
 }
 
 //弹出全屏遮罩层

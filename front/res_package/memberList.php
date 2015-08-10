@@ -204,6 +204,7 @@ echo "<script>var depName='$depName';</script>";
 	$(jsTarget+" .table_d").click(function(){
 		var x = $(this).parent().parent().find(":checkbox").attr("value");
 		alert(x)
+		window.location.href="massageBox.php?chooseToId="+x;
 	})
 	
 	//批量删除选中的指定部门的成员

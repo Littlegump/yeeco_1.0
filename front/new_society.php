@@ -14,7 +14,8 @@
 	$_SESSION['sId']=$sId;
 	$_SESSION['userName'] = $result['userName'];
     $_SESSION['userId'] = $result['uId'];
-	$_SESSION['sSchool']=$result['userSchool'];	  
+	$_SESSION['sSchool']=$result['userSchool'];	 
+	$_SESSION['userFace']=$result['userFace']; 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -170,7 +171,7 @@
       <p>·还在等什么，赶快扫一扫并分享在朋友圈吧，让更多的人知道你的社团！</p>
   </div> 
   <div class="actions">
-      <input type="button" value="继续" class="button" onclick="page_to('2','1')"/>
+      <input type="button" value="继续" class="button" onclick="page_to('3','2')"/>
   </div>
 </div>
 <!--第四页--> 
