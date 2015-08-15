@@ -8,7 +8,7 @@ function QRCode($page,$Id,$QRfolder){
 	if($page=='mobileFront/M_societyVisitor.php'){
 		$value = 'http://123.57.86.194/front/'.$page.'?sId='.$Id; //二维码内容 
 	}
-	if($page=='activity_detail.php'){
+	if($page=='mobileFront/M_activityVisitor.php'){
 		$value = 'http://123.57.86.194/front/'.$page.'?actId='.$Id;
 	}
 	$errorCorrectionLevel = 'L';//容错级别 
