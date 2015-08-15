@@ -23,7 +23,7 @@ $fAnn=$freshResult['fAnn'];
 $fDetail=$freshResult['fDetail'];
 $fBoard=$sinfoResult['Board'];
 //在申请成员表apply_information_unselected中查询信息
-$members=mysql_query("SELECT aId,uId,aName,aSex,aClass,aTel,sDep,aRemark FROM apply_information_unselected WHERE sId='$sId' order by aSendTime desc");
+$members=mysql_query("SELECT aId,uId,aName,aSex,aClass,aTel,sDep,aRemark FROM apply_information_unselected WHERE sId='$sId' order by aSendTime desc limit 0,10");
 if($members && mysql_num_rows($members)){
 	    while($row = mysql_fetch_assoc($members)){
 			$member_info[]=$row;
@@ -80,7 +80,7 @@ if($query && mysql_num_rows($query)){
   </div>
 </div>
 <div style="clear:both;"></div>
-
+ <input type="hidden" name="sId" value="<?php echo $sId?>"/>
 <!--封面--> 
 <div class="head">
 	<div class="cover"><img src="<?php echo $fImg ?>"/></div>
@@ -160,7 +160,7 @@ if($query && mysql_num_rows($query)){
 <?php
 	}
 ?>                             
-                <li><span><input type="checkbox" id="all" value="888"/></span><span style="border-right:0;"><label for="all">全选</label></span><a href="" id="load_more">加载更多<i></i></a></li>
+                <li><span><input type="checkbox" id="all" value="888"/></span><span style="border-right:0;"><label for="all">全选</label></span><a href="javascript:void();" id="load_more">加载更多<i></i></a></li>
               </ul>
             </div>
             <div class="handle">
@@ -451,7 +451,15 @@ if($pcId){
 
 <!--侧边快捷操作面板--> 
 <div class="icon_box">
-	<a href=""><div id="icon_1"></div></a>
+	<a href="massageBox.php"><div id="icon_1"></div>
+<?php
+	if(mysql_num_rows(mysql_query("select  msgId  from message where msgToId='$uId'"))){
+?>     
+     <span></span>
+<?php
+	}
+?> 
+     </a>
     <a href="personal_center.php"><div id="icon_2"></div></a>
     <a href="../background/background_person/login.php?action=logout"><div id="icon_3"></div></a>
 </div>

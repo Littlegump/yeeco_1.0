@@ -3,6 +3,7 @@ session_start();
 error_reporting(E_ALL & ~E_NOTICE);
 require_once('../background/conf/connect.php');
 require_once('../background/conf/session.php');
+$page=1;
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -11,6 +12,7 @@ require_once('../background/conf/session.php');
 <title>活动列表</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 <meta name="renderer" content="webkit">
+<script src="js/jquery-1.11.1.js"></script>
 <link href="css/main.css" type="text/css" rel="stylesheet">
 <link href="css/activity_cards.css" type="text/css" rel="stylesheet">
 </head>
@@ -25,6 +27,7 @@ require_once('../background/conf/session.php');
 </div>
 <div style="clear:both;"></div>
 <input type="hidden" id="school" value="<?php echo $sSchool?>"/>
+<input type="hidden" id="page" value="<?php echo $page?>"/>
 <div id="main">
 		<div class="course-content">
             <!--分类：导航-->
@@ -34,7 +37,7 @@ require_once('../background/conf/session.php');
                         <span class="r">
                         <div class="search-area">
             				<form id="search_form" action="../background/background_society/activity/classify_query_activity.php?action=search&school=<?php echo $sSchool?>" name="search_form"  method="post">
-                				<input class="search-input" placeholder="搜索活动、关键词" type="text" autocomplete="off" name="words" value=""/>
+                				<input class="search-input" placeholder="搜索活动名称关键词" type="text" autocomplete="off" name="words" value=""/>
                 				<input type="submit" class="btn_search button" value="搜索"/>
            					</form>
 						</div>
@@ -98,17 +101,17 @@ require_once('../background/conf/session.php');
                     </span>
                 </div>
             </div>
-        </div>
-        
-        
+        </div>       
     <div class="container">
         <!--主体部分：社团名片-->   
             <div class="course-list">
-                <!--社团名片-->
-                <div class="js-course-lists" id="body">
+               <!--社团名片-->
+               <div class="js-course-lists" id="body">
+               </div> 
+               <div id="paging">          
+     			</div>      
+           </div>
 
-                </div>       
-           </div> 
 <div class="right">   
   <div class="advertisement">
       <div class="ad_title">
@@ -129,14 +132,21 @@ require_once('../background/conf/session.php');
 
 <!--侧边快捷操作面板-->
 <div class="icon_box">
-     <a href=""><div id="icon_1"></div></a>
+     <a href="massageBox.php"><div id="icon_1"></div>
+<?php
+	if(mysql_num_rows(mysql_query("select  msgId  from message where msgToId='$uId'"))){
+?>     
+     <span></span>
+<?php
+	}
+?> 
+     </a>
      <a href="personal_center.php"><div id="icon_2"></div></a>
      <a href="../background/background_person/login.php?action=logout"><div id="icon_3"></div></a>
 </div>
 
 
 
-<script src="js/jquery-1.11.1.js"></script>
 <script src="js/jquery.form.js" type="text/javascript"></script>
 <script src="js/main.js"></script>
 <script src="js/activity_cards.js" type="text/javascript"></script>

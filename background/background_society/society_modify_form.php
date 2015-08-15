@@ -4,6 +4,7 @@ session_start();
 require_once('../conf/connect.php');
 require_once('get_picture.php');
 require_once('../background_comment/create_news.php');
+require_once('../message/create_sysMsg.php');
 $action=$_GET['action'];
 $sSchool=$_SESSION['sSchool'];
 $uId=$_SESSION['userId'];
@@ -24,6 +25,8 @@ if($action=='modify_info'){
 		$oldImg=mysql_fetch_assoc(mysql_query("select sImg  from society where sId='$sId'"));
 		unlink($oldImg['sImg']);
 		mysql_query("update society set sImg='$sImg' where sId='$sId'");
+		//更新状态表里边的动态
+		mysql_query("update dynamic_state set nImg='$sImg' where oId='$sId' and nWho='society'");
 	}
 	mysql_query("update society set sName='$sName',sSchool='$sSchool',sDesc='$sDesc',sCate='$sCate' where sId='$sId'");
 	//设置动态内容
@@ -67,7 +70,12 @@ if($action=='modify_dep'){
 					$uId1=$res1['uId'];
 					mysql_query("delete from user_society_relation where societyId='$sId' and userId='$uId1'");
 					mysql_query("insert into user_society_relation(userId,societyId,isManage,depBelong,position) values('$uId1','$sId','1','$dep_name[$i]','$position_1[$i]')");
-					}
+					$data=array();
+					$data['sId']=$sId;
+					$data['depName']=$dep_name[$i];
+					$data['position']=$position_1[$i];
+					send_sysMsg($uId1,$data,'joinSociety');
+				}
 			if($position_2[$i]){
 				
 				$res2=mysql_fetch_array(mysql_query("select uId from user where userTel='$tel_2[$i]'"));
@@ -80,7 +88,12 @@ if($action=='modify_dep'){
 					$uId2=$res2['uId'];
 					mysql_query("delete from user_society_relation where societyId='$sId' and userId='$uId2'");
 					mysql_query("insert into user_society_relation(userId,societyId,isManage,depBelong,position) values('$uId2','$sId','1','$dep_name[$i]','$position_2[$i]')");
-					}
+					$data=array();
+					$data['sId']=$sId;
+					$data['depName']=$dep_name[$i];
+					$data['position']=$position_2[$i];
+					send_sysMsg($uId2,$data,'joinSociety');
+				}
 					//第二条职位、负责人、电话信息插入数据库
 					mysql_query("update department set depManager_2='$manager_2[$i]',tel_2='$tel_2[$i]',position_2='$position_2[$i]' where depName='$dep_name[$i]' and societyId='$sId'");
 			}
@@ -95,7 +108,12 @@ if($action=='modify_dep'){
 					$uId3=$res3['uId'];
 					mysql_query("delete from user_society_relation where societyId='$sId' and userId='$uId3'");
 					mysql_query("insert into user_society_relation(userId,societyId,isManage,depBelong,position) values('$uId3','$sId','1','$dep_name[$i]','$position_3[$i]')");
-					}
+					$data=array();
+					$data['sId']=$sId;
+					$data['depName']=$dep_name[$i];
+					$data['position']=$position_3[$i];
+					send_sysMsg($uId3,$data,'joinSociety');
+				}
 					//第三条职位、负责人、电话信息插入数据库
 					mysql_query("update department set depManager_3='$manager_3[$i]',tel_3='$tel_3[$i]',position_3='$position_3[$i]' where depName='$dep_name[$i]' and societyId='$sId'");
 				}	
@@ -135,7 +153,11 @@ if($action=='del_societyMembers'){
 	$depName=$_GET['depName'];
 	if($depName=='0'){
 		foreach($membersId as $value){
-			mysql_query("delete from user_society_relation where societyId='$sId' and userId='$value'");	
+			mysql_query("delete from user_society_relation where societyId='$sId' and userId='$value'");
+			//生成成员剔出社团的系统消息
+			$data=array();
+			$data['sId']=$sId;
+			send_sysMsg($value,$data,'exitSociety');
 		}
 	}else{
 		foreach($membersId as $value){
@@ -154,17 +176,27 @@ if($action=='del_societyMembers'){
 				mysql_query("update department set position_$temp='',depManager_$temp='',tel_$temp='' where depName='$res_2[depName]' and societyId='$sId'");	
 			}
 			mysql_query("delete from user_society_relation where societyId='$sId' and userId='$value'");	
+			//生成成员剔出社团的系统消息
+			$data=array();
+			$data['sId']=$sId;
+			send_sysMsg($value,$data,'exitSociety');
 		}	
 	}
 	//设置动态内容
 	$content="社团通讯录有所更新!";
 }
+
+
 if($action=='ex_societyMemberDep'){
 	$membersId=$_POST['aim_member'];
 	//要调换到的部门
 	$depName=$_POST['aim_dep'];
 	foreach($membersId as $value){
 		mysql_query("update user_society_relation set depBelong='$depName' where societyId='$sId' and userId='$value'");	
+		$data=array();
+		$data['sId']=$sId;
+		$data['depName']=$depName;
+		send_sysMsg($value,$data,'ex_SocietyDep');
 	}
 	//设置动态内容
 	$content="社团通讯录有所更新!";

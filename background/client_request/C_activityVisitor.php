@@ -16,7 +16,7 @@
 	$query=mysql_fetch_assoc(mysql_query("select isConcern from act_user_relation where uId='$uId' and actId='$actId'"));
 	
 	if(empty($relationRes)){
-		$relation = 0;//该用户未加入该社团也未关注该社团
+		$relation = 0;//该用户未加入该活动也未关注该活动
 	}else if($relationRes['isConcern'] == 0){
 		$relation = 1;//该用户已经参加了该活动，默认关注
 	}else{
@@ -40,7 +40,8 @@
 			'actFocusNum' => $actInfo['actFocusNum'],
 			'actDesc' => $actInfo['actDesc'],
 			'actDetail' => $actInfo['actDetail'],
-			'relation' => $relation
+			'actBoard' => $actInfo['actBoard'],
+			'relation' => $relation,
 		);	
 	}else{
 		$data = array(
@@ -55,6 +56,7 @@
 			'actFocusNum' => '',
 			'actDesc' => '',
 			'actDetail' => '',
+			'actBoard' => '',
 			'relation' => ''
 		);
 	}

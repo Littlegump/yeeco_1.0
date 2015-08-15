@@ -139,9 +139,9 @@ var idmem = 1;
 function insert_mem(){
 	var oForm = document.getElementById("member_all");
     var newHtml = document.createElement("li");
-	idNum = idNum +1;
-	newHtml.id= "mem_"+idNum;
-	var bb = "'mem_"+idNum+"'";
+	idmem = idmem +1;
+	newHtml.id= "mem_"+idmem;
+	var bb = "'mem_"+idmem+"'";
 	newHtml.innerHTML = '<input type="text" name="name[]" onfocus="outline_new(this)" onblur="outline_old(this)" placeholder="姓名"/><input type="text" name="telnumber[]" onfocus="outline_new(this)" onblur="outline_old(this)" placeholder="联系方式"/><a href="javascript:deleteMem('+bb+');">-</a><div style="clear:both;"></div>';
 	oForm.appendChild(newHtml);
 }

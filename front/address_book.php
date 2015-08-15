@@ -128,6 +128,12 @@ if($user_limit!='成员'){
     </div>
     <!--中间主体内容-->
     <div class="main">
+    	<div class="action">
+            <a href="javascript:exit_society()" class="action_1">退出社团</a>
+            <a href="javascript:add_newMember()" class="action_2">添加新成员</a>
+        	<a href="javascript:export_members()" class="action_3">导出通讯录</a>
+        </div>
+        <div style="clear:both;"></div>
 <?php
 	if($dep_info){
 		foreach($dep_info as $value_1){
@@ -142,15 +148,9 @@ if($user_limit!='成员'){
 		}
 	}
 ?>
-
-   
     </div>    
 </div>
 
-<!--查看成员报名表-->
-<div class="app_form" id="form_box" style="display:none;">
-
-</div>
 
 <div style="clear:both;"></div>
 <!--调换部门!-->
@@ -173,13 +173,107 @@ if($dep_info){
     </form>
 </div>    
 
+<!--***************************************************************************************************************-->
+
+<!--导出成员通讯录-->
+<div class="export_members" id="export_members" style="display:none">
+	<p>请选择您要导出的分组：</p><a href="javascript:quit()" class="quit">&times;</a>
+<form id="export_form" method="post" action="../background/excel/export_DepMembers.php">
+<input type="hidden" id="sId" name="sId" value="<?php echo $sId?>"/>
+    <ul>
+<?php
+if($dep_info){
+		foreach($dep_info as $value_1){
+?>
+    	<li><input type="checkbox" name="dep[]"  value="<?php echo $value_1['depName']=='0'?'未分配':$value_1['depName'];?>"/><label ><?php echo $value_1['depName']=='0'?'未分配':$value_1['depName'];?></label></li>
+       <!-- <li><input type="checkbox" name="dep[]" id="dep_1" value="纪律部"/><label for="dep_1">纪律部</label></li>
+        <li><input type="checkbox" name="dep[]" id="dep_2" value="安全部"/><label for="dep_2">安全部</label></li>
+        <li><input type="checkbox" name="dep[]" id="dep_3" value="教育部"/><label for="dep_3">教育部</label></li>-->
+<?php
+		}
+}
+?>
+	</ul>
+    <input type="button" class="button" value="导出" onclick="export_depMenbers()">
+</form>
+</div>
+<!--添加新成员-->
+<div class="add_newMember" id="add_newMember" style="display:none">
+	<div class="invite_1" onclick="add_1()"><img style="display:none" src="../image/web_image/逐一添加.png"></div>
+    <div class="invite_2" onclick="add_2()"><img style="display:none" src="../image/web_image/批量导入.png"></div>
+    <div style="clear:both;"></div>
+<form class="new_member" id="form_2" action="../background/background_society/dep_structure/dep_members_form.php" method="post" enctype="multipart/form-data">
+ <input type="hidden" name="sId" value="<?php echo $sId?>"/>
+ <input type="hidden" name="sSchool" value="<?php echo $sSchool?>"/>
+    <div class="way_1" style="display:none">
+        <strong>逐一添加：</strong>
+        <ul id="member_all">
+          <li id="mem_1">
+            <input type="text" name="name[]" placeholder="姓名"/>
+            <input type="text" name="telnumber[]" placeholder="联系方式"/>
+            <a href="javascript:deleteMem('mem_1');">-</a><div style="clear:both;"></div>
+          </li>         
+        </ul>
+        <a href="javascript:insert_mem();" class="go_on">继续添加</a>
+    </div>
+    <div class="way_2" style="display:none">
+        <strong>批量导入：</strong>
+        <p>·第一步：点此<a href="../background/excel/downloadExcel.php">下载Excel模板</a>；</p>
+        <p>·第二部：严格按模板格式填写对应内容，每个成员为一行；</p>
+        <p>·第三步：上传填写好的Excel模板</p>
+        <input type="file" name="members" accept="xlsx"/>
+    </div>
+  
+  <div class="direction">
+      <strong>说明：</strong>
+      <p>·请填写有效的成员联系方式，易可平台将给该号码发送注册邀请短信；</p>
+      <p>·接收到注册邀请短信的用户在注册后，将会收到“成为**社团成员”的通知，成为此社团的成员。</p>
+  </div> 
+  <div class="actions">
+      <input type="submit" value="邀请" class="button"/>
+      <input type="button" value="取消" class="button" onclick="quit()"/>
+  </div> 
+</form>  
+
+</div>
+
+<!--退出社团-->
+<div class="exit_society" id="exit_society" style="display:none;">
+	<p>您确定要退出当前社团吗？</p>
+    <form action="../background/background_society/exitSociety.php" method="post">
+        <input type="hidden" name="sId" value="<?php echo $sId?>"/>
+        <input type="hidden" name="uId" value="<?php echo $uId?>"/>
+        <input type="hidden" name="depName" value="<?php echo $isManage['depBelong']?>"/>
+        <input type="hidden" name="authority" value="<?php echo $user_limit?>"/>
+        <input class="button" type="submit" value="确定"/><a href="javascript:quit()" class="button">取消</a>
+	</form>
+</div>
+
+<!--***************************************************************************************************************-->
+
+<!--查看成员报名表-->
+<div class="app_form" id="form_box" style="display:none;">
+
+</div>
+
+
+
 <!--侧边快捷操作面板-->
 <div class="icon_box">
-     <a href=""><div id="icon_1"></div></a>
+          <a href="massageBox.php"><div id="icon_1"></div>
+<?php
+	if(mysql_num_rows(mysql_query("select  msgId  from message where msgToId='$uId'"))){
+?>     
+     <span></span>
+<?php
+	}
+?> 
+     </a>
      <a href="personal_center.php"><div id="icon_2"></div></a>
      <a href="../background/background_person/login.php?action=logout"><div id="icon_3"></div></a>
 </div>
 <script src="js/jquery-1.11.1.js"></script>
+<script src="js/jquery.form.js" type="text/javascript"></script>
 <script src="js/main.js"></script>
 <script src="js/address_book.js" type="text/javascript"></script>
 </body>

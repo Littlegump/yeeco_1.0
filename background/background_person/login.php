@@ -60,8 +60,9 @@ if($result_user){
 		if($clientSign){
 		    Response::json(107,'登录失败，该用户不存在！',NULL);
 		}else{
+			logout();
 			echo "<script>alert('登录失败，该用户不存在！');</script>";
-	 		logout();
+	 		
 		}
 	}
 }
@@ -100,8 +101,8 @@ function login(){
         $encryptpass=md5(trim($password));
 		
 		//更新cookie信息
-		setcookie("usertelno", $encryptuser, time()+3600*24*365,"/yeeco_1.0/");  
-		setcookie("passwordno", $encryptpass, time()+3600*24*365,"/yeeco_1.0/");
+		setcookie("usertelno", $encryptuser, time()+3600*24*365,"/");  
+		setcookie("passwordno", $encryptpass, time()+3600*24*365,"/");
 	    $updatetsql=mysql_query("update user set usertelno='$encryptuser',passwordno='$encryptpass' where uId='$uid'");					
 	}
 	if($clientSign){
@@ -133,8 +134,8 @@ function logout(){
     unset($_SESSION['userName']); 
 	unset($_SESSION['userId']);
     if(!empty($_COOKIE['usertelno']) || !empty($_COOKIE['passwordno'])){  
-    setcookie("usertelno", null, time()-3600*24*365,"/yeeco_1.0/");  
-    setcookie("passwordno", null, time()-3600*24*365,"/yeeco_1.0/");  
+    setcookie("usertelno", null, time()-3600*24*365,"/");  
+    setcookie("passwordno", null, time()-3600*24*365,"/");  
 	}
 	if($clientSign){
 		Response::json(202,'成功退出登录',NULL);

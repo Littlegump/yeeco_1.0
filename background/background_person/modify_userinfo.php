@@ -44,6 +44,10 @@ if($op == 'info'){
 	//获取图片
 	$folder = "../../image/user_image/user_face/defined_face";
 	$userFace=substr(getImg($folder),6);
+	//更新动态表信息
+	mysql_query("update dynamic_state set nImg='$userFace' where oId='$uId' and nWho=person");
+	//更新评论表信息
+	mysql_query("update comment_form set uFace='$userFace' where uId='$uId'");
 	//更新信息
 	$updatesql1=mysql_query("update userextrainfo set userName='$username',userTel='$tel_number', userSex='$sex',userBirth='$userBirth',userPlace='$userPlace',userClass='$major',userEmail='$email',userQQ='$qq' where uId='$uId'");
 	mysql_query("update user set userName='$username' where uId='$uId'");

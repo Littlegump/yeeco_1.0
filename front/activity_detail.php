@@ -23,7 +23,7 @@ if(!$aInfo){
 	$flag=true;
 }
 //查询活动的成员
-$query=mysql_query("select uId from act_user_relation where actId='$actId'");
+$query=mysql_query("select uId from act_user_relation where actId='$actId' limit 0,10");
 if($query && mysql_num_rows($query)){
 	    while($row = mysql_fetch_assoc($query)){
 			$aUid[]=$row;
@@ -55,6 +55,7 @@ if($query && mysql_num_rows($query)){
 }	
 //查询活动主办社团
 $society=mysql_fetch_assoc(mysql_query("select sName,sImg from society where sId='$aInfo[sId]'"));
+$i=0;
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -81,6 +82,8 @@ $society=mysql_fetch_assoc(mysql_query("select sName,sImg from society where sId
 <div style="clear:both;"></div>
 <!--个人信息-->
 <input type="hidden" id="user_limit" value="<?php echo $user_limit?>"/>
+<input type="hidden" id="actId" value="<?php echo $actId?>"/>
+
 <!--社团封面-->
 <div class="head">
 	<div class="cover"><img src="<?php echo substr($aInfo['actImg'],3)?>"/></div>
@@ -177,9 +180,11 @@ if($aUid){
                 <li><span><input type="checkbox" value="<?php echo $value['uId']?>" id="key" name='member[]'/></span><span><a href="javascript:void(0)" id="table_a"><img src="../<?php echo $uFace['userFace']?>"/><?php echo $uInfo['userName']?><i><?php echo $uInfo['userSex']?></i></a></span><span><?php echo $uInfo['userClass']?></span><span><?php echo $uInfo['userTel']?></span></li>
                
 <?php
+		$i++;
 	}
-?>                             
-                <li><span><input type="checkbox" id="all" value=""/></span><span style="border-right:0;"><label for="all">全选</label></span><a href="" id="load_more">加载更多<i></i></a></li>
+?>                
+<input type="hidden" id="i" value="<?php echo $i?>"/>             
+                <li><span><input type="checkbox" id="all" value=""/></span><span style="border-right:0;"><label for="all">全选</label></span><a href="javascript:void();" id="load_more">加载更多<i></i></a></li>
               </ul>
             </div>
             <div style="clear:both;"></div>            
@@ -385,7 +390,15 @@ if($flag==false){
 
 <!--侧边快捷操作面板--> 
 <div class="icon_box">
-	<a href=""><div id="icon_1"></div></a>
+	<a href="massageBox.php"><div id="icon_1"></div>
+<?php
+	if(mysql_num_rows(mysql_query("select  msgId  from message where msgToId='$uId'"))){
+?>     
+     <span></span>
+<?php
+	}
+?> 
+     </a>
     <a href="personal_center.php"><div id="icon_2"></div></a>
     <a href="../background/background_person/login.php?action=logout"><div id="icon_3"></div></a>
 </div>

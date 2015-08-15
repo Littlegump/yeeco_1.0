@@ -342,7 +342,15 @@ on u.uId=e.uId  where e.uId='$uId' limit 1"));
 
 <!--侧边快捷操作面板-->
 <div class="icon_box">
-     <a href="massageBox.php"><div id="icon_1"></div></a>
+     <a href="massageBox.php"><div id="icon_1"></div>
+<?php
+	if(mysql_num_rows(mysql_query("select  msgId  from message where msgToId='$uId'"))){
+?>     
+     <span></span>
+<?php
+	}
+?> 
+     </a>
      <a href="personal_center.php"><div id="icon_2"></div></a>
      <a href="../background/background_person/login.php?action=logout"><div id="icon_3"></div></a>
 </div>

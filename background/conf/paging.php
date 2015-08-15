@@ -2,7 +2,7 @@
 function paging($page,$total){
 //显示页数
 $showPage=5;
-$pageSize=10;
+$pageSize=3;
 ////总条数
 //$total_sql="select count(*) from page";
 //$total_result=mysql_fetch_array(mysql_query($total_sql));
@@ -14,8 +14,8 @@ $page_banner="<div class='page'>";
 //计算偏移量
 $pageoffset=($showPage-1)/2;
 if($page>1){
-	$page_banner.="<a href='".$_SERVER['PHP_SELF']."?p=1'>首页</a>";
-	$page_banner.="<a href='".$_SERVER['PHP_SELF']."?p=".($page-1)."'><上一页</a>";	
+	$page_banner.="<a href='javascript:void()' onclick='paging_ajax(1,this)'>首页</a>";
+	$page_banner.="<a href='javascript:void()' onclick='paging_ajax(".$page.",this)'><上一页</a>";	
 }else{
 	$page_banner.="<span class='disable'>首页</span>";
 	$page_banner.="<span class='disable'><上一页</span>";
@@ -41,26 +41,26 @@ for($i=$start;$i<=$end;$i++){
 	if($page==$i){
 		$page_banner.="<span class='current'>{$i}</span>";
 	}else{
-		$page_banner.="<a href='".$_SERVER['PHP_SELF']."?p=".$i."'>{$i}</a>";
+		$page_banner.="<a href='javascript:void()' onclick='paging_ajax(".$i.",this)'>{$i}</a>";
 	}
 }
 //尾部省略
 if($total_pages>$showPage&&$total_pages>$page+$pageoffset){
 	$page_banner.="...";
 }
-if($page<$total_pages){
-	$page_banner.="<a href='".$_SERVER['PHP_SELF']."?p=".($page+1)."'>下一页></a>";
-	$page_banner.="<a href='".$_SERVER['PHP_SELF']."?p=".($total_pages)."'>尾页</a>";
+if($page<$total_pages){//".$url."?p=".($page+1)."
+	$page_banner.="<a href='javascript:void()' onclick='paging_ajax(".$page.",this)'>下一页></a>";
+	$page_banner.="<a href='javascript:void()' onclick='paging_ajax(".$total_pages.",this)'>尾页</a>";
 }else{
 	$page_banner.="<span class='disable'>下一页></span>";
 	$page_banner.="<span class='disable'>尾页</span>";
 }
 $page_banner.="共{$total_pages}页,";
-$page_banner.="<form action='activity_cards.php' method='GET'>";
+//$page_banner.="<form action='".$url."' method='GET'>";
 $page_banner.="到第<input type='text' size='2' name='p'/>";
-$page_banner.="<input type='submit' value='确定'/>";
-$page_banner.="</form></div>";
-echo  $page_banner;	
+$page_banner.="<a href='javascript:void()' onclick='paging_ajax(".$page.",this)'>确定</a>";
+$page_banner.="</div>";
+return $page_banner;	
 	
 }
 

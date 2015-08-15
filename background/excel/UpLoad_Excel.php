@@ -44,6 +44,11 @@ if($result){
 				
 			}else{
 				$uId=$res['uId'];
+				$data=array();
+				$data['sId']=$sId;
+				$data['depName']='（未分配部门）';
+				$data['position']='成员';
+				send_sysMsg($uId,$data,'joinSociety');
 				mysql_query("insert into user_society_relation(userId,societyId,isManage) values('$uId','$sId','0')");
 				}
 		$str="";

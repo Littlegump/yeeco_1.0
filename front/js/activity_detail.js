@@ -85,6 +85,26 @@ $(document).ready(function(){
 			error:function(jqXHR){alert("操作失败"+jqXHR.status);}
 		})
 	})
+	//加载更多
+	$("#load_more").click(function(){
+		var actId=$("#actId").val();
+		var i=$("#i").val();
+		$.ajax({
+			type:"POST",
+			url:"../background/background_society/activity/activity_memLoad.php",
+			data:{
+				actId:actId,
+				i:i,
+			},
+			success:function(data){
+				index=data.indexOf('@');
+				data1=data.substr(0,index-1);
+				data2=data.substr(index+1);
+				$("#i").val(data2).before(data1);
+			},
+			error:function(jqXHR){alert("操作失败"+jqXHR.status);}
+		})	
+	})
 })
 
 //选中的添加备注

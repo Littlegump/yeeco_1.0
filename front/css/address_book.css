@@ -160,6 +160,24 @@ body{
 
 
 /*中间主体部分样式*/
+
+.action a{
+	height:38px;
+	width:130px;
+	display:inline-block;
+	margin-left:10px;
+	margin-bottom:10px;
+	border-radius:5px;
+	float:right;
+	text-align:center;
+	line-height:38px;
+	color:#999;
+	border:1px solid #999;
+	background:#fff;}
+		.action_1:hover{border:1px solid #f00;color:#f00;}
+		.action_2:hover{border:1px solid #3C0;color:#3c0;}
+		.action_3:hover{border:1px solid #00acff;color:#00acff;}
+
 .main{
 	float:left;
 	margin-left:17px;
@@ -310,3 +328,160 @@ body{
 			background:#00acff;
 			color:#fff;}
 
+/*导出通讯录*/
+.export_members{
+	position:fixed;
+	top:50%;
+	left:50%;
+	margin-top:-200px;
+	margin-left:-200px;
+	width:350px;
+	border:1px solid #ccc;
+	background:#fff;
+	padding:25px;
+	z-index:11;}
+	.export_members ul{
+		margin:15px;}
+	.export_members ul li{
+		line-height:28px;
+		margin:0 20px;
+		color:#999;}
+	.export_members input[type=checkbox]{
+		vertical-align: middle;
+		cursor:pointer;}
+	.export_members ul li label{
+		margin:0 5px;
+		height:28px;
+		line-height:26px;
+		cursor:pointer;}
+	.export_members .button{
+		width:80px;
+		margin:0 auto;}
+	.export_members .quit{
+		font-size:26px;
+		position:absolute;
+		top:15px;
+		right:25px;}
+
+/*添加新成员*/
+.add_newMember{
+	position:fixed;
+	top:50%;
+	left:50%;
+	margin-top:-250px;
+	margin-left:-400px;
+	border:1px solid #ccc;
+	background:#fff;
+	z-index:11;
+	width:800px;}
+.invite_1,.invite_2{
+	height:100px;
+	width:100px;
+	border:10px solid #fff;
+	border-radius:60px;
+	box-shadow:0 0px 5px #ccc;
+	top:80px;
+	cursor:pointer;
+	margin-top:100px;}
+	.invite_1{
+		background:url(../../image/web_image/%E4%B8%BB%E9%A2%98%E5%9B%BE%E7%89%87.png) center no-repeat;
+		float:left;
+		margin-left:220px;}
+	.invite_2{
+		background:url(../../image/web_image/%E4%B8%BB%E9%A2%98%E5%9B%BE%E7%89%87.png) center no-repeat;
+		float:right;
+		margin-right:220px;}
+	.add_newMember .direction{
+		margin-top:90px;
+		margin-left:100px;}
+.way_1,.way_2{
+	background:#fff;
+	margin:auto;
+	margin-top:20px;
+	margin-bottom:-50px;
+	width:450px;
+	box-shadow:0 0px 5px #ccc;
+	padding:20px;}
+	.way_2 strong,.way_1 strong{
+		margin:10px;}
+	.way_2 p{
+		margin:10px;}
+	.way_2 input[type=file]{
+		margin-left:10px;}
+	.way_2 a{
+		text-decoration:underline;}
+	.way_1 input{
+		float:left;
+		margin:0 10px;
+		border:1px solid #ccc;
+		vertical-align: middle;
+		height:36px;
+		line-height:36px;
+		border-radius:5px;
+		text-align:center;}
+	.way_1 input[name='name[]']{
+		width:80px;}
+	.way_1 input[name='telnumber[]']{
+		width:200px;}
+.way_1 ul li{
+	margin:10px 0 10px 30px;}
+	.way_1 ul li a{
+		margin:5px;
+		float:left;
+		display:block;
+		eight:25px;
+		width:25px;
+		border:1px solid #ccc;
+		border-radius:15px;
+		text-align:center;
+		line-height:25px;
+		color:#ccc;}
+	.way_1 ul li a:hover{
+		color:#00acff;
+		border:1px solid #00acff;}
+	.go_on{
+		margin:0 auto;
+		display:block;
+		eight:30px;
+		width:80px;
+		border:1px solid #00acff;
+		border-radius:15px;
+		text-align:center;
+		line-height:30px;
+		color:#00acff;}
+	.go_on:hover{
+		background:#00acff;
+		color:#fff;}
+.actions{
+	width:330px;
+	margin:auto;}
+.actions .button{
+	display:inline-block;
+	margin:25px 15px}
+
+
+/*退出社团*/
+.exit_society{
+	position:fixed;
+	top:50%;
+	left:50%;
+	margin-top:-100px;
+	margin-left:-200px;
+	border:1px solid #ccc;
+	background:#fff;
+	z-index:11;
+	width:350px;
+	padding:25px;
+	text-align:center;}
+	.exit_society .button{
+		display:inline-block;
+		margin:0 15px;
+		margin-top:20px;}
+	
+	
+	
+	
+	
+	
+	
+	

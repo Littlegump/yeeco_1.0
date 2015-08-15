@@ -3,6 +3,7 @@ error_reporting(E_ALL & ~E_NOTICE);
 session_start();
 require_once('../background/conf/connect.php');
 require_once('../background/conf/session.php');
+$page=1;
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -26,6 +27,7 @@ require_once('../background/conf/session.php');
 </div>
 <div style="clear:both;"></div>
 <input type="hidden" id="school" value="<?php echo $sSchool?>"/>
+<input type="hidden" id="page" value="<?php echo $page?>"/>
 <div id="main">
     <div class="container">
         <div class="course-content">
@@ -118,7 +120,10 @@ require_once('../background/conf/session.php');
                 <div class="js-course-lists">
                        	 <ul id="body">
                   		 </ul>
-                    </div>       
+                 </div>
+                 <div style="clear:both;"></div>
+                  <div id="paging">          
+     			</div>          
             </div>
         </div>
     </div>

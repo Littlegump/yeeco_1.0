@@ -1,6 +1,8 @@
 <?php
 session_start();
 error_reporting(E_ALL & ~E_NOTICE);
+require_once('../background/conf/connect.php');
+require_once('../background/conf/session.php');
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -95,7 +97,15 @@ error_reporting(E_ALL & ~E_NOTICE);
 </div>
 <!--侧边快捷操作面板--> 
 <div class="icon_box">
-	<a href=""><div id="icon_1"></div></a>
+	<a href="massageBox.php"><div id="icon_1"></div>
+<?php
+	if(mysql_num_rows(mysql_query("select  msgId  from message where msgToId='$uId'"))){
+?>     
+     <span></span>
+<?php
+	}
+?> 
+     </a>
     <a href="personal_center.php"><div id="icon_2"></div></a>
     <a href="../background/background_person/login.php?action=logout"><div id="icon_3"></div></a>
 </div>

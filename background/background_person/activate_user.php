@@ -14,6 +14,7 @@
 	require_once('../conf/enc.php');
 	require_once('../conf/isMobile.php');
 	require_once('../conf/json_port.php');
+	require_once('../message/create_sysMsg.php');
 	$clientSign = isMobile();
 	//获取表单值
 	$password=$_POST['password_1'];
@@ -54,9 +55,19 @@
 			mysql_query("delete user_society_relation where societyId='$sid' and userId='$newId'");	
 			//插入一条新的关联关系。
 			if($isDepManager == '0'){
-				$f1=mysql_query("insert into user_society_relation(userId,societyId,isManage,depBelong,position) values('$newId','$sid','0','0','$position')");			
+				$f1=mysql_query("insert into user_society_relation(userId,societyId,isManage,depBelong,position) values('$newId','$sid','0','0','$position')");	
+				$data=array();
+				$data['sId']=$sid;
+				$data['depName']='（未分配部门）';
+				$data['position']=$position;
+				send_sysMsg($newId,$data,'joinSociety');		
 			}else{
-				$f1=mysql_query("insert into user_society_relation(userId,societyId,isManage,depBelong,position) values('$newId','$sid','1','$isDepManager','$position')");		
+				$f1=mysql_query("insert into user_society_relation(userId,societyId,isManage,depBelong,position) values('$newId','$sid','1','$isDepManager','$position')");	
+				$data=array();
+				$data['sId']=$sid;
+				$data['depName']=$isDepManager;
+				$data['position']=$position;
+				send_sysMsg($newId,$data,'joinSociety');	
 			}
 			$f3=mysql_query("delete from preuser_society_relation where pid='$value'");	
 		}

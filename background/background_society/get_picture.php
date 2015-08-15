@@ -1,4 +1,5 @@
 <?php
+require_once('../conf/adjust_Img.php');
 	error_reporting(E_ALL & ~E_NOTICE);
 //生成唯一字符串的文件名
 	function getUniName(){
@@ -33,6 +34,15 @@ function getImg($folder){
 			}
 				if(is_uploaded_file($tmp_name)){
 					if(move_uploaded_file($tmp_name,$destination)){
+						if(strpos($destination,'defined_face')){
+							Img($destination,70,70,1);
+						}else if(strpos($destination,'fresh') || strpos($destination,'activity')){
+							Img($destination,600,340,1);
+						}else{
+							
+							Img($destination,130,130,1);
+						}
+						
 						return  $destination;
 					}else{
 						echo "<script>alert('文件移动失败！')</script>";

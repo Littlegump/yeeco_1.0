@@ -84,7 +84,17 @@ if($query && mysql_num_rows($query)){
           </li>
           <li class="course_hour">
             <span>报名人数</span>
+<?php
+	if($aInfo['isApply']=='无需报名'){
+?>
+            <em>无需报名</em>
+<?php
+	}else{
+?>
             <em><?php echo $aInfo['actNum']?></em>
+<?php
+	}
+?>
           </li>
         </ul>
     </div>
@@ -323,7 +333,15 @@ if($pcId){
 
 <!--侧边快捷操作面板--> 
 <div class="icon_box">
-	<a href=""><div id="icon_1"></div></a>
+	<a href="massageBox.php"><div id="icon_1"></div>
+<?php
+	if(mysql_num_rows(mysql_query("select  msgId  from message where msgToId='$uId'"))){
+?>     
+     <span></span>
+<?php
+	}
+?> 
+     </a>
     <a href="personal_center.php"><div id="icon_2"></div></a>
     <a href="../background/background_person/login.php?action=logout"><div id="icon_3"></div></a>
 </div>

@@ -5,7 +5,7 @@ $sId=$_POST['sId'];
 $depName=$_POST['depName'];
 
 //获取用户社团关系信息
-$user_society_r=mysql_query("select userId,isManage,depBelong,position from user_society_relation where societyId='$sId' and depBelong='$depName'");
+$user_society_r=mysql_query("select userId,isManage,depBelong,position from user_society_relation where societyId='$sId' and depBelong='$depName' limit 0,10");
 if($user_society_r && mysql_num_rows($user_society_r)){
 	    while($row = mysql_fetch_assoc($user_society_r)){			
 			$user_r[]=$row;
@@ -34,7 +34,8 @@ echo "<script>var depName='$depName';</script>";
 			}
 		}	
 ?>     
-                <li><span><input type="checkbox" class="check_all" id="all_<?php echo $depName?>" value="<?php echo $depName?>" onchange="select_all()"/></span><span style="border-right:0;"><label for="all_<?php echo $depName?>">全选</label></span><a href="" id="load_more">加载更多<i></i></a></li>
+<input type="hidden" id="i" value="<?php echo $i?>"/>
+                <li><span><input type="checkbox" class="check_all" id="all_<?php echo $depName?>" value="<?php echo $depName?>" onchange="select_all()"/></span><span style="border-right:0;"><label for="all_<?php echo $depName?>">全选</label></span><a href="javascript:void()" id="load_more">加载更多<i></i></a></li>
               </ul>
         	  <div class="handle">
                 <p>操作：</p><a href="javascript:void(0)" id="h1" class="h1">删除</a><a href="javascript:void(0)" id="h2" class="h2">调换部门</a><a href="javascript:void(0)" id="h3" class="h3">发送通知</a>
@@ -203,8 +204,31 @@ echo "<script>var depName='$depName';</script>";
 	//发送通知 table_d
 	$(jsTarget+" .table_d").click(function(){
 		var x = $(this).parent().parent().find(":checkbox").attr("value");
-		alert(x)
+		//alert(x)
 		window.location.href="massageBox.php?chooseToId="+x;
+	})
+	//加载更多
+	$(jsTarget+" #load_more").click(function(){
+		var i=$("#i").val();
+		var depName=$(this).parent().find(".check_all").attr("value");
+		if(depName=='未分配'){
+			depName=0;
+		}
+		var sId=$("#sId").val();
+		$.ajax({
+				type:"POST",
+				url:"../background/background_society/society_memLoad.php?sId="+sId+"&depName="+depName,
+				data:{
+					i:i,
+				},
+				success:function(data){	
+					index=data.indexOf('@');
+					data1=data.substr(0,index-1);
+					data2=data.substr(index+1);
+					$("#i").before(data1).val(data2);				
+				},
+				error:function(jqXHR){alert("操作失败"+jqXHR.status);}
+		})		
 	})
 	
 	//批量删除选中的指定部门的成员
@@ -272,5 +296,4 @@ echo "<script>var depName='$depName';</script>";
 			}
 		}
 		})
-
 </script>

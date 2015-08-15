@@ -9,7 +9,7 @@
 	require_once('get_picture.php');
 	require_once('../conf/isMobile.php');
 	require_once('../conf/json_port.php');
-	
+	require_once('../message/create_sysMsg.php');
 	$uId=$_POST['uId'];
 	$sId=$_POST['sId'];
 	//判断是否已经是该社团成员
@@ -44,7 +44,12 @@
 	if($action=='del_app'){
 		$aId=$_POST['aId'];
 		foreach($aId as $value){
-			mysql_query("delete from apply_information_unselected where aId='$value'");	
+			$res=mysql_fetch_assoc(mysql_query("select uId,sId,sDep from apply_information_unselected where aId='$value'"));
+			$data=array();
+			$data['sId']=$res['sId'];
+			$data['sDep']=$res['sDep'];
+			send_sysMsg($res['uId'],$data,'unemploySociety');	
+			mysql_query("delete from apply_information_unselected where aId='$value'");
 		}
 		exit;
 	}
@@ -53,6 +58,11 @@
 		$aId=$_POST['aId'];
 		foreach($aId as $value){
 				$f=mysql_query("insert into apply_information_member(aId,userId,aName,aSex,aBirthday,aNative,aClass,aTel,aEmail,aQQ,aFavor,aStrong,aPhoto,aAnser_1,aAnser_2,aAnser_3,sId,fId,sDep,aSendTime,aRemark) select aId,uId,aName,aSex,aBirthday,aNative,aClass,aTel,aEmail,aQQ,aFavor,aStrong,aPhoto,aAnser_1,aAnser_2,aAnser_3,sId,fId,sDep,aSendTime,aRemark from apply_information_unselected where aId='$value'");
+				$res=mysql_fetch_assoc(mysql_query("select uId,sId,sDep from apply_information_unselected where aId='$value'"));
+				$data=array();
+				$data['sId']=$res['sId'];
+				$data['sDep']=$res['sDep'];
+				send_sysMsg($res['uId'],$data,'employSociety');
 				//mysql_query();
 				if($f){
 					mysql_query("delete from apply_information_unselected where aId='$value'");

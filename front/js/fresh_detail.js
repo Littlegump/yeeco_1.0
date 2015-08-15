@@ -426,6 +426,41 @@ Array.prototype.remove=function(dx)
     } 
     this.length-=1 
 } 
+//加载更多
+$("#load_more").click(function(){
+	var sId=$("#sId").val();
+	var a =$(this).parent();	
+	$.ajax({
+		type:"POST",
+		url:"../background/background_society/fresh_memLoad.php",
+		data:{
+			sId:sId,
+			i:i,
+		},
+		success:function(data){
+			a.before(data);
+				//查看报名表资料
+			$(".check_form").click(function(){
+				var aId = $(this).parent().parent().find(":checkbox").val();
+				var index = search_index(aIds,aId);
+				var left_aId = aIds[index-1];
+				var right_aId = aIds[index+1];
+				if((index-1) <= -1){
+					left_aId = aId;
+				}
+				if((index+1)>=aIds.length){
+					right_aId=aId;
+				}
+				$("#member_appForm").load("res_package/unselect_memberForm.php",{"aId":aId,"right_aId":right_aId,"left_aId":left_aId,"sName":sName,"fQue_1":fQue_1,"fQue_2":fQue_2,"fQue_3":fQue_3},function(){
+					coverall();
+					$("#member_appForm").show();
+				});		
+			})
+		},
+		error:function(jqXHR){alert("操作失败"+jqXHR.status);}
+	})	
+	
+})
 //**************************************************************************************
 var current_host = ""
 

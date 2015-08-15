@@ -84,6 +84,16 @@ body{
 		margin:3%;
 		width:94%;
 		height:94%;}
+	.userFace span{
+		display:block;
+		background:#F00;
+		height:12px;
+		width:12px;
+		border-radius:6px;
+		position:absolute;
+		top:-2px;
+		left:52px;
+		z-index:3;}
 	.msg_list strong{
 		position:absolute;
 		left:80px;
@@ -238,3 +248,9 @@ body{
 		.sendBox input[type=submit]:hover{
 			background:#00acff;
 			cursor:pointer;}
+			
+#oldMsg{
+	height:1px;
+	border-bottom:1px solid #f0f0f0;
+	width:600px;
+	margin:20px auto;}

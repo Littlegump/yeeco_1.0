@@ -47,7 +47,7 @@ function create_news($type,$data){
 		$img=mysql_fetch_assoc(mysql_query("select sImg from society where sId='$oId'"));
 		$nImg = $img['sImg'];
 		if($content=='社团通讯录有所更新!'){
-			$mUrl="address_book?sId=".$oId;
+			$mUrl="address_book.php?sId=".$oId;
 		}else{
 			$mUrl="society_info.php?sId=".$oId;
 		}

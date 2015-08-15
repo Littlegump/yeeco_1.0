@@ -24,8 +24,8 @@
 <title>我的社团</title>
 <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
 <meta name="renderer" content="webkit">
-<link href="css/new_society.css" type="text/css" rel="stylesheet">
 <link href="css/main.css" type="text/css" rel="stylesheet">
+<link href="css/new_society.css" type="text/css" rel="stylesheet">
 </head>
 
 <body>
@@ -129,6 +129,8 @@
     <div class="invite_2" onclick="add_2()"><img style="display:none" src="../image/web_image/批量导入.png"></div>
     <div style="clear:both;"></div>
 <form class="new_member" id="form_2" action="../background/background_society/dep_structure/dep_members_form.php" method="post" enctype="multipart/form-data">
+ <input type="hidden" name="sId" value="<?php echo $_SESSION['sId']?>"/>
+ <input type="hidden" name="sSchool" value="<?php echo $_SESSION['sSchool']?>"/>
     <div class="way_1" style="display:none">
         <strong>逐一添加：</strong>
         <ul id="member_all">
@@ -186,7 +188,15 @@
 </div>
 <!--侧边快捷操作面板-->
 <div class="icon_box">
-     <a href=""><div id="icon_1"></div></a>
+     <a href="massageBox.php"><div id="icon_1"></div>
+<?php
+	if(mysql_num_rows(mysql_query("select  msgId  from message where msgToId='$uId'"))){
+?>     
+     <span></span>
+<?php
+	}
+?> 
+     </a>
      <a href="personal_center.php"><div id="icon_2"></div></a>
      <a href="../background/background_person/login.php?action=logout"><div id="icon_3"></div></a>
 </div>

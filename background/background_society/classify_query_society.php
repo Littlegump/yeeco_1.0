@@ -4,6 +4,7 @@
 */
 error_reporting(E_ALL & ~E_NOTICE);
 require_once('../conf/connect.php');
+require_once('../conf/paging.php');
 $action=$_GET['action'];
 //搜索按钮查找社团
 if($action=='search'){
@@ -39,39 +40,58 @@ if($action=='search'){
 }
 //分类查找
 if($action=='precise_search'){
+	//传入页码
+    $page=$_GET['p'];
+	$pageSize=3;
 	$cert=$_POST['cert'];
 	$cate=$_POST['cate'];
 	$status=$_POST['status'];
 	$school=$_POST['school'];
 	if($cert=='全部' && $cate=='全部'){
 		if($status=='最热'){
-			$query=mysql_query("select sId,sName,sCate,sDesc,sNum,sImg from society where sSchool='$school' order by sNum DESC");
+			$total_result=mysql_fetch_array(mysql_query("select count(*) from society where sSchool='$school'"));
+			$total=$total_result[0];
+			$query=mysql_query("select sId,sName,sCate,sDesc,sNum,sImg from society where sSchool='$school' order by sNum DESC limit ".($page-1)*$pageSize .",{$pageSize}");
 		}
 		if($status=='最新'){
-			$query=mysql_query("select sId,sName,sCate,sDesc,sNum,sImg from society where sSchool='$school' order by regTime DESC");
+			$total_result=mysql_fetch_array(mysql_query("select count(*) from society where sSchool='$school'"));
+			$total=$total_result[0];
+			$query=mysql_query("select sId,sName,sCate,sDesc,sNum,sImg from society where sSchool='$school' order by regTime DESC limit ".($page-1)*$pageSize .",{$pageSize}");
 		}
 	}else if($cert=='全部' && $cate!='全部'){
 		if($status=='最热'){
-			$query=mysql_query("select sId,sName,sCate,sDesc,sNum,sImg from society where sCate like '%$cate%' and sSchool='$school' order by sNum DESC");
+			$total_result=mysql_fetch_array(mysql_query("select count(*) from society where sCate like '%$cate%' and sSchool='$school'"));
+			$total=$total_result[0];
+			$query=mysql_query("select sId,sName,sCate,sDesc,sNum,sImg from society where sCate like '%$cate%' and sSchool='$school' order by sNum DESC limit ".($page-1)*$pageSize .",{$pageSize}");
 		}
 		if($status=='最新'){
-			$query=mysql_query("select sId,sName,sCate,sDesc,sNum,sImg from society where sCate like '%$cate%' and sSchool='$school' order by regTime DESC");
+			$total_result=mysql_fetch_array(mysql_query("select count(*) from society where sCate like '%$cate%' and sSchool='$school'"));
+			$total=$total_result[0];
+			$query=mysql_query("select sId,sName,sCate,sDesc,sNum,sImg from society where sCate like '%$cate%' and sSchool='$school' order by regTime DESC limit ".($page-1)*$pageSize .",{$pageSize}");
 		}
 	}else if($cert!='全部' && $cate=='全部'){
 		$cert=substr($cert,0,3);
 		if($status=='最热'){
-			$query=mysql_query("select sId,sName,sCate,sDesc,sNum,sImg from society where isCert like '%$cert%' and sSchool='$school' order by sNum DESC");
+			$total_result=mysql_fetch_array(mysql_query("select count(*) from society where isCert like '%$cert%' and sSchool='$school'"));
+			$total=$total_result[0];
+			$query=mysql_query("select sId,sName,sCate,sDesc,sNum,sImg from society where isCert like '%$cert%' and sSchool='$school' order by sNum DESC limit ".($page-1)*$pageSize .",{$pageSize}");
 		}
 		if($status=='最新'){
-			$query=mysql_query("select sId,sName,sCate,sDesc,sNum,sImg from society where isCert like '%$cert%' and sSchool='$school' order by regTime DESC");
+			$total_result=mysql_fetch_array(mysql_query("select count(*) from society where isCert like '%$cert%' and sSchool='$school'"));
+			$total=$total_result[0];
+			$query=mysql_query("select sId,sName,sCate,sDesc,sNum,sImg from society where isCert like '%$cert%' and sSchool='$school' order by regTime DESC limit ".($page-1)*$pageSize .",{$pageSize}");
 		}
 	}else{
 		$cert=substr($cert,0,3);
 		if($status=='最热'){
-			$query=mysql_query("select sId,sName,sCate,sDesc,sNum,sImg from society where sCate like '%$cate%' and isCert like '%$cert%' and sSchool='$school' order by sNum DESC");
+			$total_result=mysql_fetch_array(mysql_query("select count(*) from society where sCate like '%$cate%' and isCert like '%$cert%' and sSchool='$school'"));
+			$total=$total_result[0];
+			$query=mysql_query("select sId,sName,sCate,sDesc,sNum,sImg from society where sCate like '%$cate%' and isCert like '%$cert%' and sSchool='$school' order by sNum DESC limit ".($page-1)*$pageSize .",{$pageSize}");
 		}
 		if($status=='最新'){
-			$query=mysql_query("select sId,sName,sCate,sDesc,sNum,sImg from society where sCate like '%$cate%' and isCert like '%$cert%' and sSchool='$school' order by regTime DESC");
+			$total_result=mysql_fetch_array(mysql_query("select count(*) from society where sCate like '%$cate%' and isCert like '%$cert%' and sSchool='$school'"));
+			$total=$total_result[0];
+			$query=mysql_query("select sId,sName,sCate,sDesc,sNum,sImg from society where sCate like '%$cate%' and isCert like '%$cert%' and sSchool='$school' order by regTime DESC limit ".($page-1)*$pageSize .",{$pageSize}");
 		}
 	}
 	if($query && mysql_num_rows($query)){
@@ -98,7 +118,7 @@ if($action=='precise_search'){
                           </li>";	
 		}	
 	}
-	echo '@'.count($sInfo);
+	echo '@'.$total.'@'.paging($page,$total);
 	exit;
 }
 ?>
