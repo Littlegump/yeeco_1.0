@@ -7,6 +7,7 @@
 	error_reporting(E_ALL & ~E_NOTICE);
 	require_once('../conf/connect.php');
 	require_once('get_picture.php');
+	require_once('../conf/adjust_Img.php');
 	require_once('../conf/isMobile.php');
 	require_once('../conf/json_port.php');
 	require_once('../message/create_sysMsg.php');

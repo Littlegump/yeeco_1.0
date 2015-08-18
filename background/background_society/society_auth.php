@@ -3,6 +3,7 @@ error_reporting(E_ALL & ~E_NOTICE);
 session_start();
 require_once('../conf/connect.php');
 require_once('get_picture.php');
+require_once('../conf/adjust_Img.php');
 require_once('../conf/code.php');
 //获取参数值
 $sid=$_GET['sid'];

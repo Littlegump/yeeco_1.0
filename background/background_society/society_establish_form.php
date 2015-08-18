@@ -3,6 +3,7 @@
 	session_start();
     require_once('../conf/connect.php');
 	require_once('get_emailbody.php');
+	require_once('../conf/adjust_Img.php');
 	require_once('../conf/mail_parameter.php');
 	require_once('get_picture.php');
 	//获取表单属性

@@ -66,7 +66,7 @@
 
 <!--第一页-->
 <div class="page_1" id="0" style="display:none">
-  <form class="framwork" id="form_1" action="../background/background_society/dep_structure/dep_struct_form.php" method="post">
+  <form class="framwork" id="form_1" action="../background/background_society/dep_structure/dep_struct_form.php?sName=<?php echo $sName?>&sSchool=<?php echo $_SESSION['sSchool']?>&userName=<?php echo $_SESSION['userName']?>" method="post">
   <div class="leader_team">
       <label>架构名称：</label><input type="text" name="leader_team" value="<?php echo $sName?>2015届领导班子"/>
   </div>
@@ -128,7 +128,7 @@
 	<div class="invite_1" onclick="add_1()"><img style="display:none" src="../image/web_image/逐一添加.png"></div>
     <div class="invite_2" onclick="add_2()"><img style="display:none" src="../image/web_image/批量导入.png"></div>
     <div style="clear:both;"></div>
-<form class="new_member" id="form_2" action="../background/background_society/dep_structure/dep_members_form.php" method="post" enctype="multipart/form-data">
+<form class="new_member" id="form_2" action="../background/background_society/dep_structure/dep_members_form.php?sName=<?php echo $sName?>&userName=<?php echo $_SESSION['userName']?>" method="post" enctype="multipart/form-data">
  <input type="hidden" name="sId" value="<?php echo $_SESSION['sId']?>"/>
  <input type="hidden" name="sSchool" value="<?php echo $_SESSION['sSchool']?>"/>
     <div class="way_1" style="display:none">

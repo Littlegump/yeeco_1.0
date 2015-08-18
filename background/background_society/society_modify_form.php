@@ -3,8 +3,12 @@ error_reporting(E_ALL & ~E_NOTICE);
 session_start();
 require_once('../conf/connect.php');
 require_once('get_picture.php');
+require_once('../conf/adjust_Img.php');
 require_once('../background_comment/create_news.php');
 require_once('../message/create_sysMsg.php');
+require_once('invite_code.php');
+//载入ucpass类
+require_once('../ucpass-demo/lib/Ucpaas.class.php');
 $action=$_GET['action'];
 $sSchool=$_SESSION['sSchool'];
 $uId=$_SESSION['userId'];
@@ -34,6 +38,9 @@ if($action=='modify_info'){
 }
 //社团部门信息修改
 if($action=='modify_dep'){
+	$userName=$_GET['userName'];
+	$sName=$_GET['sName'];
+	$param=$userName.','.$sName;
 	//获取表单数据
 	$leader_team=$_POST['leader_team'];
 	$position=$_POST['position'];
@@ -66,6 +73,8 @@ if($action=='modify_dep'){
 					mysql_query("insert into pre_user(userName,userTel,userSchool) values('$manager_1[$i]','$tel_1[$i]','$sSchool')");
 					$pid1 = mysql_insert_id();
 					mysql_query("insert into preuser_society_relation(pid,sid,isDepManager,position) values('$pid1','$sId','$dep_name[$i]','$position_1[$i]')");
+					//给未激活用户发短信
+					send_msg($tel_1[$i],$param);
 				}else{
 					$uId1=$res1['uId'];
 					mysql_query("delete from user_society_relation where societyId='$sId' and userId='$uId1'");
@@ -84,6 +93,8 @@ if($action=='modify_dep'){
 							mysql_query("insert into pre_user(userName,userTel,userSchool) values('$manager_2[$i]','$tel_2[$i]','$sSchool')");
 							$pid2 = mysql_insert_id();
 							mysql_query("insert into preuser_society_relation(pid,sid,isDepManager,position) values('$pid2','$sId','$dep_name[$i]','$position_2[$i]')");
+							//给未激活用户发短信
+							send_msg($tel_2[$i],$param);
 				}else{
 					$uId2=$res2['uId'];
 					mysql_query("delete from user_society_relation where societyId='$sId' and userId='$uId2'");
@@ -104,6 +115,8 @@ if($action=='modify_dep'){
 							mysql_query("insert into pre_user(userName,userTel,userSchool) values('$manager_3[$i]','$tel_3[$i]','$sSchool')");
 							$pid3 = mysql_insert_id();
 							mysql_query("insert into preuser_society_relation(pid,sid,isDepManager,position) values('$pid3','$sId','$dep_name[$i]','$position_3[$i]')");
+							//给未激活用户发短信
+							send_msg($tel_3[$i],$param);
 				}else{
 					$uId3=$res3['uId'];
 					mysql_query("delete from user_society_relation where societyId='$sId' and userId='$uId3'");

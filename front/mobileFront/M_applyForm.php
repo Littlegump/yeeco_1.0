@@ -27,7 +27,7 @@ if($dep && mysql_num_rows($dep)){
 <form action="../../background/web_app/M_applyFormB.php" method="post" name="pre_applyForm" id="pre_applyForm">
 <div id="index_1">
 <div class="top">
-	<a href="M_societyVisitor.php">&lt;返回</a>
+	<a href="M_societyVisitor.php?sId=<?php echo $sId?>">&lt;返回</a>
 	<p><?php echo $fInfo['sName']?>&nbsp;·&nbsp;报名表</p>
 </div>
 

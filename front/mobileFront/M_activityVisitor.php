@@ -1,13 +1,12 @@
 <?php
 error_reporting(E_ALL & ~E_NOTICE);
 require_once('../../background/conf/connect.php');
-$actId=8;//$_GET['actId'];
+$actId = $_GET['actId'];
 
 //查找活动信息
 $aInfo=mysql_fetch_assoc(mysql_query("select * from society_act_open where actId='$actId'"));
 //查询活动主办社团
 $society=mysql_fetch_assoc(mysql_query("select sName,sSchool from society where sId='$aInfo[sId]'"));
-
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -84,7 +83,7 @@ $society=mysql_fetch_assoc(mysql_query("select sName,sSchool from society where 
     <p><pre id="detail"><?php echo $aInfo['actDetail']?></pre></p>
 </div>
 
-<a href="M_activityApply.php?actId=<?php echo $actId?>&sSchool=<?php $society['sSchool']?>" id="goOn"><div class="join">报名参加</div></a>
+<a href="M_activityApply.php?actId=<?php echo $actId?>&sSchool=<?php echo $society['sSchool']?>" id="goOn"><div class="join">报名参加</div></a>
 
 <script src="M_js/M_activityVisitor.js" type="text/javascript"></script>
 </body>

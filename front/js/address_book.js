@@ -72,7 +72,7 @@ $(document).ready(function(){
 			$(".invite_2 img").fadeOut("fast");
 	});
 	
-	$("#form_2").ajaxForm(function() {  
+	$("#form_2").ajaxForm(function(data) { 
        alert("邀请成功！");
 	   quit();
     });
@@ -113,8 +113,14 @@ function quit(){
 
 
 function add_newMember(){
-	newbox("add_newMember");
-	coverall();
+	var authority=$("#authority").val();
+	if(authority!='成员'){
+		newbox("add_newMember");
+		coverall();
+	}else{
+		alert("只有社团创建人和管理员才能邀请成员！");
+	}
+	
 }
 
 //打开“逐个添加”添加方式

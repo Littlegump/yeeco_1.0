@@ -228,7 +228,7 @@ if($dep_info){
 ?>                
                 </ul>
               </div>
-      		  <form class="framwork" id="form_1" action="../background/background_society/society_modify_form.php?action=modify_dep&sId=<?php echo $sId?>" method="post" style="display:none;">
+      		  <form class="framwork" id="form_1" action="../background/background_society/society_modify_form.php?action=modify_dep&sId=<?php echo $sId?>&sName=<?php echo $sInfo['sName']?>&userName=<?php echo $userName?>" method="post" style="display:none;">
       <div class="leader_team">
           <label>架构名称：</label><input type="text" name="leader_team" value="<?php echo $sInfo['team_name']?>"/>
       </div>

@@ -202,7 +202,7 @@ if($dep_info){
 	<div class="invite_1" onclick="add_1()"><img style="display:none" src="../image/web_image/逐一添加.png"></div>
     <div class="invite_2" onclick="add_2()"><img style="display:none" src="../image/web_image/批量导入.png"></div>
     <div style="clear:both;"></div>
-<form class="new_member" id="form_2" action="../background/background_society/dep_structure/dep_members_form.php" method="post" enctype="multipart/form-data">
+<form class="new_member" id="form_2" action="../background/background_society/dep_structure/dep_members_form.php?sName=<?php echo $sInfo['sName']?>&userName=<?php echo $userName?>" method="post" enctype="multipart/form-data">
  <input type="hidden" name="sId" value="<?php echo $sId?>"/>
  <input type="hidden" name="sSchool" value="<?php echo $sSchool?>"/>
     <div class="way_1" style="display:none">

@@ -71,7 +71,7 @@ if($isApplied){
 			'password_1' => $password_2,
 			'flag' => 'M_request'
 		); 
-		$url = 'http://123.57.86.194/background/background_person/activate_user.php';
+		$url = 'http://localhost/yeeco_1.0/background/background_person/activate_user.php';
 		
 		$uId = do_post_request($url,$data);//将用户的激活信息传递给activate_user.php
 		//如果是被邀请成员，则提醒他已被邀请成员该社团的成员了
@@ -86,7 +86,7 @@ if($isApplied){
 			'password1' => $password_2,
 			'school' => $aSchool
 		); 
-		$url = 'http://123.57.86.194/background/background_person/form_register.php';
+		$url = 'http://localhost/yeeco_1.0/background/background_person/form_register.php';
 		do_post_request($url,$data);//将用户的注册信息传递给form_register.php
 		applyInsert($uId,$actId);//执行插入报名表	
 	}

@@ -3,6 +3,7 @@ session_start();
 error_reporting(E_ALL & ~E_NOTICE);
 require_once('../conf/connect.php');
 require_once('get_picture.php');
+require_once('../conf/adjust_Img.php');
 require_once('../background_comment/create_news.php');
 //上传纳新海报
 $folder = "../../image/user_image/society/fresh";

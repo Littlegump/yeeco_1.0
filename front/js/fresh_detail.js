@@ -400,7 +400,10 @@ function next_page(aId){
 	if((index+1)>=aIds.length){
 		right_aId=aId;
 	}
-	$("#member_appForm").load("res_package/unselect_memberForm.php",{"aId":aId,"right_aId":right_aId,"left_aId":left_aId,"sName":sName,"fQue_1":fQue_1,"fQue_2":fQue_2,"fQue_3":fQue_3},function(){
+	$("#member_appForm").load("res_package/unselect_memberForm.php",{"aId":aId,"right_aId":right_aId,"left_aId":left_aId,"sName":sName,"fQue_1":fQue_1,"fQue_2":fQue_2,"fQue_3":fQue_3},function(response){
+		if(response=='no_member'){
+			location.reload();
+		}
 	});
 }
 

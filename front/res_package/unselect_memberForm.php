@@ -12,6 +12,9 @@
 	//print_r(strpos($aIds,$aId));exit;
 	//查询成员报名信息
 	$aInfo=mysql_fetch_assoc(mysql_query("select * from apply_information_unselected where aId='$aId'"));
+	if(!$aInfo){
+		echo "no_member";
+	}
 ?>
 <strong><?php  echo $sName?>报名表<a href="">&times;</a></strong>
 <form action="background/society-apply-form.php" method="post" name="apply_table">
@@ -78,7 +81,7 @@
   </tr>
 </table>
 <div class="handle" style="margin:0 auto;width:340px;">
-	<a href="javascript:void(0)" onClick="delete_form_app(this)" id="h1">删除</a><a href="" id="h3">发送通知</a><a href="javascript:void(0)" onClick="employ_form_app(this)" id="h4">录用</a>
+	<a href="javascript:void(0)" onClick="delete_form_app(this)" id="h1">删除</a><a href="massageBox.php?chooseToId=<?php echo $aInfo['uId']?>" id="h3">发送通知</a><a href="javascript:void(0)" onClick="employ_form_app(this)" id="h4">录用</a>
 </div>
          <div style="clear:both;"></div> 
 </form>

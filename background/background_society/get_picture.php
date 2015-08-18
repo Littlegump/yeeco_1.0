@@ -1,5 +1,5 @@
 <?php
-require_once('../conf/adjust_Img.php');
+
 	error_reporting(E_ALL & ~E_NOTICE);
 //生成唯一字符串的文件名
 	function getUniName(){

@@ -19,5 +19,5 @@
 		$allSociety =  array();
 	}
 	
-	Response::json(200,'该学校的所有社团列表如下',$allSociety);	
+	Response::json(221,'该学校的所有社团列表如下',$allSociety);	
 ?>

@@ -3,6 +3,7 @@ session_start();
 error_reporting(E_ALL & ~E_NOTICE);
 require_once('../../conf/connect.php');
 require_once('../get_picture.php');
+require_once('../../conf/adjust_Img.php');
 require_once('../../conf/code.php');
 require_once('../../background_comment/create_news.php');
 $sId=$_POST['sId'];
@@ -52,7 +53,7 @@ mysql_query("insert into society_act_open(actName,actType,isApply,actRange,actBe
 $actId=mysql_insert_id();
 
 //生成专属二维码
-$page='activity_detail.php';
+$page='mobileFront/M_activityVisitor.php';
 $QRCode=substr(QRCode($page,$actId,'../../../'),3);
 //将二维码保存在数据库中
 mysql_query("update society_act_open set actCode='$QRCode' where actId='$actId'");

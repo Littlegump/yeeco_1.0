@@ -11,6 +11,7 @@ session_start();
 error_reporting(E_ALL & ~E_NOTICE);
 require_once('../conf/connect.php');
 require_once('../background_society/get_picture.php');
+require_once('../conf/adjust_Img.php');
 require_once('../conf/json_port.php');
 require_once('../conf/isMobile.php');
 
@@ -26,6 +27,7 @@ $op = $_GET['op'];
 *个人资料模块
 *
 */
+
 if($op == 'info'){
 	$username=$_POST['username'];
 	$tel_number=$_POST['tel_number'];
@@ -45,9 +47,11 @@ if($op == 'info'){
 	$folder = "../../image/user_image/user_face/defined_face";
 	$userFace=substr(getImg($folder),6);
 	//更新动态表信息
-	mysql_query("update dynamic_state set nImg='$userFace' where oId='$uId' and nWho=person");
+	$sql="update dynamic_state set nImg='../../".$userFace."' where oId='$uId' and nWho=person";
+	mysql_query($sql);
 	//更新评论表信息
-	mysql_query("update comment_form set uFace='$userFace' where uId='$uId'");
+	$sql="update comment_form set uFace='../".$userFace."' where uId='$uId'";
+	mysql_query("update comment_form set uFace='../$userFace' where uId='$uId'");
 	//更新信息
 	$updatesql1=mysql_query("update userextrainfo set userName='$username',userTel='$tel_number', userSex='$sex',userBirth='$userBirth',userPlace='$userPlace',userClass='$major',userEmail='$email',userQQ='$qq' where uId='$uId'");
 	mysql_query("update user set userName='$username' where uId='$uId'");

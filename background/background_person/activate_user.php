@@ -78,6 +78,7 @@
 			$_SESSION['userName'] = $userName;
 			$_SESSION['sSchool']  = $userSchool;
 			$_SESSION['userId'] = $newId;
+			$_SESSION['userFace']=$userFace;
 			if($clientSign){
 				$data = array(
 					'userId' => $newId,

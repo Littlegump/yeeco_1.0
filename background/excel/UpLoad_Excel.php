@@ -2,9 +2,10 @@
 error_reporting(E_ALL & ~E_NOTICE);
 require_once '../../conf/connect.php';
 require_once 'PHPExcel.php';
-require_once 'PHPExcel\IOFactory.php';
-require_once 'PHPExcel\Reader\Excel5.php';
-function uploadFile($sId,$file,$sSchool){	
+require_once 'PHPExcel/IOFactory.php';
+require_once 'PHPExcel/Reader/Excel5.php';
+function uploadFile($sId,$file,$sSchool,$sName,$userName){	
+$param=$userName.','.$sName;
 if($file){
 //上传到服务器上的临时文件名
 $filetempname = $_FILES['members']['tmp_name'];
@@ -41,7 +42,8 @@ if($result){
 				mysql_query("insert into pre_user(userName,userTel,userSchool) values('$strs[0]','$strs[1]','$sSchool')");
 				$pid= mysql_insert_id();
 				mysql_query("insert into preuser_society_relation(pid,sid,isDepManager) values('$pid','$sId','0')");
-				
+				//执行短信发送
+				send_msg($strs[1],$param);
 			}else{
 				$uId=$res['uId'];
 				$data=array();
@@ -50,6 +52,8 @@ if($result){
 				$data['position']='成员';
 				send_sysMsg($uId,$data,'joinSociety');
 				mysql_query("insert into user_society_relation(userId,societyId,isManage) values('$uId','$sId','0')");
+				//执行短信发送
+				send_msg_res($strs[1],$param);
 				}
 		$str="";
 		}
