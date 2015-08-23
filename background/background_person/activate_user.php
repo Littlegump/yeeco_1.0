@@ -52,7 +52,7 @@
 			$isDepManager = $res['isDepManager'];
 			$position = $res['position'];
 			//为避免重复添加关联关系，先删除已有的关联关系，保证一个用户和一个社团之间只存在一条关系；
-			mysql_query("delete user_society_relation where societyId='$sid' and userId='$newId'");	
+			mysql_query("delete from user_society_relation where societyId='$sid' and userId='$newId'");	
 			//插入一条新的关联关系。
 			if($isDepManager == '0'){
 				$f1=mysql_query("insert into user_society_relation(userId,societyId,isManage,depBelong,position) values('$newId','$sid','0','0','$position')");	

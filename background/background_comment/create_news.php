@@ -41,7 +41,7 @@ function create_news($type,$data){
 		$nBody=$oName.'创建了一个新的活动啦！<br/>'.$describe.'<br/>更多活动详情请点击<a href='.$aUrl.' style="color:#97ddff">这里!!</a>';	
 	}
 	if($type=='修改社团资料'){
-		$nWho = 'activity';
+		$nWho = 'society';
 		$content=$data['content'];
 		//查询图片
 		$img=mysql_fetch_assoc(mysql_query("select sImg from society where sId='$oId'"));

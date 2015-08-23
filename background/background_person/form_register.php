@@ -74,8 +74,13 @@ if($_POST['ousertel']){
 $insertsql=mysql_query("insert into user(userTel,password,userSchool,userName,regTime,userFace) values('$userTel','$password','$userSchool','$userName',$regTime,'$userFace')");
 $uid = mysql_insert_id();
 
+
 //插入成功，执行登录操作
- if($insertsql){ 	
+ if($insertsql){
+	if($_POST['flag'] == 'M_request'){
+		echo $uid;
+		exit;
+	}else{ 	
 		$_SESSION['userName'] = $userName;
 		$_SESSION['userId'] = $uid;
 		$_SESSION['sSchool'] = $userSchool;
@@ -91,12 +96,13 @@ $uid = mysql_insert_id();
 		}else{
 			echo "<script>window.location.href='../../front/square.php'</script>";
 		}
-	}else{
-		if($clientSign){
-			Response::json(103,'注册失败，未知错误！',NULL);
-		}else{
-			echo "<script>alert('注册失败！');window.location.href='../../index.php'</script>";
-		}
 	}
+}else{
+	if($clientSign){
+		Response::json(103,'注册失败，未知错误！',NULL);
+	}else{
+		echo "<script>alert('注册失败！');window.location.href='../../index.php'</script>";
+	}
+}
 
 ?>

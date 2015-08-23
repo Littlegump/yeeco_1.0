@@ -179,5 +179,354 @@ function export_depMenbers(){
 	}
 }
 
+function testfunc(){
+	alert("hello!")
+}
+//***********成员列表按钮操作***************************************************************
+	//单选与全选
+	function choose(x){
+		var depName = $(x).attr('value');
+		if($(x).attr("id")== "all_"+depName){
+			//获取所要全选的部门的dId，该ID存储在全选按钮的value值当中	
+			if(x.checked){
+				$(":checkbox[name='member_"+depName+"[]']").prop('checked',true)
+				$(":checkbox[name='member_"+depName+"[]']").parent().parent().css("background","#ffffd7");
+			}else{
+				$(":checkbox[name='member_"+depName+"[]']").prop('checked',false)
+				$(":checkbox[name='member_"+depName+"[]']").parent().parent().css("background","#fff");
+			}
+		}else{
+			if(x.checked){
+				$(x).parent().parent().css("background","#ffffd7");
+			}else{
+				$(x).parent().parent().css("background","#fff");
+			}
+		}	
+	}
+	
+	//调换单一成员部门 table_c
+	function change_oneDep(x){
+		var uId = $(x).parent().parent().find(":checkbox").attr("value");
+		var position = $(x).parent().parent().find(".limit").text();
+		//设置权限
+		if($('#authority').val()=='创建人'){
+			if($('#uId').val()==uId){
+				alert("您是该社团创建人，无法调换自己！");
+			}else if(position!='成员'){
+				alert("只能调换成员！");
+			}else{
+				var target = $(x).parent().parent();
+				var html = "<input type='hidden' name='aim_member[]' value='"+uId+"'/>";
+				$(html).appendTo(".change_dep form");
+				$(".change_dep").appendTo(target).show();
+				$(document).one("click",
+					function(){$(".change_dep").hide()}
+				);
+				event.stopPropagation();
+			}
+		}else{
+			alert("只有社团创建人可以调换部门！");
+		}
+	}
+	
+	//批量调换
+	function change_manyDep(x){
+		var depName = $(x).parent().parent().find(".check_all").attr("value");
+		var c=0;
+		var t=0;
+		var html="";
+		$("input[name='member_"+depName+"[]']:checkbox").each(function () { 
+			if (this.checked){ 
+				c++;
+				var limit = $(this).parent().parent().find(".limit").text();
+				if(limit != '成员'){
+					t++;
+				}
+			}
+		})
+		if(c==0){
+			alert("您没有勾选任意一个成员！");
+		}else if(t!=0){
+			alert("您只能调换成员，请重新勾选！");
+		}else{
+			var uId=new Array();
+			var i=0;
+			$("input[name='member_"+depName+"[]']:checkbox").each(function () { 
+				if (this.checked){ 									
+					uId[i] = $(this).parent().parent().find(":checkbox").attr("value");
+					html = "<input type='hidden' name='aim_member[]' value='"+uId[i]+"'/>";
+					$(html).appendTo(".change_dep form");
+					i++;
+				}
+			})
+			if($('#authority').val()=='创建人'){
+				var target = $(x).parent().parent();
+				$(".change_dep").appendTo(target).show();
+				$(document).one("click", function (){//对document绑定一个影藏Div方法
+					$(".change_dep").hide();
+				});
+				event.stopPropagation();
+			}else{
+				alert("只有社团创建人可以调换部门！");
+			}
+		}
+	}
+	function noDisappear(event){
+		$(document).unbind();
+		event.stopPropagation();//阻止事件向上冒泡
+	}
 
 
+	//删除单一成员 table_b
+	function delete_one(x){
+		var uId=new Array();
+		var i=0;
+		uId[i] = $(x).parent().parent().find(":checkbox").attr("value");
+		var depName = $(x).parent().parent().parent().find(".check_all").attr("value");
+		var position = $(x).parent().parent().find(".limit").text();
+		var sId=$("#sId").val();
+		if($('#authority').val()=='创建人'){
+			if($('#uId').val()==uId[i]){
+				alert("您是该社团创建人，无法删除自己！");
+			////**************************************在这里执行异步提交以后的内容
+			}else{
+				i++;
+				$.ajax({
+						type:"POST",
+						url:"../background/background_society/society_modify_form.php?action=del_societyMembers&sId="+sId+"&depName="+depName,
+						data:{
+							uId:uId,
+						},
+						success:function(data){
+							for(var j=0;j<i;j++){
+								$('#'+uId[j]).parent().parent().remove();
+							}
+											
+						},
+						error:function(jqXHR){alert("操作失败"+jqXHR.status);}
+					})	
+			}
+		}else if($('#authority').val()=='管理员'){
+			if($('#uId').val()==uId[i]){
+				alert("您是该社团部门管理员，无法删除自己！");
+			}else if($('#user_dep').val()==depName){
+				if(position!='成员'){
+					alert("您无法删除社团管理员");
+				}else{
+					i++;
+					$.ajax({
+							type:"POST",
+							url:"../background/background_society/society_modify_form.php?action=del_societyMembers&sId="+sId+"&depName="+depName,
+							data:{
+								uId:uId,
+							},
+							success:function(data){
+								for(var j=0;j<i;j++){
+									$('#'+uId[j]).parent().parent().remove();
+								}
+												
+							},
+							error:function(jqXHR){alert("操作失败"+jqXHR.status);}
+						})
+				}	
+			}else{
+				alert("您只能删除自己部门的成员！");				
+			}
+		}
+	}
+	
+	//批量删除选中的指定部门的成员
+	function delete_many(x){
+		var depName = $(x).parent().parent().find(".check_all").attr("value");
+		var sId=$("#sId").val();
+		var c=0;
+		var t=0;
+		$("input[name='member_"+depName+"[]']:checkbox").each(function () { 
+			if (this.checked){ 
+				c++;
+				var limit = $(this).parent().parent().find(".limit").text();
+				if(limit != '成员'){
+					t++;
+				}
+			}
+		})
+		if(c==0){
+			alert("您没有勾选任意一个成员！");
+		}else if(t!=0){
+			alert("您只能删除成员，请重新勾选！");
+		}else{
+			var uId=new Array();
+			var i=0;
+			$("input[name='member_"+depName+"[]']:checkbox").each(function () { 
+				if (this.checked){ 									
+					uId[i] = $(this).parent().parent().find(":checkbox").attr("value");
+					i++;
+				}
+			})
+			if($('#authority').val()=='创建人'){
+				$.ajax({
+						type:"POST",
+						url:"../background/background_society/society_modify_form.php?action=del_societyMembers&sId="+sId+"&depName="+depName,
+						data:{
+							uId:uId,
+						},
+						success:function(data){
+							for(var j=0;j<i;j++){
+								$('#'+uId[j]).parent().parent().remove();
+							}
+											
+						},
+						error:function(jqXHR){alert("操作失败"+jqXHR.status);}
+					})	
+			}else if($('#authority').val()=='管理员'){
+				if($('#user_dep').val()==depName){
+					$.ajax({
+						type:"POST",
+						url:"../background/background_society/society_modify_form.php?action=del_societyMembers&sId="+sId+"&depName="+depName,
+						data:{
+							uId:uId,
+						},
+						success:function(data){
+							for(var j=0;j<i;j++){
+								$('#'+uId[j]).parent().parent().remove();
+							}
+											
+						},
+						error:function(jqXHR){alert("操作失败"+jqXHR.status);}
+					})	
+				}else{
+					alert("您只能删除自己部门的成员！");				
+				}
+			}
+		}
+	}	
+		
+		
+	//单独发送通知	
+	function send_oneMsg(x){
+		var target = $(x).parent().parent().find(":checkbox").attr("value");
+		var form = "<form method='post' action='massageBox.php'><input name='chooseToId' value='"+target+"' /></form>"
+		$(form).submit();
+	}
+	
+	function send_manyMsg(x){
+		var depName = $(x).parent().parent().find(".check_all").attr("value");
+		var sId=$("#sId").val();
+		var c=0;
+		$("input[name='member_"+depName+"[]']:checkbox").each(function () { 
+			if (this.checked){ 
+				c++;
+			}
+		})
+		if(c<=1){
+			alert("群发消息请勾选至少两名成员！");
+		}else{
+			var target = '';
+			$("input[name='member_"+depName+"[]']:checkbox").each(function () { 
+				if (this.checked){ 	
+					target += "<input name='chooseToId[]' value='"+$(this).parent().parent().find(":checkbox").attr("value")+"'>";	
+				}
+			})
+			var form = "<form method='post' action='massageBox.php'>"+target+"</form>";
+			$(form).submit();
+		}
+	}
+	
+	//加载更多
+	function add_moreMember(x){
+		var i=$(x).parent().parent().parent().find(".i");
+		var j=$(x).parent().parent().parent().find(".j");
+		var depName=$(x).parent().find(".check_all").attr("value");
+		if(depName=='未分配'){
+			depName=0;
+		}
+		var sId=$("#sId").val();
+		var that = $(x);
+		$.ajax({
+				type:"POST",
+				url:"../background/background_society/society_memLoad.php?sId="+sId+"&depName="+depName,
+				data:{
+					i:i.val(),
+					j:j.val(),
+				},
+				success:function(data){	
+					index=data.indexOf('@');
+					index1=data.indexOf('+');
+					data1=data.substr(0,index-1);
+					data2=data.substr(index+1,index1-1);
+					data3=data.substr(index1+1);
+					if(data1==''){
+						that.text("到底儿了~");
+					}else{
+						i.before(data1).val(data2);	
+						j.val(data3);
+						//权限管理
+						if($('#authority').val()=='成员'){
+							$(".table_b").remove();
+							$(".table_c").remove();
+							$(".table_e").remove();
+						}
+					}			
+				},
+				error:function(jqXHR){alert("操作失败"+jqXHR.status);}
+		})		
+	}
+	//删除未激活成员
+	function del_preuser(x){
+		var depName = $(x).parent().parent().parent().find(".check_all").attr("value");
+		var uId = $(x).parent().parent().find(":checkbox");
+		var position = $(x).parent().parent().find(".limit").text();
+		var sId=$("#sId").val();
+		if($("#authority").val()=='成员'){
+			alert("只有社团创建人或管理员才能删除");
+		}else if($("#authority").val()=='创建人' ){
+			$.ajax({
+				type:"POST",
+				url:"../background/background_society/society_modify_form.php?action=del_preMember&sId="+sId,
+				data:{
+					uId:uId.attr("value"),
+				},
+				success:function(data){
+						uId.parent().parent().remove();				
+				},
+				error:function(jqXHR){alert("操作失败"+jqXHR.status);}
+			})	
+		}else if(depName==$('#user_dep').val()){
+			if(position!='成员'){
+				alert("您只能删除成员！");	
+			}else{
+				$.ajax({
+					type:"POST",
+					url:"../background/background_society/society_modify_form.php?action=del_preMember&sId="+sId,
+					data:{
+						uId:uId.attr("value"),
+					},
+					success:function(data){			
+						uId.parent().parent().remove();
+					},
+					error:function(jqXHR){alert("操作失败"+jqXHR.status);}
+				})	
+			}
+		}else{
+			alert("您只能删除自己部门的成员！");
+		}
+	
+	}
+	//提醒激活
+	function warn_active(x){
+		var uId = $(x).parent().parent().find(":checkbox");		
+		var sId=$("#sId").val();
+		$.ajax({
+			type:"POST",
+			url:"../background/background_society/society_modify_form.php?action=warn_active&sId="+sId,
+			data:{
+				uId:uId.attr("value"),
+			},
+			success:function(data){			
+				
+			},
+			error:function(jqXHR){alert("操作失败"+jqXHR.status);}
+		})	
+	}
+	
+	

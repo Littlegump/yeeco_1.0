@@ -355,12 +355,12 @@ body{
 	top:50%;
 	margin-top:-70px;
 	left:50%;
-	margin-left:-210px;
+	margin-left:-260px;
 	padding:10px;
 	border:1px solid #f2f2f2;
 	box-shadow:0 0 3px #ccc;
 	height:140px;
-	width:400px;
+	width:500px;
 	background:#fff;}
 	.notice_box strong{
 		margin:10px auto;
@@ -381,7 +381,12 @@ body{
 	.notice_box .choose{
 		width:284px;
 		margin:10px auto;}
-
+.notice_box span{
+	display:block;
+	position:absolute;
+	top:10px;
+	right:20px;
+	font-size:26px;}
 
 /*成员名片*/
 .form_remark{
@@ -558,4 +563,19 @@ body{
 	font-size:15px;
 	color:#000;
 	margin:0 5px;}
-		
+.society_code{
+	padding:10px 20px;
+	margin-bottom:10px;
+	width:240px;
+	height:220px;
+	border:1px solid #f2f2f2;
+	box-shadow:0 0 3px #ccc;
+	background:#fff;}
+	.society_code .qrCode{
+		margin:10px auto;
+		height:170px;
+		width:170px;
+		background:#CCC;}
+	.qrCode img{
+		width:100%;
+		height:100%;}		

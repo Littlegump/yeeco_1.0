@@ -141,7 +141,7 @@ if($user_limit!='成员'){
     	<div class="page">
         	<div class="title"><strong class="dep_name"><?php echo $value_1['depName']=='0'?'未分配':$value_1['depName'];?></strong><a href="javascript:void(0)" class="unfold" <?php if($value_1['depName'] == $isManage['depBelong']){echo "id='open_target'";}?>>展开<i></i></a><div style="clear:both;"></div></div>         
 			<div id="content_<?php echo $value_1['depName']?>" style="display:none;">  
-
+				<p style="text-align:center;line-height:60px;">正在加载……</p>
 			</div>
         </div>
 <?php
@@ -154,7 +154,7 @@ if($user_limit!='成员'){
 
 <div style="clear:both;"></div>
 <!--调换部门!-->
-<div class="change_dep" style="display:none;">
+<div class="change_dep" style="display:none;" onclick="noDisappear()">
 	<p>把他（她）调换到:</p>
     <form action="../background/background_society/society_modify_form.php?action=ex_societyMemberDep&sId=<?php echo $sId?>" method="post" name="change_dep">
         <select name="aim_dep">

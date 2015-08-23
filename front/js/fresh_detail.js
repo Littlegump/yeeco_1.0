@@ -330,7 +330,11 @@ function stopFresh(){
 	coverall();
 	newbox('notice_box');
 }
-
+//取消停止纳新
+function cancel_closed(){
+	movebox('notice_box');
+	nocover();
+}
 
 //********************************************************************************************************
 //编辑报名表内备注
@@ -441,24 +445,31 @@ $("#load_more").click(function(){
 			i:i,
 		},
 		success:function(data){
-			a.before(data);
+			if(data==''){
+				$("#load_more").text("到底儿了~");
+			}else{
+				a.before(data);
 				//查看报名表资料
-			$(".check_form").click(function(){
-				var aId = $(this).parent().parent().find(":checkbox").val();
-				var index = search_index(aIds,aId);
-				var left_aId = aIds[index-1];
-				var right_aId = aIds[index+1];
-				if((index-1) <= -1){
-					left_aId = aId;
-				}
-				if((index+1)>=aIds.length){
-					right_aId=aId;
-				}
-				$("#member_appForm").load("res_package/unselect_memberForm.php",{"aId":aId,"right_aId":right_aId,"left_aId":left_aId,"sName":sName,"fQue_1":fQue_1,"fQue_2":fQue_2,"fQue_3":fQue_3},function(){
-					coverall();
-					$("#member_appForm").show();
-				});		
-			})
+				$(".check_form").click(function(){
+					var aId = $(this).parent().parent().find(":checkbox").val();
+					var index = search_index(aIds,aId);
+					var left_aId = aIds[index-1];
+					var right_aId = aIds[index+1];
+					if((index-1) <= -1){
+						left_aId = aId;
+					}
+					if((index+1)>=aIds.length){
+						right_aId=aId;
+					}
+					$("#member_appForm").load("res_package/unselect_memberForm.php",{"aId":aId,"right_aId":right_aId,"left_aId":left_aId,"sName":sName,"fQue_1":fQue_1,"fQue_2":fQue_2,"fQue_3":fQue_3},function(){
+						coverall();
+						$("#member_appForm").show();
+					});		
+				})
+			
+			}
+			
+			
 		},
 		error:function(jqXHR){alert("操作失败"+jqXHR.status);}
 	})	
@@ -635,3 +646,4 @@ function praise_cancel(x){
 		error:function(jqXHR){alert("操作失败"+jqXHR.status);}
 	})
 }
+

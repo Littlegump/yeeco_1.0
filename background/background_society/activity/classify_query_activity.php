@@ -48,7 +48,7 @@ if($action=='search'){
 if($action=='precise_search'){
 	//传入页码
     $page=$_GET['p'];
-	$pageSize=3;
+	$pageSize=12;
 	//获取属性
 	$going=$_POST['going'];
 	$type=$_POST['type'];

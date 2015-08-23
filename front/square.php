@@ -53,60 +53,55 @@ if($query && mysql_num_rows($query)){
 
 
 <body>
-<div class="top_back">
-  <div class="top">
-      <div class="top_logo"><a href="../index.jsp"><img src="../image/web_image/logo.png"/></a></div>
-      <div class="top_right">
-          <ul>
-            <li>
-                <span><img src="../<?php echo $result_user['userFace']?>"/></span>
-                <span><?php echo $_SESSION['userName']?></span>
-            </li> 
-            <div style="clear:both;"></div>
-            <a href="personal_center.php"><li>个人中心</li></a>
-            <a href=""><li>易可助手</li></a>
-            <a href="../background/background_person/login.php?action=logout"><li>退出登录</li></a>
-          </ul>
-      </div>
-  </div>
-</div>
-<div style="clear:both;"></div>
-    
-<div class="page_main" id="page_main">
-<script>
-//计算并设置主页面的高度
-    $("#page_main").height($(window).height()-100); 
-</script>
 
-<div id="all_cover" style="display:none;"></div>
-    <div class="pic_back">
-      <div class="pic_main" id="container"> 
-          <div id="list" style="margin-left: -537px;"><!--图片宽度为537-->
-            <a href=""><img src="../image/web_image/测试图片/4.jpg" alt="1"/></a>
-            <a href=""><img src="../image/web_image/测试图片/1.jpg" alt="1"/></a>
-            <a href=""><img src="../image/web_image/测试图片/2.jpg" alt="2"/></a>
-            <a href=""><img src="../image/web_image/测试图片/3.jpg" alt="3"/></a>
-            <a href=""><img src="../image/web_image/测试图片/4.jpg" alt="4"/></a>
-            <a href=""><img src="../image/web_image/测试图片/1.jpg" alt="4"/></a>
+
+    <div class="top_back">
+      <div class="top">
+          <div class="top_logo"><a href="../index.jsp"><img src="../image/web_image/logo1.png"/></a></div>
+          <div class="top_right">
+              <ul>
+                <li>
+                    <span><img src="../<?php echo $result_user['userFace']?>"/></span>
+                    <span><?php echo $_SESSION['userName']?></span>
+                </li> 
+                <div style="clear:both;"></div>
+                <a href="personal_center.php"><li>个人中心</li></a>
+                <a href="massageBox.php"><li>消息盒子</li></a>
+                <a href="../background/background_person/login.php?action=logout"><li>退出登录</li></a>
+              </ul>
           </div>
       </div>
-      <div class="pic_right" id="buttons">
-        <div index="1" class="on"></div>
-        <div index="2" ></div>
-        <div index="3" ></div>
-        <div index="4" ></div>
-      </div>
     </div>
-    <div class="slogan"></div>
+    <div style="clear:both;"></div>
     
-    <div class="buttons">
-      <ul>
-        <a onclick="find_society()"><li class="unselected">寻找社团</li></a>
-        <a onclick="mysociety()"><li class="unselected">我的社团</li></a>
-      </ul>
-      <div style="clear:both;"></div>
-    </div>
-    <div class="mysociety" style="display:none">
+<div class="banner_wrap"> 
+        <!-- 幻灯片基本结构 添加类名current置顶显示 具体效果开发同事看需要做 -->
+        <div class="banner_bg">
+            <a href="javascript:void(0);" style="display:inline-block" id="img_1"><img src="../image/user_image/defaultImg/testAnnounce_1.png" width="1380" height="440" /></a>
+            <a href="javascript:void(0);" id="img_2"><img src="../image/user_image/defaultImg/testAnnounce_2.png" width="1380" height="440" /></a>
+            <a href="javascript:void(0);" id="img_3"><img src="../image/user_image/defaultImg/testAnnounce_3.png" width="1380" height="440" /></a>
+            <a href="javascript:void(0);" id="img_4"><img src="../image/user_image/defaultImg/testAnnounce_4.png" width="1380" height="440" /></a>  
+        </div>
+        <div class="control">
+            <ul>
+                <li><a href="javascript:void(0);" id="btn_1" class="current"></a></li>
+                <li><a href="javascript:void(0);" id="btn_2"></a></li>
+                <li><a href="javascript:void(0);" id="btn_3"></a></li>
+                <li><a href="javascript:void(0);" id="btn_4"></a></li>
+            </ul>
+        </div>
+</div>
+<div class="handdles">
+	<ul>
+	  <li><a href="society_establish.php" class="handdle">创建社团</a></li>
+      <li><a href="javascript:void(0)" class="handdle" onclick="find_society()">寻找社团</a></li>
+      <li><a href="javascript:void(0)" onclick="mysociety()" class="handdle">我的社团</a></li>
+    </ul>
+</div>
+
+<div class="my_society">
+	<div class="my_society_in">
+		<div class="list_title"><span>我的社团</span><a href="javascript:hidden()" style="margin-left:120px;font-size:26px">&times;</a></div>
         <ul>
         <?php 
 			if($mySociety){
@@ -116,10 +111,10 @@ if($query && mysql_num_rows($query)){
          <?php 
 		 	}}
 		 ?>
-          <div style="clear:both;"></div>
-        </ul>   
-      </div>
+        </ul>
+    </div>
 </div>
+
 
 <!--活动推荐-->
 <div class="act_recommend">
@@ -159,7 +154,8 @@ if($query && mysql_num_rows($query)){
 <div class="society_card" id="cards">
   <div class="card_in">
     <div id="card_1" class="card_a" onmouseover="movecover(this)" onmouseout="recover(this)">
-        <a href="society_establish.php"><img src="<?php echo $sImg?>"/></a>
+        <a href="society_establish.php"><img src="../image/user_image/defaultImg/createNew.png"/>
+</a>
         <div id="card_1_cover" class="card_a_cover"></div>
         <div id="card_1_det" class="card_a_det" style="display:none;">
             <strong>创建一个社团</strong>
@@ -441,7 +437,9 @@ if($query && mysql_num_rows($query)){
 
 
 <div class="mobile_client">
-<img src="../image/web_image/下载APP.png" width="677" height="431" /> </div>
+	<p style="line-height:80px;display:block;text-align:center;font-size:36px;">APP正在加紧开发中~~~</p>
+	<img src="../image/web_image/下载APP.png" width="677" height="431" /> 
+</div>
 
 <div class="about_us">
 </div>

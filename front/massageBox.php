@@ -3,22 +3,42 @@ session_start();
 error_reporting(E_ALL & ~E_NOTICE);
 require_once('../background/conf/connect.php');
 require_once('../background/conf/session.php');
-//点对点通信,主动给某人发,生成一则消息div
-$chooseToId = $_GET['chooseToId'];
+//将数据库所有发给该用户的数据置为未读
+mysql_query("update message set notice=0 where msgToId='$uId'");
+
+$chooseToId = $_POST['chooseToId'];
 if(empty($chooseToId)){
 	$chooseToId = "noBody";
 }
-mysql_query("update message set notice=0 where msgToId='$uId'");
 if($chooseToId){ 
-$toUserInfo = mysql_fetch_assoc(mysql_query("select userFace,userName from user where uId='$chooseToId' limit 1"));
-	echo "<script>
-		newTarget = '$chooseToId';
-		newTargetName = '$toUserInfo[userName]';
-		newTargetFace = '$toUserInfo[userFace]';
-	</script>";
+	if(is_array($chooseToId)){
+		//准备群发消息
+		foreach($chooseToId as $value){
+			$i++;
+			$massRes = mysql_fetch_assoc(mysql_query("select userName from user where uId='$value' limit 1"));
+			$massUserNameArray[] = $massRes['userName'];
+		}
+		$massUserName = implode(',',$massUserNameArray);
+		$massTarget = '"'.implode(',',$chooseToId).'"';
+	//	echo $massUserName;
+		echo "<script>
+			newTarget = '$massTarget';
+			newTargetName = '$massUserName';
+			newTargetFace = '/image/user_image/defaultImg/massFace.png';
+		</script>";
+	}else{
+		//准备单发消息
+		$toUserInfo = mysql_fetch_assoc(mysql_query("select userFace,userName from user where uId='$chooseToId' limit 1"));
+		echo "<script>
+			newTarget = '$chooseToId';
+			newTargetName = '$toUserInfo[userName]';
+			newTargetFace = '$toUserInfo[userFace]';
+		</script>";
+	}
 }
 
 ?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" style="height: 100%;">
 <head>
@@ -97,6 +117,15 @@ $toUserInfo = mysql_fetch_assoc(mysql_query("select userFace,userName from user 
 <br/>*****************************************************************************<br/>
 <div id="result2" style="height:200px">result2:</div>
 -->
+<!--短信发送窗口-->
+<div class="mobile_msg" id="mobile_msg" style="display:none">
+<p>网站推广期间，手机短信发送次数不限~~</p><a href="javascript:quit()">&times;</a>
+<form action="../background/message/mobile_msg.php" method="post" id="mobileMsg_form">
+    <input type="hidden" name="toId" value="" />
+    <textarea name="m_message" placeholder="在这里编辑短信的内容"></textarea>
+    <input type="submit" value="发送" onclick="send_mobileMsg()"/>
+</form>
+</div>
 <!--侧边快捷操作面板-->
 <div class="icon_box">
      <a href="massageBox.php"><div id="icon_1"></div>

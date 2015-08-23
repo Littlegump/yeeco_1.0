@@ -355,6 +355,11 @@ if($pcId){
 				<br/><input type="hidden" id="actId" value="<?php echo $actId?>"/><textarea name="board" id="board_text" placeholder="不超过140个字符" readonly="readonly"><?php echo $aInfo['actBoard']?></textarea>
             
         </div>
+        <!--社团二维码-->
+    	<div class="activity_code">
+            <strong>活动二维码</strong>
+			<div><img src="<?php echo substr($aInfo['actCode'],3)?>" /></div>
+        </div>
         <div class="advertisement">
           <div class="ad_title">
             <li class="ad_title_li">推广链接</li>

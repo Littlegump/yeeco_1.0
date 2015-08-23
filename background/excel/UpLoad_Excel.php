@@ -45,6 +45,7 @@ if($result){
 				//执行短信发送
 				send_msg($strs[1],$param);
 			}else{
+				if(!mysql_num_rows(mysql_query("select id from user_society_relation where userId='$res[uId]' and societyId='$sId'"))){
 				$uId=$res['uId'];
 				$data=array();
 				$data['sId']=$sId;
@@ -55,6 +56,7 @@ if($result){
 				//执行短信发送
 				send_msg_res($strs[1],$param);
 				}
+			}
 		$str="";
 		}
 		unlink($uploadfile);//删除上传的excel文件

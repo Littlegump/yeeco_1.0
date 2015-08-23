@@ -2,8 +2,9 @@
 $(document).ready(function () {
      //提交表单
     $("#search_form").ajaxForm(function(data) {  
-     	var data1=data.substr(0,data.length-1);
-		var data2=data.substr(data.length-1,1);
+     	var index=data.indexOf('@');
+     	var data1=data.substr(0,index-1);
+		var data2=data.substr(index+1);
 		$('#body').html(data1);
 		$('#snum').text(data2);
 		$('#paging').html("");

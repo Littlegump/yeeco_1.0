@@ -7,35 +7,37 @@ $(document).ready(function(){
 	dataBase = openDatabase('msgdb', '1.0', 'message dataBase', 5 * 1024 * 1024);
 	dataBase.transaction( function(tx) { 
 		tx.executeSql(
-			"create table if not exists recent_msg_list (userId INTEGER, targetName TEXT, targetFace TEXT, targetId INTEGER, lastTime INTEGER, lastMsg TEXT)"//, unread INTEGER
+			"create table if not exists recent_msg_list (userId INTEGER, targetName TEXT, targetFace TEXT, targetId TEXT, lastTime INTEGER, lastMsg TEXT)"//, unread INTEGER
 		);
 		tx.executeSql(
-			"create table if not exists message (userId INTEGER, targetId INTEGER, msgTime INTEGER, msgBody TEXT, flag INTEGER)"
+			"create table if not exists message (userId INTEGER, targetId TEXT, msgTime INTEGER, msgBody TEXT, flag INTEGER)"
 		);
 	});
 	//查询数据库中已有的最近联系人列表
 	var userId = $("[name='userId']").val();
 	query_msg_list(userId);
 	
-	
 	//与服务器建立连接，随时接收服务器收到的新消息
-	
-    source=new EventSource("../background/message/request_msg.php?msgFromId="+userId);
-	source.onmessage=function(event){
-		//document.getElementById("result2").innerHTML+=event.data + "<br />";
-		if (!event.data.match("^\{(.+:.+,*){1,}\}$")){
-			//alert("请求重传")
-		}else{
-				//通过这种方法可将字符串转换为对象
-			var obj = jQuery.parseJSON(event.data);
-			var notice = obj.notice;
-			$.unique(notice);//过滤掉数组中重复的元素
-			for (var i = 0; i < notice.length; i++) {
-				//notice[i]为未读消息，将未读消息在最近联系人列表中通知用户
-				inform(userId,notice[i]);
-    		};
-		}
-	}	
+	if(typeof(EventSource)!=="undefined"){
+		source=new EventSource("../background/message/request_msg.php?msgFromId="+userId);
+		source.onmessage=function(event){
+			//document.getElementById("result2").innerHTML+=event.data + "<br />";
+			if (!event.data.match("^\{(.+:.+,*){1,}\}$")){
+				//alert("请求重传")
+			}else{
+					//通过这种方法可将字符串转换为对象
+				var obj = jQuery.parseJSON(event.data);
+				var notice = obj.notice;
+				$.unique(notice);//过滤掉数组中重复的元素
+				for (var i = 0; i < notice.length; i++) {
+					//notice[i]为未读消息，将未读消息在最近联系人列表中通知用户
+					inform(userId,notice[i]);
+				};
+			}
+		}	
+	}else{
+		alert("对不起，您的浏览器暂不支持即时消息推送~");
+	}
 });
 
 //新消息通知，此消息为非当前联系人的新消息
@@ -117,7 +119,7 @@ function query_msg_list(userId){
 					if(isExist){
 						//alert("此人在联系人列表中已经存在！");
 					}else{
-						//alert("将此联系人作为最新联系人插入到数据库中");
+						//将此联系人作为最新联系人插入到数据库中;
 						delete_msg_list(userId,newTarget);
 						insert_list(userId, newTarget, newTargetName, newTargetFace, Date.parse(new Date())/1000, "");
 						//将此联系人添加到最近联系人列表顶部
@@ -256,7 +258,7 @@ function delete_msg_list(userId,targetId){
 	
 //打开并接收消息
 function openSingleChat(msgToId,x){
-
+	
 	//保存上一个聊天对象为最近一次的联系人
 	update_list();
 	//清除聊天窗口内的所有内容、
@@ -267,7 +269,7 @@ function openSingleChat(msgToId,x){
 	$(".msg_list ul").prepend(x);
 	$(x).children("li").css("background","#ffffd7");
 	$(x).find("span").remove();
-	
+
 	var msgFromId = $("[name='userId']").val();
 	//alert("您的ID为："+msgFromId+"，跟您通信的人ID为："+msgToId);
 		
@@ -287,7 +289,13 @@ function openSingleChat(msgToId,x){
 	
 		//获取与当前联系人曾经的聊天记录
 		query_msg(msgFromId,msgToId);
-			
+		
+		//如果是群发，新增群发标签
+		if(isNaN(msgToId)){
+			var massHtml = "<li><div class='mass_tag'>您将要给以下好友群发消息："+toUserName+"。<br/>您还可以改为<a href='javascript:mobileWin()'>发送手机短信</a></div></li>";
+			$("#currentMsg").before(massHtml);	
+		}
+
 		//断开上一次与服务器的通信，再与服务器建立新的连接
 		source.close();
 		source=new EventSource("../background/message/request_msg.php?msgToId="+msgToId+"&msgFromId="+msgFromId);
@@ -346,6 +354,7 @@ function send_massage(){
 	var date = Date.parse(new Date())/1000;
 	
 	$("#massage_form").ajaxForm(function(data){
+		//alert(data);
 		//把发出的消息存入本地数据库
 		insert_msg(msgFromId,targetId,massage,date,0);
 		var new_html = "<li class='Tx_msg'><div class='msg_face'><img src='"+userFace+"' /></div><div class='conbine'><em>"+userName+"</em><div class='msg_content'><p>"+massage+"</p></div></div><span class='send_time'>"+formateDate(new Date(date *1000))+"</span><div style='clear:both;'></div></li>";
@@ -353,7 +362,6 @@ function send_massage(){
 		$("[name='message']").val("");
 	});
 }
-
 //格式化日期
 function formateDate(date) {
     var y = date.getFullYear();
@@ -364,11 +372,44 @@ function formateDate(date) {
     m = m > 9 ? m : '0' + m;
     return y + '-' + m + '-' + d + ' ' + h + ':' + mi;
 }
+//添加回车发送事件
+	$("#msgBody").keydown(function(event){
+		if(event.which == 13){
+			send_massage();
+			$("#massage_form").submit();
+		}
+	})
+
+function send_mobileMsg(){
+	var userName = $("[name='userName']").val();
+	var userFace = $("[name='userFace']").val();
+	var massage = "手机短信："+$("[name='m_message']").val();
+	var msgFromId = $("[name='userId']").val();
+	var targetId = $("[name='toId']").val();
+	var date = Date.parse(new Date())/1000;
+	$("#mobileMsg_form").ajaxForm(function(data){
+		//把发出的消息存入本地数据库
+		insert_msg(msgFromId,targetId,massage,date,0);
+		var new_html = "<li class='Tx_msg'><div class='msg_face'><img src='"+userFace+"' /></div><div class='conbine'><em>"+userName+"</em><div class='msg_content'><p>"+massage+"</p></div></div><span class='send_time'>"+formateDate(new Date(date *1000))+"</span><div style='clear:both;'></div></li>";
+		$("#currentMsg").before(new_html);
+		$("[name='message']").val("");
+		alert("发送成功！");
+		quit();
+	});
+}
 
 
 
 
+//发送手机短信窗口
+function mobileWin(){
+	newbox("mobile_msg");
+	coverall();
+}
 
-
-
+//关闭发送短信窗口
+function quit(){
+	movebox("mobile_msg");
+	nocover();
+}
 

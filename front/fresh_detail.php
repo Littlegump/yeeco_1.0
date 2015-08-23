@@ -16,7 +16,7 @@ if($isManage['isManage']==0){
 
 //在社团纳新表中提取信息
 $freshResult=mysql_fetch_assoc(mysql_query("select * from society_fresh where sId='$sId'"));
-$sinfoResult=mysql_fetch_assoc(mysql_query("select sNum,Board,isFresh from society where sId='$sId'"));
+$sinfoResult=mysql_fetch_assoc(mysql_query("select sNum,Board,isFresh,sQRCode from society where sId='$sId'"));
 $fImg=substr($freshResult['fImg'],3);
 $fNum=$freshResult['fNum'];
 $fAnn=$freshResult['fAnn'];
@@ -334,6 +334,11 @@ if($pcId){
 				<br/><input type="hidden" id="sId" value="<?php echo $sId?>"/><textarea name="board" id="board_text" placeholder="不超过140个字符" readonly="readonly"><?php echo $fBoard ?></textarea>
             
         </div>
+        <!--社团二维码-->
+    	<div class="society_code">
+            <strong>社团二维码</strong>
+				<div class="qrCode"><img src="<?php echo substr($sinfoResult['sQRCode'],3)?>" /></div>
+        </div>
         <div class="advertisement">
           <div class="ad_title">
             <li class="ad_title_li">推广链接</li>
@@ -424,7 +429,7 @@ if($pcId){
 
 <!--公式提醒框--> 
 <div class="notice_box" id="notice_box" style="display:none;">
-	<strong>本次纳新结束，是否将本次纳新结果进行公示？</strong>
+	<strong>本次纳新结束，是否将本次纳新结果进行公示？</strong><span><a href="javascript:cancel_closed()">&times;</a></span>
     <p>注：公示为期一周，一周后将自动关闭公示；<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;公示结果仅本校内同学可见！</p>
     <div class="choose"><a class="button" href="../background/background_society/society_stopFresh.php?sId=<?php echo $sId?>&sName=<?php echo $freshResult['sName']?>&action=pub">公示</a><a class="button" href="../background/background_society/society_stopFresh.php?sId=<?php echo $sId?>&sName=<?php echo $freshResult['sName']?>&action=pri">不公示</a></div>
 </div>

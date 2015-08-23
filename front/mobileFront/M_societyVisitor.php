@@ -14,7 +14,7 @@ $fInfo=mysql_fetch_assoc(mysql_query("select * from society_fresh where sId='$sI
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=2.0,initial-scale=1.0,user-scalable=no">
-<title>社团详情</title>
+<title><?php echo $sInfo['sName']?>·社团详情</title>
 <link href="M_css/M_societyVisitor.css" type="text/css" rel="stylesheet">
 <script src="../js/jquery-1.11.1.js"></script>
 </head>
@@ -87,7 +87,7 @@ $fInfo=mysql_fetch_assoc(mysql_query("select * from society_fresh where sId='$sI
 <?php
 	}
 ?>
-<a href="M_applyForm.php?sId=<?php echo $sId?>&sSchool=<?php echo $sInfo['sSchool']?>" id="goOn"><div class="join">申请加入</div></a>
+<a href="M_applyForm.php?sId=<?php echo $sId?>&sSchool=<?php echo $sInfo['sSchool']?>&fId=<?php echo $fInfo['fId']?>" id="goOn"><div class="join">申请加入</div></a>
 
 <script src="M_js/M_societyVisitor.js" type="text/javascript"></script>
 <?php

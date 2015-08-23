@@ -288,7 +288,7 @@ body{
 	.table li:last-child input[type=checkbox]{
 		height:25px;}
 		
-#load_more{
+.load_more{
 	display:inline-block;
 	height:25px;
 	line-height:25px;
@@ -296,7 +296,7 @@ body{
 	text-align:center;
 	margin-left:15px;
 	color:#fff;}
-	#load_more:hover{
+	.load_more:hover{
 		color:#000;}
 		
 

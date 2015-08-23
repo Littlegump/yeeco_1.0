@@ -99,7 +99,13 @@ body{
 		left:80px;
 		top:5px;
 		line-height:26px;
-		font-size:17px;}
+		font-size:17px;
+		width:180px;
+		display:block;
+		white-space:nowrap; 
+		overflow:hidden; 
+		text-overflow:ellipsis;
+		}
 	.msg_list p{
 		position:absolute;
 		left:80px;
@@ -160,6 +166,7 @@ body{
 	overflow:hidden;}
 .massages ul{
 	position:absolute;
+	min-height:100%;
 	bottom:0;}
 .massages li{
 	width:680px;
@@ -217,6 +224,18 @@ body{
 		display:block;
 		vertical-align:top;
 		float:left;}
+.mass_tag{
+	width:500px;
+	padding:15px;
+	background:#f2f2f2;
+	color:#999;
+	text-align:center;
+	margin:0 auto;}		
+.mass_tag a{
+	margin:0 5px;
+	color:#97ddff;}
+	.mass_tag a:hover{
+		color:#00acff;}	
 		
 .sendBox{
 	position:relative;
@@ -253,4 +272,50 @@ body{
 	height:1px;
 	border-bottom:1px solid #f0f0f0;
 	width:600px;
-	margin:20px auto;}
+	margin:20px auto;}	
+.mobile_msg{
+	z-index:11;
+	background:#fff;
+	position:fixed;
+	top:50%;
+	left:50%;
+	margin-top:-100px;
+	margin-left:-200px;
+	width:360px;
+	height:160px;
+	padding:20px;
+	border:1px solid #ccc;}
+	.mobile_msg a{
+		position:absolute;
+		top:5px;
+		right:15px;
+		font-size:26px;}
+	.mobile_msg textarea{
+		margin-top:15px;
+		width:360px;
+		height:90px;
+		border:1px solid #ccc;
+		border-radius:5px;
+		resize: none;
+		line-height:23px;
+		padding:10px;}
+		
+	.mobile_msg input[type=submit]{
+		display:block;
+		margin:10px auto;
+		height:30px;
+		width:80px;
+		border:0;
+		background:#97ddff;
+		color:#fff;
+		font-size:16px;
+		right:0;
+		border-radius:5px;}
+		.mobile_msg input[type=submit]:hover{
+			background:#00acff;
+			cursor:pointer;}
+
+	
+
+	
+	

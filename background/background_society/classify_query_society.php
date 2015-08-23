@@ -42,7 +42,7 @@ if($action=='search'){
 if($action=='precise_search'){
 	//传入页码
     $page=$_GET['p'];
-	$pageSize=3;
+	$pageSize=12;
 	$cert=$_POST['cert'];
 	$cate=$_POST['cate'];
 	$status=$_POST['status'];

@@ -163,7 +163,7 @@ if($action=='modify_dep'){
 //批量删除选中用户信息
 if($action=='del_societyMembers'){
 	$membersId=$_POST['uId'];
-	$depName=$_GET['depName'];
+	$depName=($_GET['depName']=='未分配'?0:$_GET['depName']);
 	if($depName=='0'){
 		foreach($membersId as $value){
 			mysql_query("delete from user_society_relation where societyId='$sId' and userId='$value'");
@@ -199,11 +199,11 @@ if($action=='del_societyMembers'){
 	$content="社团通讯录有所更新!";
 }
 
-
+//调换部门
 if($action=='ex_societyMemberDep'){
 	$membersId=$_POST['aim_member'];
 	//要调换到的部门
-	$depName=$_POST['aim_dep'];
+	$depName=($_POST['aim_dep']=='未分配'?0:$_POST['aim_dep']);
 	foreach($membersId as $value){
 		mysql_query("update user_society_relation set depBelong='$depName' where societyId='$sId' and userId='$value'");	
 		$data=array();
@@ -215,13 +215,30 @@ if($action=='ex_societyMemberDep'){
 	$content="社团通讯录有所更新!";
 	echo "<script>window.location.href='../../front/address_book.php?sId=$sId'</script>";
 }
+//删除未激活用户
+if($action=='del_preMember'){
+	$pre_uId=$_POST['uId'];
+	mysql_query("delete from preuser_society_relation where pid='$pre_uId' and sid='$sId'");
+	//发短信告诉用户，您长时间未激活已被该社团请出
+	exit;
+}
+//提醒用户激活
+if($action=='warn_active'){
+	$pre_uId=$_POST['uId'];
+	//查找用户电话
+	$query=mysql_fetch_assoc(mysql_query("select userTel from pre_user where pId='$pre_uId'"));
+	$userTel=$query['userTel'];
+	//调用短信模板发送短信
+	
+	exit;
+}
 //生成新的社团动态
 $sName=mysql_fetch_assoc(mysql_query("select sName from society where sId='$sId'"));
 $type = '修改社团资料';
 $data = array(
 		'sId' => $sId,
 		'oId' => $sId,
-		'oName' => $sName,
+		'oName' => $sName['sName'],
 		'content' => $content,
 );
 create_news($type,$data);

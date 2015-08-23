@@ -27,105 +27,51 @@ function getEvent(e){
 //******************************************************************
 //页面加载时产生的事件响应
 window.onload = function () {
-    
-	//焦点轮播图效果
-            var container = document.getElementById('container');
-            var list = document.getElementById('list');
-            var buttons = document.getElementById('buttons').getElementsByTagName('div');
-           
-            var index = 1;
-            var len = 4;         //总共有4张图片
-            var animated = false;
-            var interval = 3000;   //每隔3秒图片进行一次切换
-            var timer;
-
-
-            function animate (offset) {
-                if (offset == 0) {
-                    return;
-                }
-                animated = true;
-                var time = 300;     //每次切换所用时常为300ms
-                var inteval = 10;
-                var speed = offset/(time/inteval);
-                var left = parseInt(list.style.marginLeft) + offset;
-
-                var go = function (){
-                    if ( (speed > 0 && parseInt(list.style.marginLeft) < left) || (speed < 0 && parseInt(list.style.marginLeft) > left)) {
-                        list.style.marginLeft = parseInt(list.style.marginLeft) + speed + 'px';
-                        setTimeout(go, inteval);
-                    }
-                    else {
-                        list.style.marginLeft = left + 'px';
-                        if(left>-200){
-                            list.style.marginLeft = -537 * len + 'px'; //图片宽度为630
-                        }
-                        if(left<(-537 * len)) { 
-                            list.style.marginLeft = '-537px';
-                        }
-                        animated = false;
-                    }
-                }
-                go();
-            }
-
-            function showButton() {
-                for (var i = 0; i < buttons.length ; i++) {
-                    if( buttons[i].className == 'on'){
-                        buttons[i].className = '';
-                        break;
-                    }
-                }
-                buttons[index - 1].className = 'on';
-            }
-
-            function play() {
-                timer = setTimeout(function () {
-                    next();
-                    play();
-                }, interval);
-            }
-            function stop() {
-                clearTimeout(timer);
-            }
-
-            function next() {
-                if (animated) {
-                    return;
-                }
-                if (index == 4) {
-                    index = 1;
-                }
-                else {
-                    index += 1;
-                }
-                animate(-537); 
-                showButton();
-            }
-           
-            for (var i = 0; i < buttons.length; i++) {
-                buttons[i].onclick = function () {
-                    if (animated) {
-                        return;
-                    }
-                    if(this.className == 'on') {
-                        return;
-                    }
-                    var myIndex = parseInt(this.getAttribute('index'));
-                    var offset = -537 * (myIndex - index);  
-
-                    animate(offset);
-                    index = myIndex;
-                    showButton();
-                }
-            }
-
-            container.onmouseover = stop;
-            container.onmouseout = play;
-
-            play();
-
-
+	var timer = setTimeout;
+	var currentId = 1
+	
+	function play(){
+		var nextId = currentId + 1;
+		if(nextId > 4){
+			nextId = 1;
+		}
+		timer = setTimeout(function(){
+			$(".banner_bg a").fadeOut();
+			$("#img_"+nextId).fadeIn().css("display","inline-block");
+			$(".control ul li a").removeClass("current");
+			$("#btn_"+nextId).addClass("current");
+			currentId = nextId;
+			play();
+		},4000)
+	}
+	
+    $(".banner_bg").hover(
+		function(event){
+			event.stopPropagation();
+			clearTimeout(timer);
+			timer = null;
+		},
+		function(event){
+			event.stopPropagation();
+			play();
+		}	
+	);
+	
+	$(".control ul li a").click(function(){
+		var nextId = $(this).attr("id").substr(4);
+		$(".banner_bg a").fadeOut();
+		$("#img_"+nextId).fadeIn().css("display","inline-block");
+		$(".control ul li a").removeClass("current");
+		$("#btn_"+nextId).addClass("current");
+		currentId = nextId
+		clearTimeout(timer);
+		timer = null;
+		play();
+	})
+	
+	play();
+	
+		
 
 	
 	//鼠标划过cards，遮罩层消失；
@@ -191,15 +137,20 @@ function recover(x){
 }
 //打开或关闭我的社团
 function mysociety(){
-	$(".mysociety").fadeIn("fast");
+	$(".my_society_in").animate({left:"0"},300);
 	$(document).one("click", function (){//对document绑定一个影藏Div方法
-		$(".mysociety").fadeOut("fast");
+		$(".my_society_in").animate({left:"300px"},300);
 	});
 	event.stopPropagation();
 }
-$(".mysociety").click(function (event){
+
+$(".my_society_in").click(function (event){
 	event.stopPropagation();//阻止事件向上冒泡
 });
+function hidden(){
+	$(".my_society_in").animate({left:"300px"},300);
+}
+
 //寻找社团
 function find_society(){
 	scrollTo(0,1300);

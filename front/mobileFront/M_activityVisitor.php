@@ -13,7 +13,7 @@ $society=mysql_fetch_assoc(mysql_query("select sName,sSchool from society where 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=2.0,initial-scale=1.0,user-scalable=no">
-<title>社团详情</title>
+<title><?php echo $aInfo['actName']?>·活动详情</title>
 <link href="M_css/M_activityVisitor.css" type="text/css" rel="stylesheet">
 <script src="../js/jquery-1.11.1.js"></script>
 </head>

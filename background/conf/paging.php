@@ -2,7 +2,7 @@
 function paging($page,$total){
 //显示页数
 $showPage=5;
-$pageSize=3;
+$pageSize=12;
 ////总条数
 //$total_sql="select count(*) from page";
 //$total_result=mysql_fetch_array(mysql_query($total_sql));

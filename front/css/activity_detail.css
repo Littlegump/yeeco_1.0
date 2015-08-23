@@ -487,6 +487,21 @@ body{
 	font-size:15px;
 	color:#000;
 	margin:0 5px;}
-		
+.activity_code{
+	padding:10px 20px;
+	margin-bottom:10px;
+	width:240px;
+	height:200px;
+	border:1px solid #f2f2f2;
+	box-shadow:0 0 3px #ccc;
+	background:#fff;}
+	.activity_code img{
+		height:100%;
+		width:100%;}
+	.activity_code div{
+		margin:10px auto;
+		height:150px;
+		width:150px;
+		background:#CCC;}
 
 

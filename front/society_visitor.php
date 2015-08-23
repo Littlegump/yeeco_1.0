@@ -53,7 +53,7 @@ if($query && mysql_num_rows($query)){
   <div class="top">
       <ul>
         <li class="a"><?php echo $sInfo['sName']?></li>
-        <li class="b">返回&nbsp&nbsp;<a href="square.php">易可广场>></a></li>
+        <li class="b"><a href="javascript:history.go(-1)">返回&nbsp&nbsp;上一页>></a></li>
       </ul>
   </div>
 </div>

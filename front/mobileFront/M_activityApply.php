@@ -22,7 +22,7 @@ $sSchool=$_GET['sSchool'];
 </div>
 
 <div style="height:40px;"></div>
-<input type="hidden" name="sId" value="<?php echo $actId?>"/>
+<input type="hidden" name="actId" value="<?php echo $actId?>"/>
 <input type="hidden" name="state"/>
 <div class="block page_1">
   <ul>
@@ -64,7 +64,7 @@ $sSchool=$_GET['sSchool'];
     <li><p>尊敬的<span id="userName_1"></span>同学：</p></li>
     <li><p>您的登录账号是：<span id="userTel_1"></span></p></li>
   </ul>
-    <input type="password" placeholder="&nbsp;&nbsp;&nbsp;请在这里输入密码" name="password_1"/>
+    <input type="password" placeholder="&nbsp;&nbsp;&nbsp;请在这里输入密码" name="password_1" required="required"/>
     <input type="submit" value="提交" class="subBtn"/>
   <div class="forget"><a href="#">忘记密码</a></div>
 </div>
@@ -82,11 +82,11 @@ $sSchool=$_GET['sSchool'];
     <li><p>请在下面输入您收到的验证码</p></li>
   </ul>
   	<div class="line">
-    	<input type="text" placeholder="&nbsp;&nbsp;&nbsp;在这里输入验证码" name="testCode"/>
-        <div class="reSend">重新发送</div>
+    	<input type="text" placeholder="&nbsp;&nbsp;&nbsp;在这里输入验证码" name="testCode" required="required"/>
+        <div class="reSend" onclick="request_code()">重新发送</div>
     </div>
     <input type="password" placeholder="&nbsp;&nbsp;&nbsp;在这里设置密码，方便查询申请结果" name="password_2"/>
-    <input type="submit" value="提交" class="subBtn" id="pre_applyForm"/>
+    <input type="button" value="提交" class="subBtn" onclick="form_submit()"/>
 </div>
 </form>
 
