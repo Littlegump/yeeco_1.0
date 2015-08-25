@@ -28,7 +28,6 @@ function return_reg(){
     movebox('email_box');
 	//取消遮罩层
 	nocover();
-	
 }
 
 

@@ -5,6 +5,7 @@ $(document).ready(function(e) {
 		$(".mod").remove();	
 	}
 })
+contact_form_lock = 0;
 function save_info(){
 	//表单验证
 	var a = $('[name="society_name"]').val();
@@ -22,10 +23,14 @@ function save_info(){
 		//验证完成
 		movebox('notice');	
 		//提交表单
-		$(".contact_form").ajaxSubmit(function() {  
-		   alert("已保存"); 
-		   location.reload();
-		});
+		if(contact_form_lock == 0){
+			contact_form_lock = 1;
+			$(".contact_form").ajaxSubmit(function() {  
+				contact_form_lock = 0;
+				alert("已保存"); 
+				location.reload();
+			});
+		}
 	}
 }
 //修改基本资料

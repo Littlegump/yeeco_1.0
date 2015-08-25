@@ -32,6 +32,7 @@ function apply_activity(){
 		$.ajax({
 			type:"GET",
 			url:"../background/background_society/activity/apply_activity.php?action=join&actId="+$("#actId").val()+"&uId="+$("#uId").val(),
+			async:false,
 			success:function(){
 				$(".handle_2").html("报名成功");	
 				$("#apply_act").attr("href","");
@@ -44,6 +45,7 @@ function apply_activity(){
 			$.ajax({
 				type:"GET",
 				url:"../background/background_society/activity/apply_activity.php?action=join&actId="+$("#actId").val()+"&uId="+$("#uId").val(),
+				async:false,
 				success:function(){
 					$(".handle_2").html("报名成功");	
 					$("#apply_act").attr("href","");
@@ -200,6 +202,7 @@ function praise(x){
 			cId:cId,
 			uId:uId
 		},
+		async:false,
 		success:function(data){
 			$(x).text("取消赞("+data+")");
 			$(x).attr("onclick","praise_cancel(this)");
@@ -219,6 +222,7 @@ function praise_cancel(x){
 			cId:cId,
 			uId:uId
 		},
+		async:false,
 		success:function(data){
 			$(x).text("赞("+data+")");
 			$(x).attr("onclick","praise(this)");
@@ -260,6 +264,7 @@ function concern(){
 				change_concern(1);
 				$("#isJoin").val('1');
 			},
+			async:false,
 			error:function(jqXHR){alert("操作失败"+jqXHR.status);}
 		})
 		
@@ -270,6 +275,7 @@ function concern(){
 			$.ajax({
 				type:"GET",
 				url:"../background/background_society/activity/apply_activity.php?action=cancel_concern&actId="+$("#actId").val()+"&uId="+$("#uId").val(),
+				async:false,
 				success:function(){
 					change_concern(2);
 					$("#isJoin").val('');

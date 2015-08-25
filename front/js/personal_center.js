@@ -7,7 +7,6 @@ function change_tel(){
 	$("[name='userTel']").focus();
 }
 function sendCode(){	
-
 	//检查手机号码格式以及是否被注册了
 	var usertel=$("[name='userTel']").val();
 	var x=$("[name='userTel']");
@@ -117,9 +116,9 @@ function password_test(){
 function checking_2(x){
 	var password1=x.value;
 	if(password1 != ""){
-	if(password1.length<6){
-	    error(x);
-	}	
+		if(password1.length<6){
+			error(x);
+		}	
 	}
 }
 
@@ -149,7 +148,6 @@ function checking_find(){
 		//*************************************************************************
 
 		$("#otel").load("../background/background_person/isExistUser.php",{"ousertel":usertel},function(){
-
 			ddd = $("#otel").text();
 			if(ddd){
 		       $("#otel").css("display","block");

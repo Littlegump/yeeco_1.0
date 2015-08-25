@@ -125,7 +125,7 @@ if($user_limit!='成员'){
                 <input type="hidden" name="uFace" value="../../<?php echo $userFace?>"/>
             	<input type="hidden" name="sId" value="<?php echo $sId?>"/>
                 <textarea name="news_content" placeholder="在这里发布一则新的动态吧！"></textarea>
-                <input type="submit" class="submit_btn" value="发表" onclick="submit_btn(this)"/>
+                <input type="button" class="submit_btn" value="发表" onclick="submit_btn()"/>
             </form>
             <div style="clear:both;"></div> 
         </div>
@@ -133,6 +133,8 @@ if($user_limit!='成员'){
 <?php
 if($news){
 	foreach($news as $value){
+		//查询该用户是否赞过该动态
+		$isPraise=mysql_num_rows(mysql_query("select * from praise where nId='$value[nId]' and uId='$uId'"));
 ?>
             <div class="box clearfix">
             	<input type="hidden" name="nId" value="<?php echo $value['nId']?>"/>
@@ -148,7 +150,7 @@ if($news){
                     </div>
                     <div class="info clearfix">
                         <span class="time"><?php echo $value['nTime']?></span>
-                        <a class="praise" href="javascript:void();" onclick="praise(this);">赞</a>
+                        <a class="praise" href="javascript:void();" onclick="praise(this);"><?php echo $isPraise!=NULL?'取消赞':'赞'?></a>
                     </div>
                     <div class="praises-total" total="<?php echo $value['pNum']?>" style="display: none;"></div>
                     <div class="comment-list">
@@ -165,8 +167,11 @@ if($query && mysql_num_rows($query)){
 		}
 	}			
 }
+
 if($comment_1){
 	foreach($comment_1 as $c1){
+		//查询用户是否赞过该评论
+		$isPraise=mysql_num_rows(mysql_query("select * from praise where cId='$c1[cId]' and uId='$uId'"));
 ?>					
     					<div class="comment-box clearfix" user="other">
                           <input type="hidden"  name="cId" value="<?php echo $c1['cId']?>"/>
@@ -177,7 +182,7 @@ if($comment_1){
                           </p>
                            <p class="comment-time">
                                     <?php echo $c1['cTime']?>
-                              	<a class="comment-praise" href="javascript:void();"  total="<?php echo $c1['pNum']?>" my="0" onclick="praise(this);">赞</a>
+                              	<a class="comment-praise" href="javascript:void();"  total="<?php echo $c1['pNum']?>" my="0" onclick="praise(this);"><?php echo $isPraise!=NULL?'取消赞':'赞'?></a>
 <?php
 	if($uId!=$c1['uId']){
 ?>
@@ -198,17 +203,19 @@ if($comment_1){
 if($comment_2){
 	foreach($comment_2 as $c2){
 		if($c2['ccId']==$c1['cId']){
+			//查询用户是否赞过该评论
+			$isPraise=mysql_num_rows(mysql_query("select * from praise where cId='$c2[cId]' and uId='$uId'"));
 ?>
 						<div class="comment-box clearfix" user="other">
                           <input type="hidden"  name="cId" value="<?php echo $c2['cId']?>"/>
                           <img class="myhead" src="<?php echo $c2['uFace']?>" alt=""/>
                           <div class="comment-content">
                              <p class="comment-text">
-                             <span class="user"><?php echo $c2['uName']?>：</span>回复<?php echo $c2['ccName']?>：<?php echo $c2['cBody']?>
+                             <span class="user"><?php echo $c2['uName']?>：</span>回复<?php echo $c2['ccName']?><?php echo $c2['cBody']?>
                              </p>
                               <p class="comment-time">
                                     <?php echo $c2['cTime']?>
-                              	<a class="comment-praise" href="javascript:void();"  total="<?php echo $c2['pNum']?>" my="0" onclick="praise(this);">赞</a>
+                              	<a class="comment-praise" href="javascript:void();"  total="<?php echo $c2['pNum']?>" my="0" onclick="praise(this);"><?php echo $isPraise!=NULL?'取消赞':'赞'?></a>
 <?php
 	if($uId!=$c2['uId']){
 ?>
@@ -224,9 +231,42 @@ if($comment_2){
                             </div>
                         </div>                         
 <?php
-		}
+		
+			foreach($comment_2 as $c3){
+				if($c3['ccId']==$c2['cId']){
+					//查询用户是否赞过该评论
+					$isPraise=mysql_num_rows(mysql_query("select * from praise where cId='$c3[cId]' and uId='$uId'"));
+?>
+						<div class="comment-box clearfix" user="other">
+                          <input type="hidden"  name="cId" value="<?php echo $c3['cId']?>"/>
+                          <img class="myhead" src="<?php echo $c3['uFace']?>" alt=""/>
+                          <div class="comment-content">
+                             <p class="comment-text">
+                             <span class="user"><?php echo $c3['uName']?>：</span>回复<?php echo $c3['ccName']?><?php echo $c3['cBody']?>
+                             </p>
+                              <p class="comment-time">
+                                    <?php echo $c3['cTime']?>
+                              	<a class="comment-praise" href="javascript:void();"  total="<?php echo $c3['pNum']?>" my="0" onclick="praise(this);"><?php echo $isPraise!=NULL?'取消赞':'赞'?></a>
+<?php
+	if($uId!=$c3['uId']){
+?>
+                              	<a href="javascript:;" class="comment-operate">回复</a>
+<?php
+	}else{
+?>
+								<a href="javascript:void();" class="comment-operate" onclick="del_comment(this);">删除</a>	
+<?php
 	}
-	
+?>
+                              </p>
+                            </div>
+                        </div>
+<?php
+					
+				}
+			}
+		}
+	}	
 }
 ?>                
 <?php

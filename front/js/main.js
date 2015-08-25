@@ -73,3 +73,17 @@ function newbox(wid){
 function movebox(wid){
 	$('#'+wid).fadeOut("fast");
 }
+
+//
+//
+//form_2_lock = 0;
+//function asyncSubmit(){
+//	if(form_2_lock == 0 ){
+//		form_2_lock = 1;
+//		$("#form_2").ajaxSubmit(function(data) { 
+//		   quit();
+//		   alert("邀请成功！");
+//		   form_2_lock = 0;
+//		});
+//	}
+//}

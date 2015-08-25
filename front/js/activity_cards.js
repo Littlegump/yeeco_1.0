@@ -1,16 +1,22 @@
 // JavaScript Document
 //异步提交表单功能
-$(document).ready(function () {
      //提交表单
-    $("#search_form").ajaxForm(function(data) {  
-		var index=data.indexOf('@');
-     	var data1=data.substr(0,index-1);
-		var data2=data.substr(index+1);
-		$('#body').html(data1);
-		$('#anum').text(data2);
-		$('#paging').html("");
-    });
-});
+search_form_lock=0;
+function aSubmit(){
+	if(search_form_lock==0){
+		search_form_lock=1;
+		$("#search_form").ajaxForm(function(data) {  
+			search_form_lock=0;
+			var index=data.indexOf('@');
+			var data1=data.substr(0,index-1);
+			var data2=data.substr(index+1);
+			$('#body').html(data1);
+			$('#anum').text(data2);
+			$('#paging').html("");
+		});
+	}
+}
+
 //加载页面自动出发事件
 $('#all').bind("myClick", function(){  
  	precise_search();
@@ -43,6 +49,7 @@ function precise_search(){
 				"status":status,
 				"school":$("#school").val(),
 			},
+			async:false,
 			success:function(data){
 				var index=data.indexOf('@');
 				var index1=data.lastIndexOf('@');
@@ -83,6 +90,7 @@ function paging_ajax(page,x){
 				"status":status,
 				"school":$("#school").val(),
 			},
+			async:false,
 			success:function(data){
 				var index=data.indexOf('@');
 				var index1=data.lastIndexOf('@');

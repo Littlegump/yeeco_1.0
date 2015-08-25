@@ -228,6 +228,7 @@ window.onload = function () {
 					ccId:ccId,
 					ccName:ccName
 				},
+				async:false,
 				success:function(data){
 					ccId=null;
 					ccName=null;
@@ -246,6 +247,7 @@ window.onload = function () {
 					date:date,
 					comment:comment
 				},
+				async:false,
 				success:function(data){
 				},
 				error:function(jqXHR){alert("操作失败"+jqXHR.status);}
@@ -268,6 +270,7 @@ function praise(x){
 						nId:nId,
 						uId:userId
 					},
+					async:false,
 					success:function(data){
 						if(data=='已赞过'){
 						}else{
@@ -284,6 +287,7 @@ function praise(x){
 						nId:nId,
 						uId:userId
 					},
+					async:false,
 					success:function(data){
 						$(x).parent().parent().find(".praises-total").attr("total",data);
 						
@@ -303,6 +307,7 @@ function praise(x){
 						cId:cId,
 						uId:userId
 					},
+					async:false,
 					success:function(data){			
 						$(x).parent().parent().find(".comment-praise").attr("total",data);
 					},
@@ -316,6 +321,7 @@ function praise(x){
 						cId:cId,
 						uId:userId
 					},
+					async:false,
 					success:function(data){
 						$(x).parent().parent().find(".comment-praise").attr("total",data);	
 					},
@@ -354,13 +360,19 @@ function del_news(x){
 	})	
 	
 }
-//异步提交表单功能
-$(document).ready(function () {
-    // 提交表单
-    $(".news").ajaxForm(function(){  
-    	location.reload();
-    });
-});
+
+// 提交表单
+news_lock=0;
+function submit_btn(){
+	if(news_lock==0){
+		news_lock=1;	
+		$(".news").ajaxSubmit(function(){  
+			news_lock=0;
+			location.reload();
+		});
+	}
+}
+
 
 
 

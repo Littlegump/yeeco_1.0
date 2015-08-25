@@ -210,7 +210,7 @@ body{
 		margin-right:10px;
 		border:1px solid #97ddff;
 		border-radius:5px;}
-	.send_msg input[type=submit]{
+	.send_msg input[type=button]{
 		float:left;
 		width:64px;
 		height:60px;

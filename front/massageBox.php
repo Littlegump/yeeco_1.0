@@ -5,23 +5,26 @@ require_once('../background/conf/connect.php');
 require_once('../background/conf/session.php');
 //将数据库所有发给该用户的数据置为未读
 mysql_query("update message set notice=0 where msgToId='$uId'");
-
+$sId = $_GET['sId'];
 $chooseToId = $_POST['chooseToId'];
 if(empty($chooseToId)){
 	$chooseToId = "noBody";
 }
-if($chooseToId){ 
+//print_r($chooseToId);
+if($chooseToId){
 	if(is_array($chooseToId)){
 		//准备群发消息
+		 
 		foreach($chooseToId as $value){
 			$i++;
 			$massRes = mysql_fetch_assoc(mysql_query("select userName from user where uId='$value' limit 1"));
 			$massUserNameArray[] = $massRes['userName'];
 		}
 		$massUserName = implode(',',$massUserNameArray);
-		$massTarget = '"'.implode(',',$chooseToId).'"';
-	//	echo $massUserName;
+		$massTarget = implode(',',$chooseToId);
+		
 		echo "<script>
+			targetSid = '$sId';
 			newTarget = '$massTarget';
 			newTargetName = '$massUserName';
 			newTargetFace = '/image/user_image/defaultImg/massFace.png';
@@ -30,6 +33,7 @@ if($chooseToId){
 		//准备单发消息
 		$toUserInfo = mysql_fetch_assoc(mysql_query("select userFace,userName from user where uId='$chooseToId' limit 1"));
 		echo "<script>
+			targetSid = 0;
 			newTarget = '$chooseToId';
 			newTargetName = '$toUserInfo[userName]';
 			newTargetFace = '$toUserInfo[userFace]';
@@ -56,7 +60,7 @@ if($chooseToId){
   <div class="top">
       <ul>
         <li class="a">消息盒子</li>
-        <li class="b">返回&nbsp&nbsp;<a href="square.php">易可广场>></a></li>
+        <li class="b"><a href="javascript:history.go(-1)">返回&nbsp&nbsp;上一页>></a></li>
       </ul>
   </div>
 </div>
@@ -122,6 +126,7 @@ if($chooseToId){
 <p>网站推广期间，手机短信发送次数不限~~</p><a href="javascript:quit()">&times;</a>
 <form action="../background/message/mobile_msg.php" method="post" id="mobileMsg_form">
     <input type="hidden" name="toId" value="" />
+    <input type="hidden" name="userName" value="<?php echo $userName?>" />
     <textarea name="m_message" placeholder="在这里编辑短信的内容"></textarea>
     <input type="submit" value="发送" onclick="send_mobileMsg()"/>
 </form>

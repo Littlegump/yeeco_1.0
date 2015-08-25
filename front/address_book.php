@@ -113,7 +113,7 @@ if($user_limit!='成员'){
 ?>
         <div class="buttons" id="fixedSide">
         <!--用户信息存储-->
-        <input type="hidden" id="sId" value="<?php echo $sId?>"/>
+        <input type="hidden" id="sName" value="<?php echo $sInfo['sName']?>"/>
         <input type="hidden" id="authority" value="<?php echo $user_limit?>"/>
         <input type="hidden" id="uId" value="<?php echo $uId?>"/>
         <input type="hidden" id="user_dep" value="<?php echo $isManage['depBelong']?>"/>
@@ -227,10 +227,11 @@ if($dep_info){
   <div class="direction">
       <strong>说明：</strong>
       <p>·请填写有效的成员联系方式，易可平台将给该号码发送注册邀请短信；</p>
+      <p>·您可以点击成员列表下方的加载更多，获取当前已经邀请了的成员；</p>
       <p>·接收到注册邀请短信的用户在注册后，将会收到“成为**社团成员”的通知，成为此社团的成员。</p>
   </div> 
   <div class="actions">
-      <input type="submit" value="邀请" class="button"/>
+      <input type="button" value="邀请" class="button" onclick="asyncSubmit()"/>
       <input type="button" value="取消" class="button" onclick="quit()"/>
   </div> 
 </form>  
@@ -255,6 +256,10 @@ if($dep_info){
 <div class="app_form" id="form_box" style="display:none;">
 
 </div>
+<!--发送通知-->
+<form method='post' action='massageBox.php?sId=<?php echo $sId?>' id="testForm">
+
+</form>
 
 
 

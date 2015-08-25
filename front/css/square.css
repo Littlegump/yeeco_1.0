@@ -123,18 +123,12 @@
 .my_society{
 	position:fixed;
 	top:100px;
-	min-height:440px;
-	right:0;
+	right:-340px;
+	background:#252E32;
 	width:300px;
+	padding:10px 20px;
+	min-height:420px;
 	z-index:11;}
-	.my_society_in{
-		position:absolute;
-		top:0;
-		left:300px;
-		background:#252E32;
-		width:300px;
-		padding:10px 20px;
-		min-height:420px;}
 	.list_title{
 		padding-left:40px;
 		color:#fff;

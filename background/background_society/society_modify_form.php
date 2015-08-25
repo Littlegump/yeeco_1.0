@@ -225,11 +225,12 @@ if($action=='del_preMember'){
 //提醒用户激活
 if($action=='warn_active'){
 	$pre_uId=$_POST['uId'];
+	$param=$_POST['sName'];
 	//查找用户电话
 	$query=mysql_fetch_assoc(mysql_query("select userTel from pre_user where pId='$pre_uId'"));
 	$userTel=$query['userTel'];
 	//调用短信模板发送短信
-	
+	warn_active($userTel,$param);
 	exit;
 }
 //生成新的社团动态

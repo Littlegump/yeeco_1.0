@@ -42,6 +42,7 @@ function precise_search(){
 				"status":status,
 				"school":$("#school").val(),
 			},
+			async:false,
 			success:function(data){
 				var index=data.indexOf('@');
 				var index1=data.lastIndexOf('@');
@@ -82,6 +83,7 @@ function paging_ajax(page,x){
 				"status":status,
 				"school":$("#school").val(),
 			},
+			async:false,
 			success:function(data){
 				var index=data.indexOf('@');
 				var index1=data.lastIndexOf('@');

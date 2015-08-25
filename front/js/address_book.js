@@ -72,14 +72,22 @@ $(document).ready(function(){
 			$(".invite_2 img").fadeOut("fast");
 	});
 	
-	$("#form_2").ajaxForm(function(data) { 
-       alert("邀请成功！");
-	   quit();
-    });
+
 	
 	
 	
 })
+form_2_lock = 0;
+function asyncSubmit(){
+	if(form_2_lock == 0 ){
+		form_2_lock = 1;
+		$("#form_2").ajaxSubmit(function(data) { 
+		   quit();
+		   alert("邀请成功！");
+		   form_2_lock = 0;
+		});
+	}
+}
 
 //关闭报名表
 function return_main(){
@@ -218,7 +226,7 @@ function testfunc(){
 				var target = $(x).parent().parent();
 				var html = "<input type='hidden' name='aim_member[]' value='"+uId+"'/>";
 				$(html).appendTo(".change_dep form");
-				$(".change_dep").appendTo(target).show();
+				$(".change_dep").appendTo(target).css({"margin-top":"35px","margin-left":"660px"}).show();
 				$(document).one("click",
 					function(){$(".change_dep").hide()}
 				);
@@ -261,7 +269,7 @@ function testfunc(){
 			})
 			if($('#authority').val()=='创建人'){
 				var target = $(x).parent().parent();
-				$(".change_dep").appendTo(target).show();
+				$(".change_dep").appendTo(target).css({"margin-top":"-130px","margin-left":"420px"}).show();
 				$(document).one("click", function (){//对document绑定一个影藏Div方法
 					$(".change_dep").hide();
 				});
@@ -404,9 +412,8 @@ function testfunc(){
 		
 	//单独发送通知	
 	function send_oneMsg(x){
-		var target = $(x).parent().parent().find(":checkbox").attr("value");
-		var form = "<form method='post' action='massageBox.php'><input name='chooseToId' value='"+target+"' /></form>"
-		$(form).submit();
+		var target = "<input name='chooseToId' value='"+$(x).parent().parent().find(":checkbox").attr("value")+"'>";
+		$("#testForm").html(target).submit();
 	}
 	
 	function send_manyMsg(x){
@@ -427,8 +434,7 @@ function testfunc(){
 					target += "<input name='chooseToId[]' value='"+$(this).parent().parent().find(":checkbox").attr("value")+"'>";	
 				}
 			})
-			var form = "<form method='post' action='massageBox.php'>"+target+"</form>";
-			$(form).submit();
+			$("#testForm").html(target).submit();
 		}
 	}
 	
@@ -518,10 +524,12 @@ function testfunc(){
 		var sId=$("#sId").val();
 		$.ajax({
 			type:"POST",
-			url:"../background/background_society/society_modify_form.php?action=warn_active&sId="+sId,
+			url:"../background/background_society/society_modify_form.php?action=warn_active",
 			data:{
 				uId:uId.attr("value"),
+				sName:$("#sName").val(),
 			},
+			async:false,
 			success:function(data){			
 				
 			},

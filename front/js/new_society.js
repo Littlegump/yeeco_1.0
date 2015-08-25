@@ -50,19 +50,27 @@ function free_skipPage(page){
 }
 
 //异步提交表单功能
-$(document).ready(function () {
-    // 提交表单form_1（组织架构）
-    $("#form_1").ajaxForm(function() {  
-       page_to('1','0'); 
-    });
-	// 提交表单form_1（组织架构）
-    $("#form_2").ajaxForm(function() {  
-       page_to('2','1');
-    });
-});
 
-
-
+form_1_lock = 0;
+function asyncSubmit_1(){
+	if(form_1_lock == 0 ){
+		form_1_lock = 1;
+		$("#form_1").ajaxSubmit(function() { 
+			page_to('1','0');
+		   	form_1_lock = 0;
+		});
+	}
+}
+form_2_lock = 0;
+function asyncSubmit_2(){
+	if(form_2_lock == 0 ){
+		form_2_lock = 1;
+		$("#form_2").ajaxSubmit(function() { 
+			page_to('2','1');
+		   	form_2_lock = 0;
+		});
+	}
+}
 
 window.onload = function(){	
     //开启6秒倒计时

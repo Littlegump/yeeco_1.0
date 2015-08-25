@@ -115,7 +115,7 @@
       <p>·接收到注册邀请短信的用户在注册后，将会收到“当选该部门部长”的通知，成为该部门的部长。</p>
   </div> 
   <div class="actions">
-      <input type="submit" value="保存" class="button"/>
+      <input type="button" value="保存" class="button" onclick="asyncSubmit_1()"/>
       <input type="button" value="跳过" class="button" onclick="page_to('1','0')"/>
   </div>   
   </form>
@@ -156,7 +156,7 @@
       <p>·接收到注册邀请短信的用户在注册后，将会收到“成为**社团成员”的通知，成为此社团的成员。</p>
   </div> 
   <div class="actions">
-      <input type="submit" value="邀请" class="button"/>
+      <input type="button" value="邀请" class="button" onclick="asyncSubmit_2()"/>
       <input type="button" value="跳过" class="button" onclick="page_to('2','1')"/>
   </div> 
 </form>  

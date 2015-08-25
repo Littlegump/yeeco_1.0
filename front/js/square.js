@@ -135,11 +135,12 @@ function recover(x){
 	//隐藏响应的card详情
 	cardOut(x);
 }
+
 //打开或关闭我的社团
 function mysociety(){
-	$(".my_society_in").animate({left:"0"},300);
+	$(".my_society").animate({right:"0"},300);
 	$(document).one("click", function (){//对document绑定一个影藏Div方法
-		$(".my_society_in").animate({left:"300px"},300);
+		$(".my_society").animate({right:"-340px"},300);
 	});
 	event.stopPropagation();
 }
@@ -148,7 +149,7 @@ $(".my_society_in").click(function (event){
 	event.stopPropagation();//阻止事件向上冒泡
 });
 function hidden(){
-	$(".my_society_in").animate({left:"300px"},300);
+	$(".my_society").animate({right:"-340px"},300);
 }
 
 //寻找社团

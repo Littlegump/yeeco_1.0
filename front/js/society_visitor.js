@@ -113,6 +113,7 @@ function apply_form(t){
 					sId:$("#sId").val(),
 					uId:$("#uId").val(),
 				},
+				async:false,
 				//dataType:,
 				success:function(data){
 					if(data){

@@ -2,6 +2,7 @@
 session_start();
 error_reporting(E_ALL & ~E_NOTICE);
 require_once('../background/conf/connect.php');
+require_once('../background/conf/session.php');
 $sId=$_GET['sId'];
 $sName=$_GET['sName'];
 //查询社团二维码
@@ -102,7 +103,7 @@ $qrcode=mysql_fetch_assoc(mysql_query("select sQRCode from society where sId='$s
                 <label for="ques_3">设置问题三：</label><input type="checkbox" id="set_3"  onclick="judge_check('3');"/>
                 <input type="text" name="que_3"  placeholder="在这里输入问题（4~25字）" id="ques_3" style="display:none;"/>
             </li>
-            <li><div style="width:304px;margin:auto;"><input type="button" class="button" onclick="page_to('1','2');" value="上一步"/><input type="submit" class="button" value="开启纳新"/></div></li>
+            <li><div style="width:304px;margin:auto;"><input type="button" class="button" onclick="page_to('1','2');" value="上一步"/><input type="button" class="button" value="开启纳新"  onclick="asyncSubmit()"/></div></li>
           </ul>
       <div style="clear:both;"></div>
       </div>

@@ -66,7 +66,6 @@ function save(){
 			data:{
 				board:$("#board_text").val(),
 				sId:$("#sId").val(),
-				
 			},
 			//dataType:,
 			success:function(data){

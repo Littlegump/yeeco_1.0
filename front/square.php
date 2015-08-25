@@ -100,7 +100,7 @@ if($query && mysql_num_rows($query)){
 </div>
 
 <div class="my_society">
-	<div class="my_society_in">
+	
 		<div class="list_title"><span>我的社团</span><a href="javascript:hidden()" style="margin-left:120px;font-size:26px">&times;</a></div>
         <ul>
         <?php 
@@ -112,7 +112,7 @@ if($query && mysql_num_rows($query)){
 		 	}}
 		 ?>
         </ul>
-    </div>
+    
 </div>
 
 
@@ -125,7 +125,7 @@ if($query && mysql_num_rows($query)){
 	for($i=0;$i<=7;$i++){
 ?>
  		<li>
-          <a href="activity_visitor.php?actId=<?php echo $acts[$i]['actId']?>" target="_blank">
+          <a href="activity_visitor.php?actId=<?php echo $acts[$i]['actId']?>"  >
              <div class="act_img">
                  <img src="<?php echo substr($acts[$i]['actImg'],3)?>" alt="">
           	 </div>
@@ -167,7 +167,7 @@ if($query && mysql_num_rows($query)){
     
     <div class="card_b">
         <div id="card_7" class="card_c" onmouseover="movecover(this)" onmouseout="recover(this)">
-            <a href="society_visitor.php?sId=<?php echo $society[0]['sId']?>" target="_blank"><img src="<?php echo substr($society[0]['sImg'],3)?>"/></a>
+            <a href="society_visitor.php?sId=<?php echo $society[0]['sId']?>"  ><img src="<?php echo substr($society[0]['sImg'],3)?>"/></a>
             <div id="card_7_cover" class="card_c_cover"></div>
             <div id="card_7_det" class="card_c_det" style="display:none;">
             	<strong><?php echo $society[0]['sName']?></strong></li>
@@ -175,7 +175,7 @@ if($query && mysql_num_rows($query)){
             </div>
         </div>
         <div id="card_8" class="card_c" onmouseover="movecover(this)" onmouseout="recover(this)">
-            <a href="society_visitor.php?sId=<?php echo $society[1]['sId']?>" target="_blank"><img src="<?php echo substr($society[1]['sImg'],3)?>"/></a>
+            <a href="society_visitor.php?sId=<?php echo $society[1]['sId']?>"  ><img src="<?php echo substr($society[1]['sImg'],3)?>"/></a>
             <div id="card_8_cover" class="card_c_cover"></div>
             <div id="card_8_det" class="card_c_det" style="display:none;">
             	<strong><?php echo $society[1]['sName']?></strong></li>
@@ -183,7 +183,7 @@ if($query && mysql_num_rows($query)){
             </div>
         </div>
         <div id="card_9" class="card_c" onmouseover="movecover(this)" onmouseout="recover(this)">
-            <a href="society_visitor.php?sId=<?php echo $society[2]['sId']?>" target="_blank"><img src="<?php echo substr($society[2]['sImg'],3)?>"/></a>
+            <a href="society_visitor.php?sId=<?php echo $society[2]['sId']?>"  ><img src="<?php echo substr($society[2]['sImg'],3)?>"/></a>
             <div id="card_9_cover" class="card_c_cover"></div>
             <div id="card_9_det" class="card_c_det" style="display:none;">
             	<strong><?php echo $society[2]['sName']?></strong></li>
@@ -191,7 +191,7 @@ if($query && mysql_num_rows($query)){
             </div>
         </div>
         <div id="card_10" class="card_c" onmouseover="movecover(this)" onmouseout="recover(this)">
-            <a href="society_visitor.php?sId=<?php echo $society[3]['sId']?>" target="_blank"><img src="<?php echo substr($society[3]['sImg'],3)?>"/></a>
+            <a href="society_visitor.php?sId=<?php echo $society[3]['sId']?>"  ><img src="<?php echo substr($society[3]['sImg'],3)?>"/></a>
             <div id="card_10_cover" class="card_c_cover"></div>
             <div id="card_10_det" class="card_c_det" style="display:none;">
             	<strong><?php echo $society[3]['sName']?></strong></li>
@@ -200,7 +200,7 @@ if($query && mysql_num_rows($query)){
         </div>
     </div>
     <div id="card_2" class="card_a" onmouseover="movecover(this)" onmouseout="recover(this)">
-        <a href="society_visitor.php?sId=<?php echo $society[4]['sId']?>" target="_blank"><img src="<?php echo substr($society[4]['sImg'],3)?>"/></a>
+        <a href="society_visitor.php?sId=<?php echo $society[4]['sId']?>"  ><img src="<?php echo substr($society[4]['sImg'],3)?>"/></a>
         <div id="card_2_cover" class="card_a_cover"></div>
         <div id="card_2_det" class="card_a_det" style="display:none;">
         	<strong><?php echo $society[4]['sName']?></strong></li>
@@ -212,7 +212,7 @@ if($query && mysql_num_rows($query)){
     
     <div class="card_b">
         <div id="card_11" class="card_c" onmouseover="movecover(this)" onmouseout="recover(this)">
-            <a href="society_visitor.php?sId=<?php echo $society[5]['sId']?>" target="_blank"><img src="<?php echo substr($society[5]['sImg'],3)?>"/></a>
+            <a href="society_visitor.php?sId=<?php echo $society[5]['sId']?>"  ><img src="<?php echo substr($society[5]['sImg'],3)?>"/></a>
             <div id="card_11_cover" class="card_c_cover"></div>
             <div id="card_11_det" class="card_c_det" style="display:none;">
             	<strong><?php echo $society[5]['sName']?></strong></li>
@@ -220,7 +220,7 @@ if($query && mysql_num_rows($query)){
             </div>
         </div>
         <div id="card_12" class="card_c" onmouseover="movecover(this)" onmouseout="recover(this)">
-            <a href="society_visitor.php?sId=<?php echo $society[6]['sId']?>" target="_blank"><img src="<?php echo substr($society[6]['sImg'],3)?>"/></a>
+            <a href="society_visitor.php?sId=<?php echo $society[6]['sId']?>"  ><img src="<?php echo substr($society[6]['sImg'],3)?>"/></a>
             <div id="card_12_cover" class="card_c_cover"></div>
             <div id="card_12_det" class="card_c_det" style="display:none;">
             	<strong><?php echo $society[6]['sName']?></strong></li>
@@ -228,7 +228,7 @@ if($query && mysql_num_rows($query)){
             </div>
         </div>
         <div id="card_13" class="card_c" onmouseover="movecover(this)" onmouseout="recover(this)">
-            <a href="society_visitor.php?sId=<?php echo $society[7]['sId']?>" target="_blank"><img src="<?php echo substr($society[7]['sImg'],3)?>"/></a>
+            <a href="society_visitor.php?sId=<?php echo $society[7]['sId']?>"  ><img src="<?php echo substr($society[7]['sImg'],3)?>"/></a>
             <div id="card_13_cover" class="card_c_cover"></div>
             <div id="card_13_det" class="card_c_det" style="display:none;">
             	<strong><?php echo $society[7]['sName']?></strong></li>
@@ -236,7 +236,7 @@ if($query && mysql_num_rows($query)){
             </div>
         </div>
         <div id="card_14" class="card_c" onmouseover="movecover(this)" onmouseout="recover(this)">
-            <a href="society_visitor.php?sId=<?php echo $society[8]['sId']?>" target="_blank"><img src="<?php echo substr($society[8]['sImg'],3)?>"/></a>
+            <a href="society_visitor.php?sId=<?php echo $society[8]['sId']?>"  ><img src="<?php echo substr($society[8]['sImg'],3)?>"/></a>
             <div id="card_14_cover" class="card_c_cover"></div>
             <div id="card_14_det" class="card_c_det" style="display:none;">
             	<strong><?php echo $society[8]['sName']?></strong></li>
@@ -246,7 +246,7 @@ if($query && mysql_num_rows($query)){
     </div>
     
     <div id="card_3" class="card_a" onmouseover="movecover(this)" onmouseout="recover(this)">
-        <a href="society_visitor.php?sId=<?php echo $society[9]['sId']?>" target="_blank"><img src="<?php echo substr($society[9]['sImg'],3)?>"/></a>
+        <a href="society_visitor.php?sId=<?php echo $society[9]['sId']?>"  ><img src="<?php echo substr($society[9]['sImg'],3)?>"/></a>
         <div id="card_3_cover" class="card_a_cover"></div>
         <div id="card_3_det" class="card_e_det" style="display:none;">
         	<strong><?php echo $society[9]['sName']?></strong></li>
@@ -258,7 +258,7 @@ if($query && mysql_num_rows($query)){
     
     <div class="card_b">
         <div id="card_15" class="card_c" onmouseover="movecover(this)" onmouseout="recover(this)">
-            <a href="society_visitor.php?sId=<?php echo $society[10]['sId']?>" target="_blank"><img src="<?php echo substr($society[10]['sImg'],3)?>"/></a>
+            <a href="society_visitor.php?sId=<?php echo $society[10]['sId']?>"  ><img src="<?php echo substr($society[10]['sImg'],3)?>"/></a>
             <div id="card_15_cover" class="card_c_cover"></div>
             <div id="card_15_det" class="card_d_det" style="display:none;">
           		<strong><?php echo $society[10]['sName']?></strong></li>
@@ -266,7 +266,7 @@ if($query && mysql_num_rows($query)){
             </div>
         </div>
         <div id="card_16" class="card_c" onmouseover="movecover(this)" onmouseout="recover(this)">
-            <a href="society_visitor.php?sId=<?php echo $society[11]['sId']?>" target="_blank"><img src="<?php echo substr($society[11]['sImg'],3)?>"/></a>
+            <a href="society_visitor.php?sId=<?php echo $society[11]['sId']?>"  ><img src="<?php echo substr($society[11]['sImg'],3)?>"/></a>
             <div id="card_16_cover" class="card_c_cover"></div>
             <div id="card_16_det" class="card_d_det" style="display:none;">
             	<strong><?php echo $society[11]['sName']?></strong></li>
@@ -274,7 +274,7 @@ if($query && mysql_num_rows($query)){
             </div>
         </div>
         <div id="card_17" class="card_c" onmouseover="movecover(this)" onmouseout="recover(this)">
-            <a href="society_visitor.php?sId=<?php echo $society[12]['sId']?>" target="_blank"><img src="<?php echo substr($society[12]['sImg'],3)?>"/></a>
+            <a href="society_visitor.php?sId=<?php echo $society[12]['sId']?>"  ><img src="<?php echo substr($society[12]['sImg'],3)?>"/></a>
             <div id="card_17_cover" class="card_c_cover"></div>
             <div id="card_17_det" class="card_d_det" style="display:none;">
             	<strong><?php echo $society[12]['sName']?></strong></li>
@@ -282,7 +282,7 @@ if($query && mysql_num_rows($query)){
             </div>
         </div>
         <div id="card_18" class="card_c" onmouseover="movecover(this)" onmouseout="recover(this)">
-            <a href="society_visitor.php?sId=<?php echo $society[13]['sId']?>" target="_blank"><img src="<?php echo substr($society[13]['sImg'],3)?>"/></a>
+            <a href="society_visitor.php?sId=<?php echo $society[13]['sId']?>"  ><img src="<?php echo substr($society[13]['sImg'],3)?>"/></a>
             <div id="card_18_cover" class="card_c_cover"></div>
             <div id="card_18_det" class="card_d_det" style="display:none;">
             	<strong><?php echo $society[13]['sName']?></strong></li>
@@ -292,7 +292,7 @@ if($query && mysql_num_rows($query)){
     </div>
     <div class="card_b">
         <div id="card_19" class="card_c" onmouseover="movecover(this)" onmouseout="recover(this)">
-            <a href="society_visitor.php?sId=<?php echo $society[14]['sId']?>" target="_blank"><img src="<?php echo substr($society[14]['sImg'],3)?>"/></a>
+            <a href="society_visitor.php?sId=<?php echo $society[14]['sId']?>"  ><img src="<?php echo substr($society[14]['sImg'],3)?>"/></a>
             <div id="card_19_cover" class="card_c_cover"></div>
             <div id="card_19_det" class="card_c_det" style="display:none;">
             	<strong><?php echo $society[14]['sName']?></strong></li>
@@ -300,7 +300,7 @@ if($query && mysql_num_rows($query)){
             </div>
         </div>
         <div id="card_20" class="card_c" onmouseover="movecover(this)" onmouseout="recover(this)">
-            <a href="society_visitor.php?sId=<?php echo $society[15]['sId']?>" target="_blank"><img src="<?php echo substr($society[15]['sImg'],3)?>"/></a>
+            <a href="society_visitor.php?sId=<?php echo $society[15]['sId']?>"  ><img src="<?php echo substr($society[15]['sImg'],3)?>"/></a>
             <div id="card_20_cover" class="card_c_cover"></div>
             <div id="card_20_det" class="card_c_det" style="display:none;">
             	<strong><?php echo $society[15]['sName']?></strong></li>
@@ -308,7 +308,7 @@ if($query && mysql_num_rows($query)){
             </div>
         </div>
         <div id="card_21" class="card_c" onmouseover="movecover(this)" onmouseout="recover(this)">
-            <a href="society_visitor.php?sId=<?php echo $society[16]['sId']?>" target="_blank"><img src="<?php echo substr($society[16]['sImg'],3)?>"/></a>
+            <a href="society_visitor.php?sId=<?php echo $society[16]['sId']?>"  ><img src="<?php echo substr($society[16]['sImg'],3)?>"/></a>
             <div id="card_21_cover" class="card_c_cover"></div>
             <div id="card_21_det" class="card_c_det" style="display:none;">
             	<strong><?php echo $society[16]['sName']?></strong></li>
@@ -316,7 +316,7 @@ if($query && mysql_num_rows($query)){
             </div>
         </div>
         <div id="card_22" class="card_c" onmouseover="movecover(this)" onmouseout="recover(this)">
-            <a href="society_visitor.php?sId=<?php echo $society[17]['sId']?>" target="_blank"><img src="<?php echo substr($society[17]['sImg'],3)?>"/></a>
+            <a href="society_visitor.php?sId=<?php echo $society[17]['sId']?>"  ><img src="<?php echo substr($society[17]['sImg'],3)?>"/></a>
             <div id="card_22_cover" class="card_c_cover"></div>
             <div id="card_22_det" class="card_c_det" style="display:none;">
             	<strong><?php echo $society[17]['sName']?></strong></li>
@@ -326,7 +326,7 @@ if($query && mysql_num_rows($query)){
     </div>
     
     <div id="card_4" class="card_a" onmouseover="movecover(this)" onmouseout="recover(this)">
-        <a href="society_visitor.php?sId=<?php echo $society[18]['sId']?>" target="_blank"><img  src="<?php echo substr($society[18]['sImg'],3)?>"/></a>
+        <a href="society_visitor.php?sId=<?php echo $society[18]['sId']?>"  ><img  src="<?php echo substr($society[18]['sImg'],3)?>"/></a>
         <div id="card_4_cover" class="card_a_cover"></div>
         <div id="card_4_det" class="card_a_det" style="display:none;">
         	<strong><?php echo $society[18]['sName']?></strong></li>
@@ -338,7 +338,7 @@ if($query && mysql_num_rows($query)){
     
     <div class="card_b">
         <div id="card_23" class="card_c" onmouseover="movecover(this)" onmouseout="recover(this)">
-            <a href="society_visitor.php?sId=<?php echo $society[19]['sId']?>" target="_blank"><img src="<?php echo substr($society[19]['sImg'],3)?>"/></a>
+            <a href="society_visitor.php?sId=<?php echo $society[19]['sId']?>"  ><img src="<?php echo substr($society[19]['sImg'],3)?>"/></a>
             <div id="card_23_cover" class="card_c_cover"></div>
             <div id="card_23_det" class="card_c_det" style="display:none;">
             	<strong><?php echo $society[19]['sName']?></strong></li>
@@ -346,7 +346,7 @@ if($query && mysql_num_rows($query)){
             </div>
         </div>
         <div id="card_24" class="card_c" onmouseover="movecover(this)" onmouseout="recover(this)">
-            <a href="society_visitor.php?sId=<?php echo $society[20]['sId']?>" target="_blank"><img src="<?php echo substr($society[20]['sImg'],3)?>"/></a>
+            <a href="society_visitor.php?sId=<?php echo $society[20]['sId']?>"  ><img src="<?php echo substr($society[20]['sImg'],3)?>"/></a>
             <div id="card_24_cover" class="card_c_cover"></div>
             <div id="card_24_det" class="card_c_det" style="display:none;">
             	<strong><?php echo $society[20]['sName']?></strong></li>
@@ -354,7 +354,7 @@ if($query && mysql_num_rows($query)){
             </div>
         </div>
         <div id="card_25" class="card_c" onmouseover="movecover(this)" onmouseout="recover(this)">
-            <a href="society_visitor.php?sId=<?php echo $society[21]['sId']?>" target="_blank"><img src="<?php echo substr($society[21]['sImg'],3)?>"/></a>
+            <a href="society_visitor.php?sId=<?php echo $society[21]['sId']?>"  ><img src="<?php echo substr($society[21]['sImg'],3)?>"/></a>
             <div id="card_25_cover" class="card_c_cover"></div>
             <div id="card_25_det" class="card_c_det" style="display:none;">
             	<strong><?php echo $society[21]['sName']?></strong></li>
@@ -362,7 +362,7 @@ if($query && mysql_num_rows($query)){
             </div>
         </div>
         <div id="card_26" class="card_c" onmouseover="movecover(this)" onmouseout="recover(this)">
-            <a href="society_visitor.php?sId=<?php echo $society[22]['sId']?>" target="_blank"><img src="<?php echo substr($society[22]['sImg'],3)?>"/></a>
+            <a href="society_visitor.php?sId=<?php echo $society[22]['sId']?>"  ><img src="<?php echo substr($society[22]['sImg'],3)?>"/></a>
             <div id="card_26_cover" class="card_c_cover"></div>
             <div id="card_26_det" class="card_c_det" style="display:none;">
             	<strong><?php echo $society[22]['sName']?></strong></li>
@@ -372,7 +372,7 @@ if($query && mysql_num_rows($query)){
     </div>
     
     <div id="card_5" class="card_a" onmouseover="movecover(this)" onmouseout="recover(this)">
-        <a href="society_visitor.php?sId=<?php echo $society[23]['sId']?>" target="_blank"><img src="<?php echo substr($society[23]['sImg'],3)?>"/></a>
+        <a href="society_visitor.php?sId=<?php echo $society[23]['sId']?>"  ><img src="<?php echo substr($society[23]['sImg'],3)?>"/></a>
         <div id="card_5_cover" class="card_a_cover"></div>
         <div id="card_5_det" class="card_a_det" style="display:none;">
         	<strong><?php echo $society[23]['sName']?></strong></li>
@@ -384,7 +384,7 @@ if($query && mysql_num_rows($query)){
     
     <div class="card_b">
         <div id="card_27" class="card_c" onmouseover="movecover(this)" onmouseout="recover(this)">
-            <a href="society_visitor.php?sId=<?php echo $society[24]['sId']?>" target="_blank"><img src="<?php echo substr($society[24]['sImg'],3)?>"/></a>
+            <a href="society_visitor.php?sId=<?php echo $society[24]['sId']?>"  ><img src="<?php echo substr($society[24]['sImg'],3)?>"/></a>
             <div id="card_27_cover" class="card_c_cover"></div>
             <div id="card_27_det" class="card_c_det" style="display:none;">
             	<strong><?php echo $society[24]['sName']?></strong></li>
@@ -392,7 +392,7 @@ if($query && mysql_num_rows($query)){
             </div>
         </div>
         <div id="card_28" class="card_c" onmouseover="movecover(this)" onmouseout="recover(this)">
-            <a href="society_visitor.php?sId=<?php echo $society[25]['sId']?>" target="_blank"><img src="<?php echo substr($society[25]['sImg'],3)?>"/></a>
+            <a href="society_visitor.php?sId=<?php echo $society[25]['sId']?>"  ><img src="<?php echo substr($society[25]['sImg'],3)?>"/></a>
             <div id="card_28_cover" class="card_c_cover"></div>
             <div id="card_28_det" class="card_c_det" style="display:none;">
             	<strong><?php echo $society[25]['sName']?></strong></li>
@@ -400,7 +400,7 @@ if($query && mysql_num_rows($query)){
             </div>
         </div>
         <div id="card_29" class="card_c" onmouseover="movecover(this)" onmouseout="recover(this)">
-            <a href="society_visitor.php?sId=<?php echo $society[26]['sId']?>" target="_blank"><img src="<?php echo substr($society[26]['sImg'],3)?>"/></a>
+            <a href="society_visitor.php?sId=<?php echo $society[26]['sId']?>"  ><img src="<?php echo substr($society[26]['sImg'],3)?>"/></a>
             <div id="card_29_cover" class="card_c_cover"></div>
             <div id="card_29_det" class="card_c_det" style="display:none;">
             	<strong><?php echo $society[26]['sName']?></strong></li>
@@ -408,7 +408,7 @@ if($query && mysql_num_rows($query)){
             </div>
         </div>
         <div id="card_30" class="card_c" onmouseover="movecover(this)" onmouseout="recover(this)">
-            <a href="society_visitor.php?sId=<?php echo $society[27]['sId']?>" target="_blank"><img src="<?php echo substr($society[27]['sImg'],3)?>"/></a>
+            <a href="society_visitor.php?sId=<?php echo $society[27]['sId']?>"  ><img src="<?php echo substr($society[27]['sImg'],3)?>"/></a>
             <div id="card_30_cover" class="card_c_cover"></div>
             <div id="card_30_det" class="card_c_det" style="display:none;">
             	<strong><?php echo $society[27]['sName']?></strong></li>
@@ -417,7 +417,7 @@ if($query && mysql_num_rows($query)){
         </div>
     </div>
     <div id="card_6" class="card_a" onmouseover="movecover(this)" onmouseout="recover(this)">
-        <a href="society_visitor.php?sId=<?php echo $society[28]['sId']?>" target="_blank"><img src="<?php echo substr($society[28]['sImg'],3)?>"/></a>
+        <a href="society_visitor.php?sId=<?php echo $society[28]['sId']?>"  ><img src="<?php echo substr($society[28]['sImg'],3)?>"/></a>
         <div id="card_6_cover" class="card_a_cover"></div>
         <div id="card_6_det" class="card_e_det" style="display:none;">
         	<strong><?php echo $society[28]['sName']?></strong></li>

@@ -6,7 +6,6 @@ $fromId=$_POST['userId'];
 $toId=$_POST['toId'];
 $message=$_POST['message'];
 $msgTime = time();
-
 if(strpos($toId ,",")){
 	//群发消息
 	$massMsgTo = explode(",",$toId);

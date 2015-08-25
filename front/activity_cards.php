@@ -38,7 +38,7 @@ $page=1;
                         <div class="search-area">
             				<form id="search_form" action="../background/background_society/activity/classify_query_activity.php?action=search&school=<?php echo $sSchool?>" name="search_form"  method="post">
                 				<input class="search-input" placeholder="搜索活动名称关键词" type="text" autocomplete="off" name="words" value=""/>
-                				<input type="submit" class="btn_search button" value="搜索"/>
+                				<input type="button" class="btn_search button" value="搜索" onclick="aSubmit()"/>
            					</form>
 						</div>
                         </span>

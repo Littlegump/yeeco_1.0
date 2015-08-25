@@ -9,20 +9,23 @@ function page_to(page_a,page_b){
 }
 
 
-//异步提交表单功能
-$(document).ready(function () {
-    // 提交表单
-   $("#activity_form").ajaxForm(function(data){
-   		page_to('3','2');
-		data=data.split('&');
-		data1=data[0].substr(3);
-		data2=data[1];
-		var sId = $('[name="sId"]').val();
-		$("#qrcode").attr("src",data1);
-		$("#activity_detail").attr("href","activity_detail.php?actId="+data2+"&sId="+sId);
-    })
-})
-
+//异步提交表单能功\
+activity_form_lock=0;
+function aSubmit(){
+	if(activity_form_lock==0){
+		activity_form_lock=1;
+	   $("#activity_form").ajaxSubmit(function(data){
+		   activity_form_lock=0;
+			page_to('3','2');
+			data=data.split('&');
+			data1=data[0].substr(3);
+			data2=data[1];
+			var sId = $('[name="sId"]').val();
+			$("#qrcode").attr("src",data1);
+			$("#activity_detail").attr("href","activity_detail.php?actId="+data2+"&sId="+sId);
+		})
+	}
+}
 //是否需要报名 
 function need_app(){
 	var temp = $('[name="apply"]').val();

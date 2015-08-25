@@ -122,7 +122,7 @@ $sinfo=mysql_fetch_assoc(mysql_query("select sName,sImg from society where sId='
               <label for="describe">&nbsp;详细说明：</label>
               <textarea name="detail" placeholder="介绍活动的赛制赛规、报名方式、费用、注意事项等（0~500个字）"></textarea>
             </li>
-            <li><div style="width:304px;margin:auto;"><input type="button" class="button" onclick="page_to('1','2');" value="上一步"/><input type="submit" class="button" value="确认创建"/></div></li>
+            <li><div style="width:304px;margin:auto;"><input type="button" class="button" onclick="page_to('1','2');" value="上一步"/><input type="button" class="button" value="确认创建" onclick="aSubmit()"/></div></li>
           </ul>
       <div style="clear:both;"></div>
       </div>

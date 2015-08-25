@@ -259,6 +259,7 @@ function employ_act(){
 				action:"employ",
 				aId:aId,
 			},
+			async:false,
 			success:function(data){
 				for(var j=0;j<i;j++){
 					$('#'+aId[j]).remove();
@@ -384,6 +385,7 @@ function employ_form_app(x){
 			action:"employ",
 			aId:aId,
 		},
+		async:false,
 		success:function(data){	
 			var index = search_index(aIds,aId);
 			aIds.remove(index);
@@ -531,6 +533,7 @@ function submit_btn_2(x){
 			ccId:ccId,
 			ccName:current_host,
 		},
+		async:false,
 		success:function(cId){
 			var new_html = "<li class='content'><div class='user_face2'><img src='"+userFace+"'/></div><div class='right_body'><input type='hidden' name='cId' value='"+cId+"'><span class='reply_content'><strong class='host'>"+userName+"</strong>回复<strong>"+current_host+"</strong>:&nbsp;"+comment+"</span><a class='delete2' href='javascript:void(0)' onclick='delete2(this)'>删除</a><span class='send_time2'>"+date+"</span><a class='praise' href='javascript:void(0)' onclick='praise(this)'>赞</a></div><div style='clear:both;'></div></li>"
 			$(target).before(new_html);
@@ -620,6 +623,7 @@ function praise(x){
 			cId:cId,
 			uId:uId
 		},
+		async:false,
 		success:function(data){
 			$(x).text("取消赞("+data+")");
 			$(x).attr("onclick","praise_cancel(this)");
@@ -639,6 +643,7 @@ function praise_cancel(x){
 			cId:cId,
 			uId:uId
 		},
+		async:false,
 		success:function(data){
 			$(x).text("赞("+data+")");
 			$(x).attr("onclick","praise(this)");

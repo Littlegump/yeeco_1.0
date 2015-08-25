@@ -66,6 +66,22 @@ function send_msg_unemploy($to,$param){
 	//$param="0227";
 	return $ucpass->templateSMS($appId,$to,$templateId,$param);
 }
+function warn_active($to,$param){
+	//初始化必填
+	$options['accountsid']='00545cd93375717edd3d44e93df42c0f';
+	$options['token']='dde37532d26905ad2f3a6bf3141e21ad';
+	
+	//初始化 $options必填
+	$ucpass = new Ucpaas($options);
+	
+	//开发者账号信息查询默认为json或xml
+	$ucpass->getDevinfo('xml');
+	$appId = "ee23bbaaa47b412f8138ad62cc1e879d";
+	//$to = "13649240941";
+	$templateId = "12049";
+	//$param="0227";
+	return $ucpass->templateSMS($appId,$to,$templateId,$param);
+}
 
 
 ?>
