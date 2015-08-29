@@ -359,7 +359,7 @@ if($pcId){
     	<div class="activity_code">
             <strong>活动二维码</strong>
 			<div><img src="<?php echo substr($aInfo['actCode'],3)?>" /></div>
-        </div>
+        </div><!--
         <div class="advertisement">
           <div class="ad_title">
             <li class="ad_title_li">推广链接</li>
@@ -369,7 +369,7 @@ if($pcId){
           <div class="ad_img"><img src="../image/web_image/测试图片/8.png"></div>
           <div class="ad_img"><img src="../image/web_image/测试图片/9.png"></div>
           <div style="clear:both;"></div>
-      </div> 
+      </div> -->
     </div>
 </div>
 <div style="clear:both;"></div>
@@ -404,7 +404,7 @@ if($flag==false){
 	}
 ?> 
      </a>
-    <a href="personal_center.php"><div id="icon_2"></div></a>
+    <a href="myconcern.php"><div id="icon_2"></div></a>
     <a href="../background/background_person/login.php?action=logout"><div id="icon_3"></div></a>
 </div>
 

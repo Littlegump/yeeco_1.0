@@ -155,8 +155,7 @@ body{
 		float:left;
 		margin:15px;
 		height:30px;
-		width:30px;
-		background:#ccc;}
+		width:30px;}
 
 
 /*中间主体部分样式*/
@@ -478,8 +477,39 @@ body{
 		margin:0 15px;
 		margin-top:20px;}
 	
-	
-	
+
+/*公示提醒框样式*/
+.notice_box{
+	z-index:11;
+	position:fixed;
+	top:50%;
+	margin-top:-70px;
+	left:50%;
+	margin-left:-260px;
+	padding:10px;
+	border:1px solid #f2f2f2;
+	height:130px;
+	width:500px;
+	background:#fff;}
+	.notice_box strong{
+		margin:10px auto;
+		font-size:18px;
+		text-align:center;
+		display:block;}
+	.notice_box p{
+		margin:10px auto;
+		display:block;
+		width:300px;
+		text-align:center;}
+	.choose a{
+		margin:10px 20px;
+		display:inline-block;
+		height:30px;
+		width:100px;
+		line-height:30px;}
+	.notice_box .choose{
+		width:284px;
+		margin:10px auto;}	
 	
 	
 	

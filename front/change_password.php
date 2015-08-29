@@ -86,7 +86,7 @@
 </div>
 <script src="js/jquery-1.11.1.js"></script>
 <script src="js/main.js"></script>
-<script src="js/personal_center.js" type="text/javascript"></script>
+<script src="js/change_password.js" type="text/javascript"></script>
 </body>
 </html>
 

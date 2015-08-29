@@ -395,6 +395,32 @@ function employ_form_app(x){
 	})
 }
 
+//批量发送通知
+function send_manyMsg(){
+	var c=0;
+	$("input[name='member[]']:checkbox").each(function () { 
+		if (this.checked){ 
+			c++;
+		}
+	})
+	if(c==0){
+		alert("您没有勾选任意一个成员！")
+	}else{
+		var aId=new Array();
+		var i=0;
+		var str = "";
+		$("input[name='member[]']:checkbox").each(function () { 
+			if (this.checked){ 
+				aId[i] = $(this).val();
+				str+='aId%5B%5D='+aId[i]+'&';
+				i++;
+			}
+		})
+		window.location.href="massageBox.php?action=applyNotice&"+str+"sId="+$("#sId").val();
+	} 
+}
+
+
 //下一张
 function next_page(aId){
 	var index = search_index(aIds,aId);
@@ -477,6 +503,10 @@ $("#load_more").click(function(){
 	})	
 	
 })
+
+
+
+
 //**************************************************************************************
 var current_host = ""
 

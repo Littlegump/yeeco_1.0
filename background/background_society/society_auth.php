@@ -8,8 +8,11 @@ require_once('../conf/code.php');
 //获取参数值
 $sid=$_GET['sid'];
 $uid=$_GET['uid'];
-$sName=$_GET['sName'];
-$sName= iconv("gbk","utf-8",$sName);  
+$sName=$_GET['sName']; 
+$e=mb_detect_encoding($sName, array('UTF-8', 'GBK'));
+if($e=='GBK'){
+$sName= iconv("gbk","utf-8",$sName);
+}
 $flag=$_GET['flag'];
 $page='mobileFront/M_societyVisitor.php';
 $QRCode=QRCode($page,$sid,'../../');
@@ -24,7 +27,7 @@ if(!$result){
 				$newId = $check_query['sId'];
 				$createNews = mysql_query("insert into dynamic_state(nImg) values('$newId')");
 				$regTime=time();
-				$updatesql=mysql_query("update society set regTime='$regTime',sQRCode='$QRCode' where sId='$sid'");
+				$updatesql=mysql_query("update society set regTime='$regTime',sQRCode='$QRCode',team_name='{$sName}2015届领导班子',position='社长' where sId='$sid'");
 				$delete_old = mysql_query("delete from pre_society where sId='$sid'");	
 			if( $insertsql && $updatesql && $delete_old ){
 				echo "<script>window.location.href='../../front/new_society.php?uId=$uid&sId=$sid&sName=$sName';</script>";

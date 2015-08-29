@@ -5,8 +5,18 @@ require_once('../background/conf/connect.php');
 require_once('../background/conf/session.php');
 //将数据库所有发给该用户的数据置为未读
 mysql_query("update message set notice=0 where msgToId='$uId'");
+
 $sId = $_GET['sId'];
 $chooseToId = $_POST['chooseToId'];
+
+if($_GET['action'] == "applyNotice"){
+	$aId = $_GET['aId'];
+	foreach($aId as $value){
+		$query=mysql_fetch_assoc(mysql_query("select uId from apply_information_unselected where aId='$value'"));
+		$chooseToId[]=$query['uId'];
+	}
+}
+
 if(empty($chooseToId)){
 	$chooseToId = "noBody";
 }
@@ -109,7 +119,7 @@ if($chooseToId){
           <form action="../background/message/create_msg.php" method="post" id="massage_form" name="massage_form">
             <input type="hidden" name="userId" value="<?php echo $uId?>" />
             <input type="hidden" name="toId" value="" />
-        	<textarea name="message"></textarea>
+        	<textarea name="message" id="msgBody"></textarea>
             <input type="submit" value="发送" onclick="send_massage()"/>
           </form>
         </div>
@@ -135,7 +145,7 @@ if($chooseToId){
 <div class="icon_box">
      <a href="massageBox.php"><div id="icon_1"></div>
      </a>
-     <a href="personal_center.php"><div id="icon_2"></div></a>
+     <a href="myconcern.php"><div id="icon_2"></div></a>
      <a href="../background/background_person/login.php?action=logout"><div id="icon_3"></div></a>
 </div>
 

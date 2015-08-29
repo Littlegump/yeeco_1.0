@@ -69,7 +69,7 @@ error_reporting(E_ALL & ~E_NOTICE);
       <div class="page_3"> 
         <ul> 
           <li>
-            <label class="checkbox"><input type="checkbox" id="server" checked disabled>我同意<a href="temp_page.html">《易可服务协议》</a></label>
+            <label class="checkbox"><input type="checkbox" id="server" checked disabled>我同意<a href="service_agreement.html" target="_blank">《易可服务协议》</a></label>
           </li>
           <li>
             <input type="button" onclick="toTest()" class="register" value="注册" >

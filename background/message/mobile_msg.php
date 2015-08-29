@@ -15,7 +15,7 @@ if($_POST['action']=='getIdentity'){
 		echo 1;
 	}
 	exit;
-}
+} 	
 
 //获取发送对象用户ID
 $toId=$_POST['toId'];
@@ -30,7 +30,7 @@ foreach($massMsgTo as $value){
 
 $userTel=substr($userTel,0,strlen($userTel)-1);
 //发送短信函数
-$c="来自".$userName."的社团通知:".$message."(本条短信通过网络平台发出，请勿回复)";
+$c="来自".$userName."的社团通知:".$message;
 $m=$userTel;
 sendSMS($url,$ac,$authkey,$cgid,$m,$c,$csid,$t);
 ?>

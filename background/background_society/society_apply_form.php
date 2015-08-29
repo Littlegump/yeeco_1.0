@@ -51,7 +51,7 @@
 			$res=mysql_fetch_assoc(mysql_query("select uId,sId,sDep,aTel from apply_information_unselected where aId='$value'"));
 			$data=array();
 			$data['sId']=$res['sId'];
-			$data['sDep']=$res['sDep'];
+			$data['sDep']=($res['sDep']==0?'未分配':$res['sDep']);
 			send_sysMsg($res['uId'],$data,'unemploySociety');
 			//获取社团名字
 			$sName=mysql_fetch_assoc(mysql_query("select sName from society where sId='$res[sId]'"));
@@ -70,13 +70,13 @@
 				$res=mysql_fetch_assoc(mysql_query("select uId,sId,sDep,aTel from apply_information_unselected where aId='$value'"));
 				$data=array();
 				$data['sId']=$res['sId'];
-				$data['sDep']=$res['sDep'];
+				$data['sDep']=($res['sDep']==0?'未分配':$res['sDep']);
 				send_sysMsg($res['uId'],$data,'employSociety');
 				//获取社团名字
 				$sName=mysql_fetch_assoc(mysql_query("select sName from society where sId='$res[sId]'"));
 				$sName=$sName['sName'];
 				$to=$res['aTel'];
-				$param=$sName.','.$res['sDep'];
+				$param=$sName.','.$data['sDep'];
 				send_msg_employ($to,$param);
 				//mysql_query();
 				if($f){
@@ -109,6 +109,7 @@
 	$aPhoto=getImg($folder);
 	//插入数据到数据库
 	$insertSql=mysql_query("insert into apply_information_unselected(uId,aName,aSex,aBirthday,aNative,aClass,aTel,aEmail,aQQ,aFavor,aStrong,aPhoto,aAnser_1,aAnser_2,aAnser_3,sId,fId,sDep,aSendTime) values('$uId','$aName','$aSex','$aBirthday','$aNative','$aClass','$aTel','$aEmail','$aQQ','$aFavor','$aStrong','$aPhoto','$aAnser_1','$aAnser_2','$aAnser_3','$sId','$fId','$depName','$aSendTime')");
+	//echo "insert into apply_information_unselected(uId,aName,aSex,aBirthday,aNative,aClass,aTel,aEmail,aQQ,aFavor,aStrong,aPhoto,aAnser_1,aAnser_2,aAnser_3,sId,fId,sDep,aSendTime) values('$uId','$aName','$aSex','$aBirthday','$aNative','$aClass','$aTel','$aEmail','$aQQ','$aFavor','$aStrong','$aPhoto','$aAnser_1','$aAnser_2','$aAnser_3','$sId','$fId','$depName','$aSendTime')";exit;
 	//同步个人信息
 	mysql_query("update userextrainfo set userName='$aName',userTel='$aTel',userSex='$aSex',userBirth='$aBirthday',userPlace='$aNative',userClass='$aClass',userEmail='$aEmail',userQQ='$aQQ' where uId='$uId'");
 	if($insertSql){
@@ -120,6 +121,8 @@
 	}else{
 		if($clientSign){
 			Response::json(301,'加入社团-数据提交失败',NULL);
+		}else{
+			echo NULL;
 		}
 	}	
 ?>

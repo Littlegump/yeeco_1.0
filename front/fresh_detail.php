@@ -164,7 +164,7 @@ if($query && mysql_num_rows($query)){
               </ul>
             </div>
             <div class="handle">
-            	<p>操作：</p><a href="javascript:del_app()" id="h1">删除</a><div class="edit_box" style="width:0px;"><input type="text" id="remark_selected"/></div><a href="javascript:add_edit()" id="h2">添加备注</a><a href="" id="h3">发送通知</a><a href="javascript:employ()" id="h4">录用</a>
+            	<p>操作：</p><a href="javascript:del_app()" id="h1">删除</a><div class="edit_box" style="width:0px;"><input type="text" id="remark_selected"/></div><a href="javascript:add_edit()" id="h2">添加备注</a><a href="javascript:send_manyMsg()" id="h3">发送通知</a><a href="javascript:employ()" id="h4">录用</a>
             </div>
             <div style="clear:both;"></div>            
 <?php
@@ -465,7 +465,7 @@ if($pcId){
 	}
 ?> 
      </a>
-    <a href="personal_center.php"><div id="icon_2"></div></a>
+    <a href="myconcern.php"><div id="icon_2"></div></a>
     <a href="../background/background_person/login.php?action=logout"><div id="icon_3"></div></a>
 </div>
 

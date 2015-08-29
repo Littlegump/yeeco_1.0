@@ -30,23 +30,34 @@ function countDown(){
 
 //点击发触页面跳转  page_a表示要去往的页面,page_b表示当前页面
 function page_to(page_a,page_b){
-	document.getElementById(page_a).style.display="";
-	document.getElementById(page_b).style.display="none"; 
-	document.getElementById("guide").getElementsByTagName("li").item(page_a).className = 'on';
-	document.getElementById("guide").getElementsByTagName("li").item(page_b).className = ''; 
+	$("#"+page_a).show();
+	$("#"+page_b).hide();
+	$("#guide li").eq(page_b).removeClass("on");
+	$("#guide li").eq(page_a).addClass("on");
+//	document.getElementById(page_a).style.display="";
+//	document.getElementById(page_b).style.display="none"; 
+//	document.getElementById("guide").getElementsByTagName("li").item(page_a).className = 'on';
+//	document.getElementById("guide").getElementsByTagName("li").item(page_b).className = ''; 
 }
 //点击guide实现任意页面跳转,page表示要去页面
 function free_skipPage(page){
-	var divId=['0','1','2','3'];
-	for(var i=0;i<=divId.length;i++){
-			if(page==divId[i]){
-					document.getElementById(page).style.display="";
-					document.getElementById("guide").getElementsByTagName("li").item(page).className = 'on';
-				}else{
-					document.getElementById(divId[i]).style.display="none";	
-					document.getElementById("guide").getElementsByTagName("li").item(divId[i]).className = '';
-				}
-		}
+	$("#0").hide();
+	$("#1").hide();
+	$("#2").hide();
+	$("#3").hide();
+	$("#"+page).show();
+	$("#guide li").removeClass("on");
+	$("#guide li").eq(page).addClass("on");
+	//var divId=['0','1','2','3'];
+//	for(var i=0;i<=divId.length;i++){
+//		if(page==divId[i]){
+//			document.getElementById(page).style.display="";
+//			document.getElementById("guide").getElementsByTagName("li").item(page).className = 'on';
+//		}else{
+//			document.getElementById(divId[i]).style.display="none";	
+//			document.getElementById("guide").getElementsByTagName("li").item(divId[i]).className = '';
+//		}
+//	}
 }
 
 //异步提交表单功能

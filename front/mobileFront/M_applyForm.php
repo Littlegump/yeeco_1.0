@@ -24,7 +24,17 @@ if($dep && mysql_num_rows($dep)){
 <link href="M_css/M_applyForm.css" type="text/css" rel="stylesheet">
 </head>
 
+
 <body>
+
+<div class="isSubmitting" style="display:none">
+    <div class="back"></div>
+    <div class="back_in">
+    	<img src="mum.gif" width="50" height="50" />
+    	<p>正在提交~</p>
+    </div>
+</div>
+
 <form action="../../background/web_app/M_applyFormB.php" method="post" name="pre_applyForm" id="pre_applyForm">
 <div id="index_1">
 <div class="top">
@@ -201,8 +211,8 @@ if($dep && mysql_num_rows($dep)){
 <div class="block page_3">
   <ul>
     <li><span>电话</span><input type="text" placeholder="输入手机号码" name="aTel" required="required" /></li>
-    <li><span>邮箱</span><input type="text" placeholder="输入邮箱" name="aEmail" required="required" /></li>
-    <li><span>Q&nbsp;Q</span><input type="text" placeholder="输入QQ" name="aQQ" required="required" /></li>
+    <li><span>邮箱</span><input type="text" placeholder="输入邮箱" name="aEmail" /></li>
+    <li><span>Q&nbsp;Q</span><input type="text" placeholder="输入QQ" name="aQQ" /></li>
   </ul>
 </div>
 
@@ -261,6 +271,7 @@ if($dep && mysql_num_rows($dep)){
     <input type="password" placeholder="&nbsp;&nbsp;&nbsp;请在这里输入密码" name="password_1" required="required"/>
     <input type="submit" value="提交" class="subBtn"/>
   <div class="forget"><a href="#">忘记密码</a></div>
+
 </div>
 
 <div id="index_3" style="display:none">
@@ -276,14 +287,13 @@ if($dep && mysql_num_rows($dep)){
     <li><p>请在下面输入您收到的验证码</p></li>
   </ul>
   	<div class="line">
-    	<input type="text" placeholder="&nbsp;&nbsp;&nbsp;在这里输入验证码" name="testCode" required="required"/>
+    	<input type="text" placeholder="&nbsp;&nbsp;&nbsp;在这里输入验证码" name="testCode"/>
         <div class="reSend" onclick="request_code();">重新发送</div>
     </div>
-    <input type="password" placeholder="&nbsp;&nbsp;&nbsp;在这里设置密码，方便查询申请结果" name="password_2" required="required"/>
+    <input type="password" placeholder="&nbsp;&nbsp;&nbsp;在这里设置密码，方便查询申请结果" name="password_2"/>
     <input type="button" value="提交" class="subBtn" onclick="form_submit();"/>
 </div>
 </form>
-
 
 <script src="../js/jquery-1.11.1.js"></script>
 <script src="../js/jquery.form.js" type="text/javascript"></script>

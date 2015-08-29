@@ -106,7 +106,7 @@ require_once('../background/conf/session.php');
 	}
 ?> 
      </a>
-    <a href="personal_center.php"><div id="icon_2"></div></a>
+    <a href="myconcern.php"><div id="icon_2"></div></a>
     <a href="../background/background_person/login.php?action=logout"><div id="icon_3"></div></a>
 </div>
 

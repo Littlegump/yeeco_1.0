@@ -31,18 +31,34 @@ body{
 	background:#999;}
 .b{
 	float:left;
-	margin:0 50px;
+	margin-left:50px;
 	line-height:40px;
 	color:#FFF;}
 .c{
-	float:right;
-	margin:0 50px;
+	float:left;
+	margin-left:20px;
 	line-height:40px;
 	color:#FFF;}
 	.c a{
 		color:#fff;}
-	.c a:hover{
+.d{
+	float:right;
+	margin:0 50px;
+	line-height:40px;
+	color:#FFF;}
+	.d a{
+		color:#fff;}
+	.d a:hover{
 		color:#333;}
+.change_society{
+	position:absolute;
+	top:45px;
+	left:160px;
+	background:#fff;
+	border:1px solid #ccc;
+	padding:10px;}
+	.change_society a{
+		margin:0 10px;}
 
 /*社团封面部分样式*/
 .head{
@@ -133,8 +149,7 @@ body{
 		float:left;
 		margin:15px;
 		height:30px;
-		width:30px;
-		background:#ccc;}
+		width:30px;}
 
 
 /*中间主体部分样式*/

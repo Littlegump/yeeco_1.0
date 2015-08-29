@@ -31,9 +31,10 @@ function sendCode(){
 							data:{
 								usertel:usertel,
 							},
+							async:false,
 							success:function(data){
 								realCode = data;
-								alert(realCode);
+								//alert(realCode);
 							},
 							error:function(jqXHR){alert("操作失败"+jqXHR.status);}
 						})
@@ -69,6 +70,7 @@ function countDown(){
 		if(t != 0 ){
 		    countDown();
 		}else{
+			t=60;
 			$("#resend").removeClass("gray");
 			$("#resend").attr("href","javascript:sendCode();"); 
 			$(".test_code input[type='button']").attr("onclick","checking_find()");
@@ -170,9 +172,10 @@ function send_findcode(){
 		data:{
 			usertel:usertel,
 		},
+		async:false,
 		success:function(data){
 			realCode = data;
-			alert(realCode);
+			//alert(realCode);
 		},
 		error:function(jqXHR){alert("操作失败"+jqXHR.status);}
 		})

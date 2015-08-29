@@ -112,7 +112,6 @@
       <p>·易可平台当前仅支持唯一社团负责人，如果有副级负责人，请另设“主席团”等部门；</p>
       <p>·每个部门最多可以有三个部长，不足三个可以不填；</p>
       <p>·请认真填写部门部长联系方式，易可平台将给该号码发送注册邀请短信；</p>
-      <p>·接收到注册邀请短信的用户在注册后，将会收到“当选该部门部长”的通知，成为该部门的部长。</p>
   </div> 
   <div class="actions">
       <input type="button" value="保存" class="button" onclick="asyncSubmit_1()"/>
@@ -197,7 +196,7 @@
 	}
 ?> 
      </a>
-     <a href="personal_center.php"><div id="icon_2"></div></a>
+     <a href="myconcern.php"><div id="icon_2"></div></a>
      <a href="../background/background_person/login.php?action=logout"><div id="icon_3"></div></a>
 </div>
 </body>

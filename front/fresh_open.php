@@ -127,7 +127,8 @@ $qrcode=mysql_fetch_assoc(mysql_query("select sQRCode from society where sId='$s
      
     </div>
   </div>
-<div class="right">   
+<div class="right"> 
+<!--  
   <div class="advertisement">
       <div class="ad_title">
         <li class="ad_title_li">推广链接</li>
@@ -137,7 +138,7 @@ $qrcode=mysql_fetch_assoc(mysql_query("select sQRCode from society where sId='$s
       <div class="ad_img"><img src="../image/web_image/测试图片/8.png"></div>
       <div class="ad_img"><img src="../image/web_image/测试图片/9.png"></div>
       <div style="clear:both;"></div>
-  </div> 
+  </div> -->
 </div>
 </div>
 
@@ -152,7 +153,7 @@ $qrcode=mysql_fetch_assoc(mysql_query("select sQRCode from society where sId='$s
 	}
 ?> 
      </a>
-    <a href="personal_center.php"><div id="icon_2"></div></a>
+    <a href="myconcern.php"><div id="icon_2"></div></a>
     <a href="../background/background_person/login.php?action=logout"><div id="icon_3"></div></a>
 </div>
 

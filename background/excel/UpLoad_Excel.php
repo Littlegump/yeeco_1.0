@@ -39,6 +39,8 @@ if($result){
 			$strs = explode("\\",$str);
 			$res=mysql_fetch_array(mysql_query("select uId from user where userTel='$strs[1]'"));
 			if(!$res){
+				//避免重复插入数据到pre_user表
+				mysql_query("delete from pre_user where userTel='$strs[1]'");
 				mysql_query("insert into pre_user(userName,userTel,userSchool) values('$strs[0]','$strs[1]','$sSchool')");
 				$pid= mysql_insert_id();
 				mysql_query("insert into preuser_society_relation(pid,sid,isDepManager) values('$pid','$sId','0')");

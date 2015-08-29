@@ -5,9 +5,9 @@ $sId=$_GET['sId'];
 $depName=$_GET['depName'];
 $i=$_POST['i'];
 $j=$_POST['j'];
-$user_r[]=NULL;
-$uInfo[]=NULL;
-$ueInfo[]=NULL;
+$user_r=array();
+$uInfo=array();
+$ueInfo=array();
 //获取用户社团关系信息
 $user_society_r=mysql_query("select userId,isManage,depBelong,position from user_society_relation where societyId='$sId' and depBelong='$depName' limit ".$i.",8");
 if($user_society_r && mysql_num_rows($user_society_r)){
@@ -49,7 +49,7 @@ if($user_r){
 				";
 				$i++;
 			}else{
-				echo "<li>
+				echo "<li style='color:#999;'>
 					<span><input type='checkbox' value='".$value_2['pid']."' name='member_".$depName."[]' disabled='disabled' /></span><span><img src=''/>".$ueInfo[$k]['userName']."</span><span> </span><span>".$ueInfo[$k]['userTel']."</span><span>".$depName."</span><span class='limit'>".$value_2['position']."</span><span class='cap'><a href='javascript:void(0)' class='table_e' onclick='del_preuser(this)'>删除</a><a href='javascript:void(0)' class='table_f' onclick='warn_active(this)'>提醒激活</a></span>                            
 					</li>
 				";	

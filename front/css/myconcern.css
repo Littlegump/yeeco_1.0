@@ -77,7 +77,30 @@ body{
 .contact{
 	width:750px;
 	margin:10px auto;
-	padding:0 20px;}		
+	padding:0 20px;}	
+
+/*我关注的社团样式*/
+.myconcern_society{
+	width:750px;
+	text-align:center;
+	line-height:30px;
+	
+	}	
+	.society_name{
+		font-size:15px;
+		color:#FFF;
+		background-color:#97ddff}
+/*我关注的活动样式*/
+.myconcern_act{
+	width:750px;
+	text-align:center;
+	line-height:30px;
+	
+	}	
+	.act_name{
+		font-size:15px;
+		color:#FFF;
+		background-color:#97ddff}
 /*活动*/		
 .act{
 	margin:20px auto;

@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_ALL & ~E_NOTICE);
 require_once('../conf/connect.php');
-require_once('../conf/funPost.php');
+require_once('../conf/HttpClient.class.php');
 require_once('../conf/enc.php');
 $sId = $_POST['sId'];
 $fId = $_POST['fId'];
@@ -113,9 +113,9 @@ if($isApplied){
 			'password_1' => $password_2,
 			'flag' => 'M_request'
 		); 
-		$url = 'http://123.57.86.194/background/background_person/activate_user.php';
+		$url = 'http://localhost/background/background_person/activate_user.php';
 		
-		$uId = do_post_request($url,$data);//将用户的激活信息传递给activate_user.php
+		$uId = HttpClient::quickPost($url,$data);//将用户的激活信息传递给activate_user.php
 		//如果是被邀请成员，则提醒他已被邀请成员该社团的成员了
 		if($uId){
 			$re=mysql_query("select id from user_society_relation where societyId='$sId' and userId='$uId'");
@@ -136,8 +136,8 @@ if($isApplied){
 			'school' => $aSchool,
 			'flag' => 'M_request'
 		); 
-		$url = 'http://123.57.86.194/background/background_person/form_register.php';
-		$uId = do_post_request($url,$data);//将用户的注册信息传递给form_register.php
+		$url = 'http://localhost/background/background_person/form_register.php';
+		$uId = HttpClient::quickPost($url,$data);//将用户的注册信息传递给form_register.php
 		if($uId){
 			applyInsert($userData);//执行插入报名表	
 		}
@@ -155,18 +155,18 @@ function applyInsert($data){
 		$uId = $uIdRes['uId'];
 		//打包数据<br />
 		$data['uId'] = $uId;
-		$url = 'http://123.57.86.194/background/background_society/society_apply_form.php';
-		$result = do_post_request($url,$data);//将用户的报名信息传递给society_apply_form.php
-		if($result){
+		$url = 'http://localhost/background/background_society/society_apply_form.php';
+		$result = HttpClient::quickPost($url,$data);//将用户的报名信息传递给society_apply_form.php
+		if($result == "success"){
 			echo "<script>alert('报名表提交成功！');window.location.href='../../front/mobileFront/M_overPage.php'</script>";
 			exit;
 		}else{
 			echo "<script>alert('报名表提交失败！');history.go(-2)</script>";
+			exit;
 		}
 	}else{
 		echo "<script>alert('报名表提交失败！');history.go(-2)</script>";
 	}
 }
-
 
 ?>

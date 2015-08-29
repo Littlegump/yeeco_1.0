@@ -120,14 +120,8 @@ function apply_form(t){
 						alert("你已经是该社团成员");
 					}else{
 						$("#form_box").load("res_package/apply_form.php",{"sId":sId,"uId":uId,"fId":fId,"sName":sName,"fQue_1":fQue_1,"fQue_2":fQue_2,"fQue_3":fQue_3},function(){
-						coverall();
-						newbox('form_box');		
-						// 提交表单
-						$("#apply_table").ajaxForm(function() {  
-							alert("提交成功！"); 
-							return_main();
-							$('.handle_2').text('等待审核').removeAttr('href');
-							});
+							coverall();
+							newbox('form_box');
 						})
 					}
 				},
@@ -136,6 +130,26 @@ function apply_form(t){
 	}	
 }
 
+
+//提交报名表
+apply_table_lock = 0;
+function applySubmit(){
+	if($("[name='aSex']").val()!="男" || $("[name='aSex']").val()!="女"){
+		alert("性别只能填写“男”或“女”！");
+	}else if(isNaN($("[name='aQQ']").val())|| $("[name='aQQ']").val() == ""){
+		alert("QQ号码格式不正确！");
+	}else{
+		if(apply_table_lock == 0){
+			apply_table_lock = 1;
+			$("#apply_table").ajaxSubmit(function() {  
+				apply_table_lock = 0;
+				alert("提交成功！"); 
+				return_main();
+				$('.handle_2').text('等待审核').removeAttr('href');
+			});
+		}
+	}
+}
 
 
 //关闭报名表

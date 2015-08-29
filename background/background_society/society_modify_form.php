@@ -231,6 +231,7 @@ if($action=='warn_active'){
 	$userTel=$query['userTel'];
 	//调用短信模板发送短信
 	warn_active($userTel,$param);
+	echo  1;
 	exit;
 }
 //生成新的社团动态

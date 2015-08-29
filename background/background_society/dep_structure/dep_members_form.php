@@ -26,12 +26,14 @@ for($i=0;$i<count($username);$i++){
 	//判断该用户是否已经注册
 	$res=mysql_fetch_array(mysql_query("select uId from user where userTel='$telnumber[$i]'"));
 	if(!$res){
+		//避免重复插入数据到pre_user表
+		mysql_query("delete from pre_user where userTel='$telnumber[$i]'");
 		//若未注册则将他插入pre_user、preuser_society_relation表
 		mysql_query("insert into pre_user(userName,userTel,userSchool) values('$username[$i]','$telnumber[$i]','$sSchool')");
 		$pid = mysql_insert_id();
-		mysql_query("insert into preuser_society_relation(pid,sid,isDepManager,position) values('$pid','$sId','0','成员')");
+		mysql_query("insert into preuser_society_relation(pid,sid,isDepManager,position) values('$pid','$sId','0','成员')");	
 		//短信发给未激活用户		
-  		send_msg($telnumber[$i],$param);
+		send_msg($telnumber[$i],$param);
 	}else{
 		$uId=$res['uId'];
 		//若已注册，继续判断是否是该社团成员，若不是则进行邀请

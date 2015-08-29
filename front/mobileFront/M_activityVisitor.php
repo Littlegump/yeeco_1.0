@@ -1,5 +1,10 @@
 <?php
 error_reporting(E_ALL & ~E_NOTICE);
+//判断网页是否被重新排版
+$isChange = 0;
+if(strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger')&&strpos($_SERVER['REQUEST_URI'], 'nsukey') ){
+	$isChange = 1;
+}
 require_once('../../background/conf/connect.php');
 $actId = $_GET['actId'];
 
@@ -25,10 +30,18 @@ $society=mysql_fetch_assoc(mysql_query("select sName,sSchool from society where 
 <div class="cover" id="cover">
 	<img src="<?php echo $aInfo['actImg']?>"/>
 </div>
+<!--页面被重新排版时的策略-->
+<?php
+if(!$isChange){
+	//如果没有被重新排版，需要用js对海报尺寸进行动态调整
+?>
 <script>
 	var coverWidth = $("#cover").width();
 	$("#cover").height(coverWidth/1.76);
 </script>
+<?php
+}
+?>
 
 <div class="summary">
 	<ul>
@@ -82,9 +95,21 @@ $society=mysql_fetch_assoc(mysql_query("select sName,sSchool from society where 
 	<strong>详细说明</strong>
     <p><pre id="detail"><?php echo $aInfo['actDetail']?></pre></p>
 </div>
-
+<?php
+if($isChange){
+?>
+<div class="method block">
+	<strong>报名方式</strong>
+    <p><span style="margin-right:29px;"></span>点击屏幕右上方，选择在其他浏览器中打开；</p>
+    <p><span style="margin-right:29px;"></span>在新窗口中拖至页面底部，选择“申请加入”；</p>
+</div>
+<?php
+}else{
+?>
 <a href="M_activityApply.php?actId=<?php echo $actId?>&sSchool=<?php echo $society['sSchool']?>" id="goOn"><div class="join">报名参加</div></a>
-
+<?php
+}
+?>
 <script src="M_js/M_activityVisitor.js" type="text/javascript"></script>
 </body>
 </html>

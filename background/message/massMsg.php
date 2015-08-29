@@ -2,7 +2,7 @@
 $url='http://smsapi.c123.cn/OpenPlatform/OpenApi';           //接口地址
 $ac='1001@501180170001';		                             //用户账号
 $authkey = '735376C85D695166600E455491BAF588';		         //认证密钥
-$cgid='52';                                                  //通道组编号
+$cgid='4958';                                                  //通道组编号
 $c = '';		 //内容
 $m= '';	                                         //号码
 $csid='5250';                                                   //签名编号 ,可以为空时，使用系统默认的编号
@@ -37,7 +37,7 @@ function sendSMS($url,$ac,$authkey,$cgid,$m,$c,$csid,$t)
          }
 		 if(is_array($stat_arr))
 	     {
-	      echo "发送成功!";//,返回值为".$re['result'];
+	      echo "发送成功!\n 短信可能会有3~5分钟延迟，请耐心等待！";//,返回值为".$re['result'];
 	     }
 		
     }

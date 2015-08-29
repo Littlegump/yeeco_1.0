@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_ALL & ~E_NOTICE);
 require_once('../conf/connect.php');
-require_once('../conf/funPost.php');
+require_once('../conf/HttpClient.class.php');
 require_once('../conf/enc.php');
 $actId = $_POST['actId'];
 
@@ -71,9 +71,9 @@ if($isApplied){
 			'password_1' => $password_2,
 			'flag' => 'M_request'
 		); 
-		$url = 'http://123.57.86.194/background/background_person/activate_user.php';
+		$url = 'http://localhost/background/background_person/activate_user.php';
 		
-		$uId = do_post_request($url,$data);//将用户的激活信息传递给activate_user.php
+		$uId = HttpClient::quickPost($url,$data);//将用户的激活信息传递给activate_user.php
 		if($uId){
 			applyInsert($uId,$actId);//执行插入报名表
 		}
@@ -86,8 +86,8 @@ if($isApplied){
 			'school' => $aSchool,
 			'flag' => 'M_request'
 		); 
-		$url = 'http://123.57.86.194/background/background_person/form_register.php';
-		$uId = do_post_request($url,$data);//将用户的注册信息传递给form_register.php
+		$url = 'http://localhost/background/background_person/form_register.php';
+		$uId = HttpClient::quickPost($url,$data);//将用户的注册信息传递给form_register.php
 		if($uId){
 			applyInsert($uId,$actId);//执行插入报名表
 		}

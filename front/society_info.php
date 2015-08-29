@@ -111,20 +111,19 @@ if($user_limit!='成员'){
 <?php
 }
 ?>
-    
-        <div class="buttons" id="fixedSide">
-        <!--用户信息存储-->
+     <!--用户信息存储-->
         <input type="hidden" id="sId" value="<?php echo $sId?>"/>
         <input type="hidden" id="authority" value="<?php echo $user_limit?>"/>
         <input type="hidden" id="uId" value="<?php echo $uId?>"/>
         <input type="hidden" id="user_dep" value="<?php echo $isManage['depBelong']?>"/>
-        <a href="society_home.php?sId=<?php echo $sId?>"><div><li><img src=""/>社团动态</li></div></a>
-        <a href="address_book.php?sId=<?php echo $sId?>"><div><li><img src=""/>通讯录</li></div></a>
-        <a href="activity.php?sId=<?php echo $sId?>"><div><li><img src=""/>活动</li></div></a>
-        <a href="society_info.php?sId=<?php echo $sId?>"><div class="nav_on"><li><img src=""/>社团资料</li></div></a>
-        <a href="change_term.php?sId=<?php echo $sId?>"><div><li><img src=""/>换届</li></div></a>
-        <a href="temp_page.html"><div><li><img src=""/>找赞助</li></div></a>
-      </div>
+        <div class="buttons" id="fixedSide">
+      		<a href="society_home.php?sId=<?php echo $sId?>"><div><li><img src="../image/web_image/homeIcon_1.png"/>社团动态</li></div></a>
+       		<a href="address_book.php?sId=<?php echo $sId?>"><div><li><img src="../image/web_image/homeIcon_2.png"/>通讯录</li></div></a>
+       	    <a href="activity.php?sId=<?php echo $sId?>"><div><li><img src="../image/web_image/homeIcon_3.png"/>活动</li></div></a>
+      	    <a href="society_info.php?sId=<?php echo $sId?>"><div class="nav_on"><li><img src="../image/web_image/homeIcon_4.png"/>社团资料</li></div></a>
+         	<a href="change_term.php?sId=<?php echo $sId?>"><div><li><img src="../image/web_image/homeIcon_5.png"/>换届</li></div></a>
+       	    <a href="temp_page.html"><div><li><img src="../image/web_image/homeIcon_6.png"/>找赞助</li></div></a>
+    	</div>
     </div>
     <!--中间主体内容-->
     <div class="main">
@@ -318,7 +317,7 @@ if($dep_info){
 	}
 ?> 
      </a>
-     <a href="personal_center.php"><div id="icon_2"></div></a>
+     <a href="myconcern.php"><div id="icon_2"></div></a>
      <a href="../background/background_person/login.php?action=logout"><div id="icon_3"></div></a>
 </div>
 <script src="js/jquery-1.11.1.js"></script>

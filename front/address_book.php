@@ -61,7 +61,7 @@ if($societyId){
 <div class="top_back transparency"></div>
   <div class="top">
       <ul>
-        <li class="a">logo</li>
+        <li class="a"><img src="../image/web_image/logolittle.png" width="120" height="40" /></li>
         <li class="b"><?php echo $sInfo['sName']?></li>
         <li class="c"><a href="javascript:change_society()">[切换]</a></li>
         <li class="d">返回&nbsp&nbsp;<a href="square.php">易可广场>></a></li>
@@ -111,20 +111,20 @@ if($user_limit!='成员'){
 <?php
 }
 ?>
-        <div class="buttons" id="fixedSide">
+       
         <!--用户信息存储-->
         <input type="hidden" id="sName" value="<?php echo $sInfo['sName']?>"/>
         <input type="hidden" id="authority" value="<?php echo $user_limit?>"/>
         <input type="hidden" id="uId" value="<?php echo $uId?>"/>
         <input type="hidden" id="user_dep" value="<?php echo $isManage['depBelong']?>"/>
-        
-        <a href="society_home.php?sId=<?php echo $sId?>"><div><li><img src=""/>社团动态</li></div></a>
-        <a href="address_book.php?sId=<?php echo $sId?>"><div class="nav_on"><li><img src=""/>通讯录</li></div></a>
-        <a href="activity.php?sId=<?php echo $sId?>"><div><li><img src=""/>活动</li></div></a>
-        <a href="society_info.php?sId=<?php echo $sId?>"><div><li><img src=""/>社团资料</li></div></a>
-        <a href="change_term.php?sId=<?php echo $sId?>"><div><li><img src=""/>换届</li></div></a>
-        <a href="temp_page.html"><div><li><img src=""/>找赞助</li></div></a>
-      </div>
+  		<div class="buttons" id="fixedSide">
+      		<a href="society_home.php?sId=<?php echo $sId?>"><div><li><img src="../image/web_image/homeIcon_1.png"/>社团动态</li></div></a>
+       		<a href="address_book.php?sId=<?php echo $sId?>"><div class="nav_on"><li><img src="../image/web_image/homeIcon_2.png"/>通讯录</li></div></a>
+       	    <a href="activity.php?sId=<?php echo $sId?>"><div><li><img src="../image/web_image/homeIcon_3.png"/>活动</li></div></a>
+      	    <a href="society_info.php?sId=<?php echo $sId?>"><div><li><img src="../image/web_image/homeIcon_4.png"/>社团资料</li></div></a>
+         	<a href="change_term.php?sId=<?php echo $sId?>"><div><li><img src="../image/web_image/homeIcon_5.png"/>换届</li></div></a>
+       	    <a href="temp_page.html"><div><li><img src="../image/web_image/homeIcon_6.png"/>找赞助</li></div></a>
+    	</div>
     </div>
     <!--中间主体内容-->
     <div class="main">
@@ -261,11 +261,17 @@ if($dep_info){
 
 </form>
 
+<!--删除提醒框--> 
+<div class="notice_box" id="del_notice" style="display:none;">
+	<strong>您确定要删除以上勾选的成员吗？</strong>
+    <p>一旦删除该成员将无法恢复！</p>
+    <div class="choose"><a href="javascript:closeWindow()" class="button">取消</a><a class="button" id="sureDelete">删除</a></div>
+</div>
 
 
 <!--侧边快捷操作面板-->
 <div class="icon_box">
-          <a href="massageBox.php"><div id="icon_1"></div>
+    <a href="massageBox.php"><div id="icon_1"></div>
 <?php
 	if(mysql_num_rows(mysql_query("select  msgId  from message where msgToId='$uId'"))){
 ?>     
@@ -274,7 +280,7 @@ if($dep_info){
 	}
 ?> 
      </a>
-     <a href="personal_center.php"><div id="icon_2"></div></a>
+     <a href="myconcern.php"><div id="icon_2"></div></a>
      <a href="../background/background_person/login.php?action=logout"><div id="icon_3"></div></a>
 </div>
 <script src="js/jquery-1.11.1.js"></script>

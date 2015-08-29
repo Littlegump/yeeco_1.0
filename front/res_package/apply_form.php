@@ -39,21 +39,21 @@ if($dep && mysql_num_rows($dep)){
 	</td>
   <tr>
     <td>出生年月</td>
-    <td><input type="text" name="aBirthday" required="required" value="<?php echo $uInfo['userBirth']?>"/></td>
+    <td><input type="text" name="aBirthday" placeholder="格式：yyyy-m-d" value="<?php echo $uInfo['userBirth']?>"/></td>
     <td>籍贯</td>
-    <td><input type="text" name="aNative" required="required" value="<?php echo $uInfo['userPlace']?>"/></td>
+    <td><input type="text" name="aNative" placeholder="格式：省份-地级市" value="<?php echo $uInfo['userPlace']?>"/></td>
   </tr>
   <tr>
     <td>专业班级</td>
     <td><input type="text" name="aClass" required="required" value="<?php echo $uInfo['userClass']?>"/></td>
     <td>联系电话</td>
-    <td><input type="text" name="aTel" required="required" value="<?php echo $uInfo['userTel']?>"/></td>
+    <td><input type="text" name="aTel" required="required" readonly="readonly" value="<?php echo $uInfo['userTel']?>"/></td>
   </tr>
   <tr>
     <td>个人邮箱</td>
-    <td><input type="text" name="aEmail" required="required" value="<?php echo $uInfo['userEmail']?>"/></td>
+    <td><input type="text" name="aEmail" value="<?php echo $uInfo['userEmail']?>"/></td>
     <td>QQ</td>
-    <td><input type="text" name="aQQ" required="required" value="<?php echo $uInfo['userQQ']?>"/></td>
+    <td><input type="text" name="aQQ" value="<?php echo $uInfo['userQQ']?>"/></td>
   </tr>
   <tr>
     <td>兴趣爱好</td>
@@ -93,7 +93,7 @@ if($dep && mysql_num_rows($dep)){
 }
 ?>
             </select>
-<input type="submit" value="提交" class="button">
+<input type="button" value="提交" class="button" onclick="applySubmit()">
          <div style="clear:both;"></div> 
 </form>
     <div style="clear:both;"></div>

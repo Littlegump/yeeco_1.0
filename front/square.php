@@ -62,10 +62,17 @@ if($query && mysql_num_rows($query)){
               <ul>
                 <li>
                     <span><img src="../<?php echo $result_user['userFace']?>"/></span>
+<?php
+	if(mysql_num_rows(mysql_query("select  msgId  from message where msgToId='$uId'"))){
+?>                      
+                	<span class="msgNotice"></span>
+<?php
+	}
+?>                    
                     <span><?php echo $_SESSION['userName']?></span>
                 </li> 
                 <div style="clear:both;"></div>
-                <a href="personal_center.php"><li>个人中心</li></a>
+                <a href="myconcern.php"><li>个人中心</li></a>
                 <a href="massageBox.php"><li>消息盒子</li></a>
                 <a href="../background/background_person/login.php?action=logout"><li>退出登录</li></a>
               </ul>
@@ -445,8 +452,8 @@ if($query && mysql_num_rows($query)){
 </div>
 <div class="footer">
 	<p><a href="temp_page.html">招才纳士</a><a href="temp_page.html">联系我们</a><a href="temp_page.html">意见反馈</a><a href="temp_page.html">网站地图</a><a href="temp_page.html">新手学堂</a></p>
-    <hr color="#ccc" size="1"/>
-    <p>中国·陕西·西安市·长安区·西安邮电大学 710100 | *</p>
+    <div class="hr"></div>
+    <p>中国·陕西·西安市·长安区·西安邮电大学 710100 | 陕ICP备 15010814 号</p>
     <p>好点子，新生活</p>
 </div>
 <script src="js/square.js" type="text/javascript"></script>

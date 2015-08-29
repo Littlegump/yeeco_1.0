@@ -10,7 +10,7 @@ $pageSize=12;
 //总页数
 $total_pages=ceil($total/$pageSize);
 //分页条
-$page_banner="<div class='page'>";
+$page_banner="<div class='pageDvd'>";
 //计算偏移量
 $pageoffset=($showPage-1)/2;
 if($page>1){
@@ -55,10 +55,6 @@ if($page<$total_pages){//".$url."?p=".($page+1)."
 	$page_banner.="<span class='disable'>下一页></span>";
 	$page_banner.="<span class='disable'>尾页</span>";
 }
-$page_banner.="共{$total_pages}页,";
-//$page_banner.="<form action='".$url."' method='GET'>";
-$page_banner.="到第<input type='text' size='2' name='p'/>";
-$page_banner.="<a href='javascript:void()' onclick='paging_ajax(".$page.",this)'>确定</a>";
 $page_banner.="</div>";
 return $page_banner;	
 	

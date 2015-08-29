@@ -27,8 +27,7 @@ body{
 	font-size:26px;
 	height:40px;
 	color:#fff;
-	width:120px;
-	background:#999;}
+	width:120px;}
 .b{
 	float:left;
 	margin-left:50px;
@@ -157,8 +156,7 @@ body{
 		float:left;
 		margin:15px;
 		height:30px;
-		width:30px;
-		background:#ccc;}
+		width:30px;}
 
 /*右侧部分样式*/	
 .right{

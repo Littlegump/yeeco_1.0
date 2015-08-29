@@ -14,6 +14,15 @@ $sSchool=$_GET['sSchool'];
 </head>
 
 <body>
+
+<div class="isSubmitting" style="display:none">
+    <div class="back"></div>
+    <div class="back_in">
+    	<img src="mum.gif" width="50" height="50" />
+    	<p>正在提交~</p>
+    </div>
+</div>
+
 <form action="../../background/web_app/M_activityApplyB.php" method="post" name="pre_applyForm" id="pre_applyForm">
 <div id="index_1">
 <div class="top">
@@ -82,7 +91,7 @@ $sSchool=$_GET['sSchool'];
     <li><p>请在下面输入您收到的验证码</p></li>
   </ul>
   	<div class="line">
-    	<input type="text" placeholder="&nbsp;&nbsp;&nbsp;在这里输入验证码" name="testCode" required="required"/>
+    	<input type="text" placeholder="&nbsp;&nbsp;&nbsp;在这里输入验证码" name="testCode"/>
         <div class="reSend" onclick="request_code()">重新发送</div>
     </div>
     <input type="password" placeholder="&nbsp;&nbsp;&nbsp;在这里设置密码，方便查询申请结果" name="password_2"/>

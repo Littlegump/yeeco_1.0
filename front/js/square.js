@@ -88,6 +88,14 @@ window.onload = function () {
     }
 
 
+	
+	//**********消息提醒红点点***************
+	$(".top_right").hover(function(){
+			$(".msgNotice").animate({"top":"116px","left":"15px"});
+		},function(){
+			$(".msgNotice").animate({"top":"0","left":"0"});
+		}
+	);	
 
 
 }
@@ -167,3 +175,5 @@ function find_society(){
 		$(this).find(".decs").fadeOut("fast");
 		$(this).find(".act_tips").fadeIn("fast");
 	});
+	
+	

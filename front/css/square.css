@@ -58,6 +58,16 @@
     -moz-transition:height 0.3s; /* Firefox 4 */
     -webkit-transition:height 0.3s; /* Safari and Chrome */
     -o-transition:height 0.3s; /* Opera */}		
+	.msgNotice{
+		display:block;
+		background:#F00;
+		height:12px;
+		width:12px;
+		border-radius:6px;
+		position:absolute;
+		top:0px;
+		left:0px;
+		z-index:3;}
 
 
 /*幻灯片广告*/

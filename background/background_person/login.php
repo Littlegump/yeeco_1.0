@@ -114,6 +114,7 @@ function login(){
 		);
 		Response::json(200,'登录成功,下一步跳转至主页',$data);
 	}else{
+		
 		echo "<script>window.location.href='../../front/square.php';</script>";
 	}
 }

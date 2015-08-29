@@ -53,7 +53,7 @@ if($societyId){
 <div class="top_back transparency"></div>
   <div class="top">
       <ul>
-        <li class="a">logo</li>
+        <li class="a"><img src="../image/web_image/logolittle.png" width="120" height="40" /></li>
         <li class="b"><?php echo $societyRes['sName']?></li>
         <li class="c"><a href="javascript:change_society()">[切换]</a></li>
         <li class="d">返回&nbsp&nbsp;<a href="square.php">易可广场>></a></li>
@@ -107,14 +107,15 @@ if($user_limit!='成员'){
 <input type="hidden" name="userName" value="<?php echo $userName?>"/>
 <input type="hidden" name="userId" value="<?php echo $uId?>"/>
 <input type="hidden" name="userFace" value="../<?php echo $userFace?>"/>
-        <div class="buttons" id="fixedSide">
-        <a href="society_home.php?sId=<?php echo $sId?>"><div class="nav_on"><li><img src=""/>社团动态</li></div></a>
-        <a href="address_book.php?sId=<?php echo $sId?>"><div><li><img src=""/>通讯录</li></div></a>
-        <a href="activity.php?sId=<?php echo $sId?>"><div><li><img src=""/>活动</li></div></a>
-        <a href="society_info.php?sId=<?php echo $sId?>"><div><li><img src=""/>社团资料</li></div></a>
-        <a href="change_term.php?sId=<?php echo $sId?>"><div><li><img src=""/>换届</li></div></a>
-        <a href="temp_page.html"><div><li><img src=""/>找赞助</li></div></a>
-      </div>
+	<div class="buttons" id="fixedSide">
+      	<a href="society_home.php?sId=<?php echo $sId?>"><div class="nav_on"><li><img src="../image/web_image/homeIcon_1.png"/>社团动态</li></div></a>
+        <a href="address_book.php?sId=<?php echo $sId?>"><div><li><img src="../image/web_image/homeIcon_2.png"/>通讯录</li></div></a>
+        <a href="activity.php?sId=<?php echo $sId?>"><div><li><img src="../image/web_image/homeIcon_3.png"/>活动</li></div></a>
+        <a href="society_info.php?sId=<?php echo $sId?>"><div><li><img src="../image/web_image/homeIcon_4.png"/>社团资料</li></div></a>
+        <a href="change_term.php?sId=<?php echo $sId?>"><div><li><img src="../image/web_image/homeIcon_5.png"/>换届</li></div></a>
+        <a href="temp_page.html"><div><li><img src="../image/web_image/homeIcon_6.png"/>找赞助</li></div></a>
+    </div>
+
     </div>
     <!--中间主体内容-->
     <div class="main">
@@ -138,7 +139,7 @@ if($news){
 ?>
             <div class="box clearfix">
             	<input type="hidden" name="nId" value="<?php echo $value['nId']?>"/>
-<?php if($user_limit=='创建人' || ($uId==$value['oId'] && $value['nWho']=='person')){?>                
+<?php if(($user_limit!='成员' && $value['nWho']!='person') || ($uId==$value['oId'] && $value['nWho']=='person')){?>                
                 <a class="close" href="javascript:void();" onclick="del_news(this);">×</a>
 <?php }?>   
                 <img class="user_face" src="<?php echo substr($value['nImg'],3)?>" alt=""/>
@@ -302,6 +303,7 @@ if($user_limit!='成员'){
 				<br/><input type="hidden" id="sId" value="<?php echo $societyRes['sId']?>"/><textarea name="board" id="board_text" placeholder="不超过140个字符" readonly="readonly"><?php echo $societyRes['Board']?></textarea>
             
         </div>
+       <!-- 
         <div class="advertisement">
           <div class="ad_title">
             <li class="ad_title_li">推广链接</li>
@@ -311,7 +313,7 @@ if($user_limit!='成员'){
           <div class="ad_img"><img src="../image/web_image/测试图片/8.png"></div>
           <div class="ad_img"><img src="../image/web_image/测试图片/9.png"></div>
           <div style="clear:both;"></div>
-        </div>  
+        </div> --> 
     </div>
 </div>
 
@@ -326,7 +328,7 @@ if($user_limit!='成员'){
 	}
 ?> 
      </a>
-     <a href="personal_center.php"><div id="icon_2"></div></a>
+     <a href="myconcern.php"><div id="icon_2"></div></a>
      <a href="../background/background_person/login.php?action=logout"><div id="icon_3"></div></a>
 </div>
 <script src="js/jquery-1.11.1.js"></script>
